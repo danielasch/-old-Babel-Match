@@ -82,14 +82,12 @@ public class SynsetDisambiguation {
         //numSy will receive the number of synsets recovered to a concept (OutFiles use only)
         int numSy = 0;
         BabelNetResource.SearchObject bestSynset = null;
-
-        System.out.println(name);
-
+        //System.out.println(name);
         List<BabelNetResource.SearchObject> searched = bn.search(name);
         if (searched.size() != 1) {
             int max = 0;
             for (BabelNetResource.SearchObject s : searched) {
-                System.out.println(s.getSynset().getMainSense());
+                //System.out.println(s.getSynset().getMainSense());
                 //size receive the number of overlaps between two lists
                 //size of the intersection between the context of a concept and
                 //it's recovered synset's bag of words

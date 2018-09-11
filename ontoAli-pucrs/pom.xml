@@ -56,10 +56,6 @@
 			<id>library</id>
 			<url>file://${basedir}/lib</url>
 		</repository>
-		<repository>
-			<id>babel-lib</id>
-			<url>file://${basedir}/babelnet-api</url>
-		</repository>
 	</repositories>
 	
 	<dependencies>
@@ -172,29 +168,29 @@
 			<version>7.2.0</version>
 		</dependency>
 
-        <dependency>
-            <groupId>org.babelnet</groupId>
-            <artifactId>babelnet-api</artifactId>
-            <version>4.0.1</version>
-        </dependency>
+		<dependency>
+			<groupId>org.babelnet</groupId>
+			<artifactId>babelnet-api</artifactId>
+			<version>4.0.1</version>
+		</dependency>
 
-        <dependency>
-            <groupId>org.babelnet</groupId>
-            <artifactId>babelscape-data-commons</artifactId>
-            <version>1.0</version>
-        </dependency>
+		<dependency>
+			<groupId>org.babelnet</groupId>
+			<artifactId>babelscape-data-commons</artifactId>
+			<version>1.0</version>
+		</dependency>
 
-        <dependency>
-            <groupId>org.babelnet</groupId>
-            <artifactId>commons-beanutils</artifactId>
-            <version>1.7.0</version>
-        </dependency>
+		<dependency>
+			<groupId>org.babelnet</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.7.0</version>
+		</dependency>
 
-        <dependency>
-            <groupId>org.babelnet</groupId>
-            <artifactId>commons-beanutils-core</artifactId>
-            <version>1.7.0</version>
-        </dependency>
+		<dependency>
+			<groupId>org.babelnet</groupId>
+			<artifactId>commons-beanutils-core</artifactId>
+			<version>1.7.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.babelnet</groupId>

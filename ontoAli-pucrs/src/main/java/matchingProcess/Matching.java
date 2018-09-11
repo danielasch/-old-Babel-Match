@@ -27,7 +27,7 @@ import javax.xml.bind.SchemaOutputResolver;
 public class Matching {
 
 //Attributes
-	
+
 	//Map list
 	private List<Mapping> listMap;
 	//path to write the rdf file
@@ -188,10 +188,10 @@ public class Matching {
 				System.out.println("-------------------------------------");
 				System.out.println("domain : " + d.get_className());
 				BabelSynset bs = d.get_goodSynset().getSynset();
-                System.out.println(bs + " " + bs.getID() + " " + bs.getMainSense());
+				System.out.println(bs + " " + bs.getID() + " " + bs.getMainSense());
 				hyp = bn.getHypernyms(bs, hyp);
 				while (idx < hyp.size()) {
-					if (levels == 10) {
+					if (levels == 11) {
 						System.out.println("\nCOULD NOT MATCH!");
 						System.out.println("END OF VERIFICATION");
 						break;
@@ -225,6 +225,7 @@ public class Matching {
 						System.out.println("\nEXPANDING...");
 						int outdated = hyp.size();
 						for (int i = 0; i < outdated; i++) {
+                            System.out.println(hyp.get(i));
 							hyp = bn.getHypernyms(hyp.get(i), hyp);
 						}
 						if (hyp.size() == outdated) break;

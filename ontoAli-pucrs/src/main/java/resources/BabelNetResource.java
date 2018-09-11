@@ -91,7 +91,6 @@ public class BabelNetResource {
     public List<BabelSynset> getHypernyms(BabelSynset bs, List<BabelSynset> hypernyms) {
         System.out.println("get hyp method ("+bs+")");
         List<BabelSynsetRelation> lbsr = bs.getOutgoingEdges(BabelPointer.ANY_HYPERNYM);
-        System.out.println(lbsr);
         if(lbsr == null || lbsr.size() == 0) return hypernyms;
         for (BabelSynsetRelation bsr : lbsr) {
             BabelSynsetID bsid = bsr.getBabelSynsetIDTarget();
@@ -119,7 +118,9 @@ public class BabelNetResource {
         if (hypernym.contains(":")) {
             ans.set(0, hypernym.substring(hypernym.lastIndexOf(":") + 1));
         }
-        return ans.get(0);
+        String r = ans.get(0);
+        ans.clear();
+        return r;
     }
 
     public ArrayList<String> lemmatizeSenses(String senses) {
@@ -223,6 +224,7 @@ public class BabelNetResource {
         for (int i = 0; i < array.length; i++) {
             newArray.add(array[i].toLowerCase());
         }
+        array = null;
         return newArray;
     }
 
@@ -236,6 +238,7 @@ public class BabelNetResource {
         for (String s : set) {
             array.add(s);
         }
+        set.clear();
         return array;
     }
 
