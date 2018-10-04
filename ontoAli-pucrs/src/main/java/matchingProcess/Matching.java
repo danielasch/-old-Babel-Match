@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import it.uniroma1.lcl.babelnet.BabelSynset;
+import objects.MatchingObject;
 import org.semanticweb.owlapi.model.OWLClass;
 import org.semanticweb.owlapi.model.OWLClassExpression;
 import org.semanticweb.owlapi.model.OWLOntology;
@@ -18,6 +19,7 @@ import objects.Concept;
 import objects.ConceptManager;
 import objects.Ontology;
 import resources.BabelNetResource;
+import resources.Utilities;
 
 import javax.xml.bind.SchemaOutputResolver;
 
@@ -32,13 +34,18 @@ public class Matching {
 	private List<Mapping> listMap;
 	//path to write the rdf file
 	private String localfile;
+	//BabelNet manipulation class
+	private BabelNetResource bn;
+	//Synset found at disambiguation process
+	private BabelSynset goodSynset;
 
 //Constructor	
 	
 	public Matching(String _file) {
 		log();
-		listMap = null;
-		localfile = _file;
+		this.listMap = null;
+		this.localfile = _file;
+		this.bn = new BabelNetResource();
 	}
 
 //Log methods	
@@ -126,62 +133,25 @@ public class Matching {
 		}
 	}
 
-//Methods
-	
-	/*
-	 * extract the supper class of a OWLClass
-	 */
-	/*
-	private OWLClassExpression extract_superClass(OWLClass cls, OWLOntology onto) {
-		
-		OWLClassExpression last = null;
-		for(OWLClassExpression sup: cls.getSuperClasses(onto)) {
-        	
-        	if(!sup.isAnonymous()) {					
-        		last = extract_superRecurClass(sup, onto);
-        		if(last == null) {
-        			last = sup;
-        		}
-        	}	
-		}
-		return last;
-	}
-	*/
-	/*
-	private OWLClassExpression extract_superRecurClass(OWLClassExpression su, OWLOntology onto) {	
-		OWLClassExpression last = null;
-		if(su != null) {
-
-			for(OWLClassExpression sup: ((OWLClass) su).getSuperClasses(onto)) {
-        	
-				if(!sup.isAnonymous()) {					
-					last = extract_superRecurClass(sup, onto);
-					if(last == null) {
-						last = sup;
-					}
-				}	
-			}
-		}
-		return last;
-	}
-	*/
-
 	/*
 	 * Matches a pair of concepts (domain - top) through
 	 * the babelnet's hypernym structure recovered from
 	 * the synset assigned to the domain concept
 	 */
+
+
 	public void matchBabel(List<Concept> dom, List<Concept> up) {
 		init_log();
-		BabelNetResource bn = new BabelNetResource();
 		ConceptManager man = new ConceptManager();
 		List<Mapping> listM = new ArrayList<>();
 		List<BabelSynset> hyp = new LinkedList<>();
-		int idx, levels;
+		HashSet<BabelSynset>searched = new HashSet<>();
+		int idx, levels, outdated, last_outdating;
 		Boolean matched;
 		for (Concept d : dom) {
 			hyp.clear();
-			idx = 0;
+			searched.clear();
+			idx = outdated = last_outdating = 0;
 			levels = 1;
 			matched = false;
 			if(d.get_goodSynset() != null) {
@@ -189,9 +159,10 @@ public class Matching {
 				System.out.println("domain : " + d.get_className());
 				BabelSynset bs = d.get_goodSynset().getSynset();
 				System.out.println(bs + " " + bs.getID() + " " + bs.getMainSense());
-				hyp = bn.getHypernyms(bs, hyp);
+				hyp = bn.getHypernyms(bs, hyp, searched);
+				searched.add(bs);
 				while (idx < hyp.size()) {
-					if (levels == 11) {
+					if (levels == 5) {
 						System.out.println("\nCOULD NOT MATCH!");
 						System.out.println("END OF VERIFICATION");
 						break;
@@ -207,11 +178,12 @@ public class Matching {
 							map.set_measure("1.0");
 							listM.add(map);
 							//System.out.println(hypernym + " : " + map.get_source() + ", " + map.get_target());
-							d.get_utilities().set_hypernyms(hyp.toString());
-							d.get_utilities().setSelected_hypernym(hypernym);
+							Utilities ut = d.get_utilities();
+							ut.set_hypernyms(hyp.toString());
+							ut.setSelected_hypernym(hypernym);
 							//System.out.println("*******" + hyp);
-							d.get_utilities().setIdx(idx);
-							d.get_utilities().setLevel(levels);
+							ut.setIdx(idx);
+							ut.setLevel(levels);
 							matched = true;
 							break;
 						}
@@ -223,10 +195,16 @@ public class Matching {
 					} else if (idx == hyp.size() - 1) {
 						System.out.println("\nCOULD NOT MATCH WITH: " + hyp + " in level " + levels);
 						System.out.println("\nEXPANDING...");
-						int outdated = hyp.size();
-						for (int i = 0; i < outdated; i++) {
-                            System.out.println(hyp.get(i));
-							hyp = bn.getHypernyms(hyp.get(i), hyp);
+						last_outdating = outdated;
+						outdated = hyp.size();
+						for (int i = last_outdating; i < outdated; i++) {
+							System.out.println(" ");
+							BabelSynset to_search = hyp.get(i);
+							if(to_search != bs) {
+								hyp = bn.getHypernyms(to_search, hyp, searched);
+								searched.add(to_search);
+							}
+							else break;
 						}
 						if (hyp.size() == outdated) break;
 						else {
@@ -244,388 +222,105 @@ public class Matching {
 		final_log();
 	}
 
-	private void print(List<BabelSynset>lst , int beg, int end){
+
+
+	public void print(List<BabelSynset>lst, int beg, int end){
 		System.out.print("[ ");
 		for(int i = beg; i < end; i++){
-			System.out.print(lst.get(i) + " ");
+			System.out.print(lst.get(i)+ " ");
 		}
-		System.out.print("]\n");
+		System.out.println("]");
 	}
-	
+
+	public List<BabelSynset> sub_list(List<BabelSynset>lst, int beg, int end){
+		List<BabelSynset>sub = new LinkedList<>();
+		for(int i = beg; i < end; i++){
+			sub.add(lst.get(i));
+		}
+		return sub;
+	}
+
 	/*
-	 * Search for the alignment in DOLCE and DUL and generates the mapping	
-	 */
-	/*
-	public void compare_dolce(List<Concept> domain, List<Concept> upper) {
-		//creates a local list of mapping class
-		List<Mapping> listM = new ArrayList<Mapping>();
-		ConceptManager man = new ConceptManager();
-		//last will reaceive the concept of higher level of DOLCE
-		OWLClassExpression last = null;
-		//owlUpper receive the OWLOntology of DOLCE
-		OWLOntology owlUpper = upper.get(0).get_owlOntology();
-		
+
+
+	public void match(List<Concept> listDom, List<Concept> listUp) {
 		init_log();
-		
-		for(Concept cnp_1: domain) {
-			//instantiate the mapping class
-			Mapping map = new Mapping();
-			//synset receive the disambiguated synset of cnp_1
-			ISynset synset = cnp_1.get_goodSynset();
-			
-			if(synset != null) {
-				//cls will receive the OWLClass aligned to cnp_1
-				OWLClass cls = new_search(cnp_1, upper);
-				
-				if(cls != null) {
-					//last receive the higher level concept of the top onto. concept
-					last = extract_superClass(cls, owlUpper);
-					
-					if(last != null) {
-						//sets the alignment of cnp_1
-						man.config_aliClass(cnp_1, last.asOWLClass());
-					} else {
-						//sets the alignment of cnp_1
-						man.config_aliClass(cnp_1, cls);
-					}
-					//sets the mapping source
-					map.set_source(cnp_1.get_owlClass().getIRI().toString());
-					//sets the mapping target
-					map.set_target(cnp_1.get_aliClass().getIRI().toString());
-					//sets the mapping realtion
-					map.set_relation("&lt;");
-					//sets the mapping measure
-					map.set_measure("1.0");
-					//add the mapping into a list
-					listM.add(map);
-				} else {
-					//sets the alignment of cnp_1 as null
-					man.config_aliClass(cnp_1, null);
-
-					map.set_source(cnp_1.get_classID());
-					map.set_target("null");
-					map.set_relation("null");
-					map.set_measure("false");
-					//add the mapping into a list
-					listM.add(map);
-				}
-			} else {
-
-				map.set_source(cnp_1.get_classID());
-				map.set_target("null");
-				map.set_relation("null");
-				map.set_measure("false");
-				//add the mapping into a list
-				listM.add(map);
+		for(Concept cnp: listDom) {
+			System.out.println(cnp.get_className());
+			if(cnp.get_goodSynset() != null) {
+				System.out.println("\nStarting match...\n");
+				System.out.println("------------------------------");
+				matchHyp(cnp, listUp);
+				System.out.println("------------------------------\n");
 			}
 		}
-		//listMap receive the local list of mappings
-		this.listMap = listM;
 		final_log();
 	}
-	*/
-	
-	/*
-	 * Search for the Top ontology class that matches the synset selected,
-	 * comparing the description of the Top Ont. concept and the gloss of the synset. 
-	 */
-	/*
-	private OWLClass new_search(Concept cnp_1, List<Concept> topConceptList) {			
-		OWLClass clss = null;
-		Set<String> glossList = new HashSet<String>();
-		//gloss receive the gloss of the synset of cnp_1
-		String gloss = cnp_1.get_goodSynset().getGlosses();
 
-		int max = 0;
-		//glossList contains all tokens of gloss
-		glossList = sp_string(gloss);
-		//removes some chars of glossList
-		glossList = rm_specialChar(glossList);
-		
-		for(Concept cnp_2: topConceptList) {
-			if(cnp_2.get_desc() != null) {
-				
-				Set<String> descList = new HashSet<String>();
-				int size = 0;
-				//desc receive the description of cnp_2 (top onto. concept)
-				String desc = cnp_2.get_desc();
-				//descList contains all tokens of desc
-				descList = sp_string(desc); 
-				//removes some chars of DescList
-				descList = rm_specialChar(descList);
-				//size will receive the numbers of overlaps between two list
-				size = intersection(glossList, descList);
-				//size must be different than 1, to avoid intersection with one overlap 
-				if(size != 1) {	
-					if(size > max) {
-						max = size;
-						clss = cnp_2.get_owlClass();
-					}
-				}			 
-			}
-			
-		}
-		return clss;
-	}
-	*/
-	
-	/*
-	 * removes some characters of a set of strings
-	 */
-	/*
-	private Set<String> rm_specialChar(Set<String> list) {
-		
-		Set<String> temp = new LinkedHashSet<String>();
-		char x = '"';
-		String z = String.valueOf(x);
-		for(String word: list) {
-			
-			if(word.contains(z)) {
-				word = word.replace(z, "");
-			}
-			
-			if(word.endsWith("-")) {
-				word = word.replace("-", "");
-			}
-		
-			if(word.contains("(")) {
-				word = word.replace("(", "");
-			}
-        
-			if(word.contains(")")) {
-				word = word.replace(")", "");
-			}
-        
-			if(word.contains(",")) {
-				word = word.replace(",", "");
-			}
-        
-			if(word.contains(":")) {
-				word = word.replace(":", "");
-			}        
-        
-			if(word.contains("'s")) {
-				word = word.replace("'s", "");
-			}
-        
-			if(word.contains("'")) {
-				word = word.replace("'", "");
-			}
-        
-			if(word.contains("?")) {
-				word = word.replace("?", "");
-			}
-        
-			if(word.contains("!")) {
-				word = word.replace("!", "");
-			}
-        
-			if(word.contains(".")) {
-				word = word.replace(".", "");
-			}
-        
-			if(word.contains(";")) {
-				word = word.replace(";", "");
-			}
-			
-			if(word.contains("\\")) {
-				word = word.replace("\\", "");
-			}
-			temp.add(word);
-		}
-		list.clear();
-		list = temp;
-        return list;	
-	}
-	*/
-	
-	/*
-	 * Split strings separated by space or �
-	 */
-	/*
-	private Set<String> sp_string(String str) {
-		Set<String> temp= new HashSet<String>();
-
-			String[] split = str.split(" |�");	
-			
-			for(String strSplit: split) {
-				temp.add(strSplit.toLowerCase());
-			}
-			return temp;
-		}
-		*/
-	
-	/*
-	 * Overlapping between two lists
-	 */
-	/*
-	private int intersection(Set<String> list_1, Set<String> list_2) {
-		int inter = 0;
-		
-		for(String word_1: list_1) {
-			
-			word_1 = word_1.toLowerCase();
-			for(String word_2: list_2) {
-				
-				if(word_1.equals(word_2)) {
-					inter++;
-					break;
-				}
-			}	
-		}
-		return inter;
-	}
-	*/
-	
-	/*
-	 * Search for the alignment in SUMO
-	 */
-
-	/*
-	public void compare_sumo(List<Concept> domain, List<Concept> upper) {
-		//creates a local list of mapping class
-		List<Mapping> listM = new ArrayList<Mapping>();
+	private void matchHyp(Concept cnp, List<Concept> listUp) {
 		ConceptManager man = new ConceptManager();
-		//last will receive the concept of higher level of SUMO
-		OWLClass last = null;
-		init_log();
-		for(Concept cnp_1: domain) {
-			//instantiate the mapping class
-			Mapping map = new Mapping();
-			//synset receive the disambiguated synset of cnp_1
-			ISynset synset = cnp_1.get_goodSynset();
+		Map<Concept, Integer> map = new HashMap<>();
+		goodSynset = cnp.get_goodSynset().getSynset();
+		System.out.println("Good Synset: " + goodSynset.getMainSense());
+		int level = 0;
+		MatchingObject mo = new MatchingObject(goodSynset, level);
+		mo.create_list();
+		Concept align = findHypers(goodSynset, listUp, null, level, mo);
+		if(align != null) {
+			Mapping mappin = new Mapping();
+			man.config_aliClass(cnp, align.get_owlClass());
+			//man.config_object(cnp, ooList);
+			mappin.set_source(cnp.get_classID());
+			mappin.set_target(align.get_classID());
+			mappin.set_measure("1.0");
+			mappin.set_relation("&lt;");
+			this.listMap.add(mappin);
+		}
+		man.config_object(cnp, mo);
+	}
 
-			if(synset != null) {
-				//code receive the synset code
-				String code = "" + synset.getOffset();
-			
-				//synset code fixation
-				code = code_fixation(code);
-				//reads the WordNet mapping to SUMO
-				try {
-					BufferedReader br = new BufferedReader(new FileReader("resources/WordNetMappings30-noun.txt"));
-					String line = "init";
+	private Concept searchTop(BabelSynset synset, List<Concept> listUp) {
+		String sense = synset.getMainSense().toString();
+		for(Concept up: listUp) {
+			if(up.get_className().toLowerCase().equals(sense.toLowerCase())) {
+				return up;
+			}
+		}
+		return null;
+	}
 
-					while ((line = br.readLine()) != null) {
-						
-						if(line.startsWith(code)) {
-							String aux = null;
-							//aux receive the name and the relation of the concept aligned to the synset of cnp_1
-							aux = rc_alignment(line);
-							//set mapping source
-							map.set_source(cnp_1.get_owlClass().getIRI().toString());
-							//aux receive the name of the concept aligned to the synset
-							last = rc_upperConcept(aux, upper);
-							
-							if(last != null) {
-								//sets Top Ont. concept align class of cnp_1 as last
-								man.config_aliClass(cnp_1, last);
-								//sets the mapping target
-								map.set_target(cnp_1.get_aliClass().getIRI().toString());
-								//sets the relation
-								if(aux.endsWith("=")) {
-									map.set_relation("&lt;");
-								} else if(aux.endsWith("+")) {
-									map.set_relation("&gt;");
-								}
-								map.set_measure("1.0");
-								//add the mapping into a list
-								listM.add(map);
-								break;
-							//sets the mapping for last == null	
-							} else {
-								man.config_aliClass(cnp_1, null);
-								map.set_source(cnp_1.get_owlClass().getIRI().toString());
-								map.set_target("null");
-								map.set_relation("null");
-								map.set_measure("false");
-								//add the mapping into a list
-								listM.add(map);
-							}
+
+	private Concept findHypers(BabelSynset synset, List<Concept> listUp,Concept aligned, int level, MatchingObject mo) {
+		if(aligned!=null) return aligned;
+		if(level < 10){
+			if(level > 0 && synset == goodSynset) return null;
+			else{
+				List<BabelSynset> hyp = bn.getHypernyms(synset);
+				if (!hyp.isEmpty()) {
+					System.out.println("\nHypernyms of " + synset.getMainSense() + ": " + hyp.toString());
+					System.out.println("Level: " + level + "\n");
+					level++;
+					mo.create_list();
+					for (BabelSynset bs : hyp) {
+						MatchingObject nmo = new MatchingObject(bs, level);
+						mo.add_list(nmo);
+						aligned = searchTop(bs, listUp);
+						if (aligned != null) {
+							System.out.println("\nMatched!\n");
+							return aligned;
 						}
 					}
-					br.close();
-				} catch(FileNotFoundException e) {
-			    	System.out.println("WordNetMappings30-ouns.txt file not found!");
-			    	System.out.println("erro: " + e);
-			    } catch (IOException e) {
-			    	System.out.println("I/O operation failed on WordNetMappings30-ouns.txt file!");
-			    	System.out.println("erro: " + e);
-			    }
-			//set the mapping for synset == null		
-			} else {
-			//sets the align Class of cnp_1 as null	
-			man.config_aliClass(cnp_1, null);
-			
-			map.set_source(cnp_1.get_owlClass().getIRI().toString());
-			map.set_target("null");
-			map.set_relation("null");
-			map.set_measure("false");
-			//add the mapping into a list
-			listM.add(map);
-			}
-		}
-		//listMap receive the local list of mappings
-		this.listMap = listM;
-		final_log();
-	}
-	*/
-	
-	/*
-	 * Recover OWLClass that has the same name as the line
-	 */
-	/*
-	private OWLClass rc_upperConcept(String line, List<Concept> upper) {
-		if(line.endsWith("=")) {
-			line = line.replace("=", "");
-		} else if(line.endsWith("+")) {
-			line = line.replace("+", "");
-		}
-		for(Concept cnp_2: upper) {
-			if(cnp_2.get_className().toLowerCase().equals(line.toLowerCase())) {
-				return cnp_2.get_owlClass();
+					for(MatchingObject nmo: mo.get_list()) {
+						if(aligned != null) return aligned;
+						findHypers(nmo.getSynset(), listUp, aligned, level, nmo);
+					}
+				}
 			}
 		}
 		return null;
 	}
 	*/
-	
-	/*
-	 * Fix the synset code, turning the code into 8 digits.
-	 */
-	/*
-	private String code_fixation(String code) {
-		if(code.length() == 7) {
-			code = "0" + code;
-		} else if(code.length() == 6) {
-			code = "00" + code;
-		} else if(code.length() == 5) {
-			code = "000" + code;
-		} else if(code.length() == 4) {
-			code = "0000" + code;
-		} else if(code.length() == 3) {
-			code = "00000" + code;
-		} else if(code.length() == 2) {
-			code = "000000" + code;
-		} else if(code.length() == 1) {
-			code = "0000000" + code;
-		}
-		return code;
-	}
-	*/
-	
-	/*
-	 * Recover the name of the alignment class in the text file
-	 */
-	/*
-	private String rc_alignment(String line) {
-		String aux;
-		int i = line.indexOf("&%");
-		aux = line.substring(i);
-		aux = aux.replaceFirst("&%", "");
-		return aux;
-	}
-	*/
+
 	
 }
 

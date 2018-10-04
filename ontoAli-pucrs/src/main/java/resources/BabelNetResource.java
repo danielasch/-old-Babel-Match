@@ -88,22 +88,40 @@ public class BabelNetResource {
         return bn.getSynsets(query);
     }
 
-    public List<BabelSynset> getHypernyms(BabelSynset bs, List<BabelSynset> hypernyms) {
+
+    public List<BabelSynset> getHypernyms(BabelSynset bs, List<BabelSynset> hypernyms, HashSet<BabelSynset>searched) {
         System.out.println("get hyp method ("+bs+")");
         List<BabelSynsetRelation> lbsr = bs.getOutgoingEdges(BabelPointer.ANY_HYPERNYM);
         if(lbsr == null || lbsr.size() == 0) return hypernyms;
         for (BabelSynsetRelation bsr : lbsr) {
             BabelSynsetID bsid = bsr.getBabelSynsetIDTarget();
             BabelSynset basy = bn.getSynset(bsid);
-            if (!hypernyms.contains(basy)) {
-                hypernyms.add(basy);
-                System.out.println("added " + basy.getMainSense() + " to hyp");
+            if(!searched.contains(basy)) {
+                if (!hypernyms.contains(basy)) {
+                    hypernyms.add(basy);
+                    System.out.println("added " + basy.getMainSense() + " to hyp");
+                }
             }
         }
         lbsr.clear();
         lbsr = null;
         return hypernyms;
     }
+
+    /*
+    public List<BabelSynset> getHypernyms(BabelSynset synset){
+        List<BabelSynset> hypernyms = new LinkedList<>();
+        List<BabelSynsetRelation> lbsr = synset.getOutgoingEdges(BabelPointer.ANY_HYPERNYM);
+        for (BabelSynsetRelation bsr : lbsr) {
+            BabelSynsetID bsid = bsr.getBabelSynsetIDTarget();
+            BabelSynset basy = bn.getSynset(bsid);
+            if(!hypernyms.contains(basy)) {
+                hypernyms.add(basy);
+            }
+        }
+        return hypernyms;
+    }
+    */
 
     //Lemmatizers
     public String lemmatizeHypernym(String hypernym) {

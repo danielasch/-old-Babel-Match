@@ -40,7 +40,6 @@ public class Concept {
 	// Auxiliary class to save the information about this concept 
 	//to generate the text out file.
 	private Utilities ut;
-	
 	private Object obj;
 	//Super concepts list
 	private List<OWLClassExpression> supers;
@@ -55,6 +54,7 @@ public class Concept {
 	
 	public Concept() {
 		this.context = new HashSet<String>();
+		this.goodSynset = null;
 		this.ut = null;
 	}
 

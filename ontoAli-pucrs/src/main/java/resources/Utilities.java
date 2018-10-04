@@ -35,7 +35,7 @@ public class Utilities {
 		this.selected_hypernym = null;
 		//this.mapPairSim = null;
 	}
-	
+
 //Getters and setters
 
     //public void set_synsetCntx(HashMap<BabelSynset, List<String>> _synsetCntxt) { this.synsetCntxt = _synsetCntxt; }

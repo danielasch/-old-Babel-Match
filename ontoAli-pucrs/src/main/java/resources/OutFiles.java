@@ -3,8 +3,11 @@ package resources;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import it.uniroma1.lcl.babelnet.BabelSynset;
 import objects.Concept;
 
 /*
@@ -48,8 +51,7 @@ public class OutFiles {
 				printer.print("Conceito Topo alinhado: " + cnp.get_aliClass() + "\n");
 				if(cnp.get_goodSynset() != null) {
 					printer.print("Synset selecionado BabelNet: " + cnp.get_goodSynset().getSynset().toString() + "\n");
-					printer.print("Lista de hiperonímios completa: " + cnp.get_utilities().getHypernyms() + "\n");
-					printer.print("Hiperonímio selecionado: " + cnp.get_utilities().getSelected_hypernym() +
+					printer.print("\nHiperonímio selecionado: " + cnp.get_utilities().getSelected_hypernym() +
 							" no nível de busca " + cnp.get_utilities().getLevel() + " e índice " +
 							cnp.get_utilities().getIdx() + "\n");
 					printer.print("Número de Synsets recuperados: " + cnp.get_utilities().get_numSy() + "\n\n");
@@ -91,8 +93,8 @@ public class OutFiles {
 			PrintWriter printer = new PrintWriter(arq);
 			
 			for(Concept cnp: listDomain) {
-				printer.print("NOME: " + cnp.get_className() + "\n");
-				printer.print("Desc: " + cnp.get_desc() + "\n");
+				printer.print("Nome do conceito de domínio: " + cnp.get_className() + "\n");
+				printer.print("Descrição: " + cnp.get_desc() + "\n");
 				printer.print("Supers: " + cnp.get_supers() + "\n");
 				printer.print("Subs: " + cnp.get_subs() + "\n");
 				printer.print("Contexto: " + cnp.get_context() + "\n");

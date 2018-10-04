@@ -1,0 +1,502 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.semanticweb.org/edson/ontologies/2017/11/untitled-ontology-28"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.semanticweb.org/edson/ontologies/2017/11/untitled-ontology-28">
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+    <Declaration>
+        <Class IRI="#physical-quality"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#action"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#perdurant"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#physical-endurant"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#space-region"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#spatial-feature"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#gesturing"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#quale"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#agent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#temporal-location-q"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#functional-matter"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#organization"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#spatial-location-q"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#temporal-quality"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#institution"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#proposition"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#region"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#physical-body"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#cognitive-event"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#amount-of-matter"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#non-physical-object"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#mental-object"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#agentive-figure"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#physical-object"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#agentive-social-object"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#endurant"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#relevant-part"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#time-interval"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#planning-activity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#quality-space"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#dependent-place"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#rational-physical-object"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#feature"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#accomplishment"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#non-agentive-physical-object"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#agentive-physical-object"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#achievement"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#measurement-unit"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#physical-plurality"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#voicing"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#communication-event"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#non-physical-endurant"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#phenomenon"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#arbitrary-sum"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#rational-agent"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#activity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#decision-activity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#social-object"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#physical-region"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#abstract"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#stative"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#physical-phenomenon"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#particular"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#set"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#physical-realization"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#material-artifact"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#socially-constructed-person"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#writing"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#physical-place"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#quality"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#abstract-quality"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#spatio-temporal-region"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#natural-person"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#abstract-region"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#temporal-region"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#information-gathering"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#spatio-temporal-particular"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#event"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#information-realization"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#abstract"/>
+        <Class IRI="#particular"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#abstract-quality"/>
+        <Class IRI="#quality"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#abstract-region"/>
+        <Class IRI="#region"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#accomplishment"/>
+        <Class IRI="#event"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#achievement"/>
+        <Class IRI="#event"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#action"/>
+        <Class IRI="#accomplishment"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#activity"/>
+        <Class IRI="#action"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#agent"/>
+        <Class IRI="#endurant"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#agentive-figure"/>
+        <Class IRI="#agentive-social-object"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#agentive-physical-object"/>
+        <Class IRI="#agent"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#agentive-social-object"/>
+        <Class IRI="#agent"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#agentive-social-object"/>
+        <Class IRI="#social-object"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#amount-of-matter"/>
+        <Class IRI="#physical-endurant"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#arbitrary-sum"/>
+        <Class IRI="#endurant"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#cognitive-event"/>
+        <Class IRI="#event"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#communication-event"/>
+        <Class IRI="#accomplishment"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#decision-activity"/>
+        <Class IRI="#activity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#dependent-place"/>
+        <Class IRI="#feature"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#endurant"/>
+        <Class IRI="#spatio-temporal-particular"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#event"/>
+        <Class IRI="#perdurant"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#feature"/>
+        <Class IRI="#physical-endurant"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#functional-matter"/>
+        <Class IRI="#amount-of-matter"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#gesturing"/>
+        <Class IRI="#action"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#information-gathering"/>
+        <Class IRI="#activity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#information-realization"/>
+        <Class IRI="#physical-realization"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#institution"/>
+        <Class IRI="#organization"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#material-artifact"/>
+        <Class IRI="#non-agentive-physical-object"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#measurement-unit"/>
+        <Class IRI="#abstract-region"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#mental-object"/>
+        <Class IRI="#non-physical-object"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#natural-person"/>
+        <Class IRI="#socially-constructed-person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#non-agentive-physical-object"/>
+        <Class IRI="#physical-object"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#non-physical-endurant"/>
+        <Class IRI="#endurant"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#non-physical-object"/>
+        <Class IRI="#non-physical-endurant"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#organization"/>
+        <Class IRI="#socially-constructed-person"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#perdurant"/>
+        <Class IRI="#spatio-temporal-particular"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#phenomenon"/>
+        <Class IRI="#accomplishment"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#physical-body"/>
+        <Class IRI="#non-agentive-physical-object"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#physical-endurant"/>
+        <Class IRI="#endurant"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#physical-object"/>
+        <Class IRI="#physical-endurant"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#physical-phenomenon"/>
+        <Class IRI="#phenomenon"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#physical-place"/>
+        <Class IRI="#non-agentive-physical-object"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#physical-plurality"/>
+        <Class IRI="#physical-object"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#physical-quality"/>
+        <Class IRI="#quality"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#physical-realization"/>
+        <Class IRI="#spatio-temporal-particular"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#physical-region"/>
+        <Class IRI="#region"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#planning-activity"/>
+        <Class IRI="#activity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#proposition"/>
+        <Class IRI="#abstract"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#quale"/>
+        <Class IRI="#region"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#quality"/>
+        <Class IRI="#spatio-temporal-particular"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#quality-space"/>
+        <Class IRI="#region"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#rational-agent"/>
+        <Class IRI="#agent"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#rational-physical-object"/>
+        <Class IRI="#agentive-physical-object"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#region"/>
+        <Class IRI="#abstract"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#relevant-part"/>
+        <Class IRI="#feature"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#set"/>
+        <Class IRI="#abstract"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#social-object"/>
+        <Class IRI="#non-physical-object"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#socially-constructed-person"/>
+        <Class IRI="#agentive-figure"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#space-region"/>
+        <Class IRI="#physical-region"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#spatial-feature"/>
+        <Class IRI="#relevant-part"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#spatial-location-q"/>
+        <Class IRI="#physical-quality"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#spatio-temporal-particular"/>
+        <Class IRI="#particular"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#spatio-temporal-region"/>
+        <Class IRI="#space-region"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#stative"/>
+        <Class IRI="#perdurant"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#temporal-location-q"/>
+        <Class IRI="#temporal-quality"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#temporal-quality"/>
+        <Class IRI="#quality"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#temporal-region"/>
+        <Class IRI="#region"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#time-interval"/>
+        <Class IRI="#temporal-region"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#voicing"/>
+        <Class IRI="#action"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#writing"/>
+        <Class IRI="#information-realization"/>
+    </SubClassOf>
+</Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.2.8.20170104-2310) https://github.com/owlcs/owlapi -->
+

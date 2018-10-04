@@ -221,7 +221,7 @@ public class Main {
 		Ontology domain = new Ontology(args[0]);
 		switch(topOnto) {
 			case "dolce":
-				Ontology upperD = new Ontology("resources/DUL.owl");
+				Ontology upperD = new Ontology("resources/DLP_397_Edited.owl");
 				listDom = domain(domain);
 				listUp = dolce(upperD);
 				disamb(listDom);
