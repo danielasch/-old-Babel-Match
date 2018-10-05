@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dad8c3cc-730b-4922-97f4-071f6133c324" name="Default Changelist" comment="" />
+    <list default="true" id="dad8c3cc-730b-4922-97f4-071f6133c324" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/matchingProcess/Matching.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/matchingProcess/Matching.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/resources/BabelNetResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/resources/BabelNetResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/resources/OutFiles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/resources/OutFiles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/synsetSelection/SynsetDisambiguation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/synsetSelection/SynsetDisambiguation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/matchingProcess/Matching.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/matchingProcess/Matching.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/objects/Concept.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/objects/Concept.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/objects/MatchingObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/objects/MatchingObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/resources/BabelNetResource.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/resources/BabelNetResource.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/resources/OutFiles.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/resources/OutFiles.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/resources/Utilities.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/resources/Utilities.class" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,37 +25,37 @@
     <session id="-40618810">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="7" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.14" value="2" />
-          <entry key="project.open.time.15" value="2" />
-          <entry key="project.opened" value="9" />
+          <entry key="project.open.time.15" value="3" />
+          <entry key="project.opened" value="10" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="java" value="4897" />
+          <entry key="java" value="6352" />
           <entry key="xml" value="132" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="JAVA" value="4898" />
+          <entry key="JAVA" value="6353" />
           <entry key="XML" value="131" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="java" value="44" />
+          <entry key="java" value="49" />
           <entry key="xml" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="JAVA" value="44" />
+          <entry key="JAVA" value="49" />
           <entry key="XML" value="4" />
         </counts>
       </usages-collector>
@@ -51,20 +63,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/matchingProcess/Matching.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="242" column="6" lean-forward="true" selection-start-line="242" selection-start-column="6" selection-end-line="242" selection-end-column="6" />
+            <state relative-caret-position="8">
+              <caret line="151" column="17" selection-start-line="151" selection-start-column="17" selection-end-line="151" selection-end-column="17" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/synsetSelection/SynsetDisambiguation.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-9">
+              <caret line="86" column="35" lean-forward="true" selection-start-line="86" selection-start-column="35" selection-end-line="86" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/resources/Utilities.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="885">
-              <caret line="66" column="39" selection-start-line="66" selection-start-column="39" selection-end-line="66" selection-end-column="39" />
+            <state relative-caret-position="37">
+              <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/resources/OutFiles.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="40">
+              <caret line="73" column="104" selection-start-line="73" selection-start-column="104" selection-end-line="73" selection-end-column="104" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/resources/BabelNetResource.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1110">
+              <caret line="93" column="41" lean-forward="true" selection-start-line="93" selection-start-column="41" selection-end-line="93" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -95,15 +134,15 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/java/synsetSelection/SynsetDisambiguationWE.java" />
-        <option value="$PROJECT_DIR$/src/main/java/synsetSelection/SynsetDisambiguation.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/main/java/resources/BabelNetResource.java" />
         <option value="$PROJECT_DIR$/src/main/java/conceptExtraction/Main.java" />
         <option value="$PROJECT_DIR$/src/main/java/objects/Concept.java" />
-        <option value="$PROJECT_DIR$/src/main/java/resources/OutFiles.java" />
         <option value="$PROJECT_DIR$/src/main/java/resources/Utilities.java" />
-        <option value="$PROJECT_DIR$/src/main/java/matchingProcess/Matching.java" />
         <option value="$PROJECT_DIR$/src/main/java/objects/MatchingObject.java" />
+        <option value="$PROJECT_DIR$/src/main/java/resources/BabelNetResource.java" />
+        <option value="$PROJECT_DIR$/src/main/java/synsetSelection/SynsetDisambiguation.java" />
+        <option value="$PROJECT_DIR$/src/main/java/resources/OutFiles.java" />
+        <option value="$PROJECT_DIR$/src/main/java/matchingProcess/Matching.java" />
       </list>
     </option>
   </component>
@@ -124,7 +163,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="67" />
     <option name="y" value="27" />
     <option name="width" value="1299" />
@@ -136,6 +175,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -205,14 +246,12 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538678954958" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1538683314606" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Project" />
@@ -232,7 +271,7 @@
     </option>
   </component>
   <component name="RunManager" selected="Application.Unnamed">
-    <configuration name="BabelNetResource" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="BabelNetResource" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="resources.BabelNetResource" />
       <module name="ontoAli-pucrs" />
       <extension name="coverage">
@@ -248,7 +287,7 @@
     <configuration name="Unnamed" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="conceptExtraction.Main" />
       <module name="ontoAli-pucrs" />
-      <option name="PROGRAM_PARAMETERS" value="$USER_HOME$/Desktop/conference-ontologies/Conference/cmt.owl $USER_HOME$/Desktop sumo 1" />
+      <option name="PROGRAM_PARAMETERS" value="$USER_HOME$/Desktop/conference-ontologies/Conference/cmt.owl $USER_HOME$/Desktop/saidas_babelmatch(LESK_V2) dolce 1" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -257,11 +296,6 @@
       <item itemvalue="Application.Unnamed" />
       <item itemvalue="Application.BabelNetResource" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.BabelNetResource" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -281,18 +315,18 @@
       <workItem from="1537807573520" duration="20146000" />
       <workItem from="1538067754012" duration="13476000" />
       <workItem from="1538164911332" duration="301000" />
-      <workItem from="1538672932731" duration="4582000" />
+      <workItem from="1538672932731" duration="7995000" />
+      <workItem from="1538759618333" duration="10042000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="73731000" />
+    <option name="totallyTimeSpent" value="87186000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="67" y="25" width="1299" height="743" extended-state="7" />
-    <editor active="true" />
+    <frame x="67" y="25" width="1299" height="743" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2753392" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22426178" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -301,7 +335,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.22838499" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.8743883" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -310,7 +344,7 @@
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="9" weight="0.32952693" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" order="11" weight="0.3284553" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.32789558" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -360,13 +394,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/synsetSelection/SynsetDisambiguation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="84" column="35" selection-start-line="84" selection-start-column="35" selection-end-line="84" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/objects/ConceptManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -402,24 +429,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/resources/BabelNetResource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/objects/Concept.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
           <caret line="55" column="31" lean-forward="true" selection-start-line="55" selection-start-column="31" selection-end-line="55" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/resources/OutFiles.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="57" column="20" lean-forward="true" selection-start-line="57" selection-start-column="20" selection-end-line="57" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -430,17 +443,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/matchingProcess/Matching.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/resources/Utilities.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="242" column="6" lean-forward="true" selection-start-line="242" selection-start-column="6" selection-end-line="242" selection-end-column="6" />
+        <state relative-caret-position="37">
+          <caret line="53" lean-forward="true" selection-start-line="53" selection-end-line="53" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/resources/Utilities.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/synsetSelection/SynsetDisambiguation.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="885">
-          <caret line="66" column="39" selection-start-line="66" selection-start-column="39" selection-end-line="66" selection-end-column="39" />
+        <state relative-caret-position="-9">
+          <caret line="86" column="35" lean-forward="true" selection-start-line="86" selection-start-column="35" selection-end-line="86" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/resources/BabelNetResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1110">
+          <caret line="93" column="41" lean-forward="true" selection-start-line="93" selection-start-column="41" selection-end-line="93" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/resources/OutFiles.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="40">
+          <caret line="73" column="104" selection-start-line="73" selection-start-column="104" selection-end-line="73" selection-end-column="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/matchingProcess/Matching.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="8">
+          <caret line="151" column="17" selection-start-line="151" selection-start-column="17" selection-end-line="151" selection-end-column="17" />
         </state>
       </provider>
     </entry>

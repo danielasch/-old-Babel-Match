@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import it.uniroma1.lcl.babelnet.BabelNet;
 import it.uniroma1.lcl.babelnet.BabelSynset;
 import objects.MatchingObject;
 import org.semanticweb.owlapi.model.OWLClass;
@@ -145,24 +146,24 @@ public class Matching {
 		ConceptManager man = new ConceptManager();
 		List<Mapping> listM = new ArrayList<>();
 		List<BabelSynset> hyp = new LinkedList<>();
-		HashSet<BabelSynset>searched = new HashSet<>();
-		int idx, levels, outdated, last_outdating;
+		Set<BabelSynset>searched = new HashSet<>();
+		int idx, levels, outdated, limit;
 		Boolean matched;
+		limit = 4;
 		for (Concept d : dom) {
 			hyp.clear();
 			searched.clear();
-			idx = outdated = last_outdating = 0;
+			idx = 0;
 			levels = 1;
 			matched = false;
 			if(d.get_goodSynset() != null) {
 				System.out.println("-------------------------------------");
 				System.out.println("domain : " + d.get_className());
 				BabelSynset bs = d.get_goodSynset().getSynset();
-				System.out.println(bs + " " + bs.getID() + " " + bs.getMainSense());
-				hyp = bn.getHypernyms(bs, hyp, searched);
-				searched.add(bs);
+				System.out.println("Best synset: " + bs + " " + bs.getID() + " " + bs.getMainSense());
+				hyp.add(bs);
 				while (idx < hyp.size()) {
-					if (levels == 5) {
+					if (levels == limit) {
 						System.out.println("\nCOULD NOT MATCH!");
 						System.out.println("END OF VERIFICATION");
 						break;
@@ -190,55 +191,66 @@ public class Matching {
 					}
 					if (matched) {
 						System.out.println("\nCOMPLETE HYPENYMS: " + hyp);
-						System.out.println("MATCHED WIHT: " + hypernym + " in level " + levels + " at index " + idx + "\n\n");
+						System.out.println("MATCHED WIHT: " + hypernym + " - " + hyp + " on level " + levels + " at index " + idx + "\n\n");
 						break;
 					} else if (idx == hyp.size() - 1) {
-						System.out.println("\nCOULD NOT MATCH WITH: " + hyp + " in level " + levels);
-						System.out.println("\nEXPANDING...");
-						last_outdating = outdated;
-						outdated = hyp.size();
-						for (int i = last_outdating; i < outdated; i++) {
-							System.out.println(" ");
-							BabelSynset to_search = hyp.get(i);
-							if(to_search != bs) {
-								hyp = bn.getHypernyms(to_search, hyp, searched);
+						System.out.println("\nCOULD NOT MATCH WITH: " + hyp + " on level " + levels);
+						if(levels+1!=limit) {
+							System.out.println("\nEXPANDING...");
+							outdated = hyp.size();
+							for (int i = 0; i < outdated; i++) {
+								BabelSynset to_search = hyp.get(i);
+								hyp = bn.getHypernyms(to_search, hyp);
 								searched.add(to_search);
+								System.out.println(hyp);
 							}
-							else break;
+							hyp = modify(outdated, hyp, searched);
+							idx -= outdated;
+							if(hyp.isEmpty()) levels = limit-1;
 						}
-						if (hyp.size() == outdated) break;
-						else {
-							levels++;
-							System.out.print("EXPANDED: ");
-							print(hyp, outdated, hyp.size());
-						}
+						else idx--;
+						levels++;
 					}
 					idx++;
 				}
 			}
 		}
-		//System.out.println("hypernyms: " + hyp.toString());
 		this.listMap = listM;
 		final_log();
 	}
 
-
-
-	public void print(List<BabelSynset>lst, int beg, int end){
-		System.out.print("[ ");
-		for(int i = beg; i < end; i++){
-			System.out.print(lst.get(i)+ " ");
+	public List<BabelSynset> modify(int index, List<BabelSynset>hypernyms, Set<BabelSynset>searched ){
+		System.out.println(hypernyms.toString());
+		for(int i = 0; i < index; i++){
+			hypernyms.remove(0);
+			System.out.println(hypernyms.toString());
 		}
-		System.out.println("]");
+		if(hypernyms.isEmpty()) return hypernyms;
+		System.out.println("\nCleared hyp: " + hypernyms.toString());
+		for(int i = 0; i < index; i++){
+			BabelSynset bs = hypernyms.get(i);
+			if(searched.contains(bs)){
+				hypernyms.remove(bs);
+				i--;
+			}
+		}
+		System.out.println("Modifyed hyp: " + hypernyms.toString());
+		return parse(hypernyms);
 	}
 
-	public List<BabelSynset> sub_list(List<BabelSynset>lst, int beg, int end){
-		List<BabelSynset>sub = new LinkedList<>();
-		for(int i = beg; i < end; i++){
-			sub.add(lst.get(i));
+	public List<BabelSynset> parse(List<BabelSynset>hypernyms){
+		Set<BabelSynset>set = new HashSet<>();
+		for(BabelSynset b:hypernyms){
+			set.add(b);
 		}
-		return sub;
+		hypernyms.clear();
+		for(BabelSynset b:set){
+			hypernyms.add(b);
+		}
+		System.out.println("Parsed hyp: " + hypernyms.toString());
+		return hypernyms;
 	}
+
 
 	/*
 

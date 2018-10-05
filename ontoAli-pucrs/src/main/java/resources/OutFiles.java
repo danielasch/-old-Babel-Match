@@ -43,7 +43,7 @@ public class OutFiles {
 			PrintWriter printer = new PrintWriter(arq);
 			List<String> bgwSelect;
 			for(Concept cnp: listDomain) {
-				printer.print("Nome do conceito de domínio: " + cnp.get_className() + "\n");
+				printer.print("\nNome do conceito de domínio: " + cnp.get_className() + "\n");
 				printer.print("Descrição: " + cnp.get_desc() + "\n");
 				printer.print("Supers: " + cnp.get_supers() + "\n");
 				printer.print("Subs: " + cnp.get_subs() + "\n");
@@ -56,25 +56,25 @@ public class OutFiles {
 							cnp.get_utilities().getIdx() + "\n");
 					printer.print("Número de Synsets recuperados: " + cnp.get_utilities().get_numSy() + "\n\n");
 					printer.print("Conjunto de synsets recuperados:\n");
-				}
-				else{
-					printer.print("Não foi possível encontar synsets para esse conceito!");
-				}
-				for(BabelNetResource.SearchObject so : cnp.get_utilities().get_synsetCntx()) {
-					List<String> cntxt = so.getBgw();
-					printer.print(so.getSynset() + " " + so.getSynset().getID() + " | " + so.getGlosses() + "\n");
-					printer.print("BOW: " + cntxt.toString());
-					printer.print("\n\n");
-				}
-				if(cnp.get_goodSynset() != null) {
+					List<BabelNetResource.SearchObject> synsets = cnp.get_utilities().get_synsetCntx();
+					for (BabelNetResource.SearchObject so : synsets) {
+						printer.print("\n>Synset: " + so.getSynset() + "\n");
+						printer.print(">Sentidos: " + so.getSenses() + "\n");
+						printer.print(">Glosses: " + so.getGlosses() + "\n");
+						printer.print(">BOW: " + so.getBgw().toString() + "\n");
+					}
+					printer.print("\n");
 					bgwSelect = cnp.get_goodSynset().getBgw();
 					printer.print("Intersecção de palavras:");
 					for (String a : bgwSelect) {
 						if (cnp.get_context().contains(a)) {
-							printer.print(" " + a + " | ");
+							printer.print(" " + a + " ");
 						}
 					}
-					printer.print("\n----------\n");
+					printer.print("\n--------------------------------------------------------------------\n");
+				}
+				else{
+					printer.print("Não foi possível encontar synsets para esse conceito!");
 				}
 			}
 		arq.close();
@@ -107,6 +107,12 @@ public class OutFiles {
 							cnp.get_utilities().getIdx() + "\n");
 					printer.print("Número de Synsets recuperados: " + cnp.get_utilities().get_numSy() + "\n\n");
 					printer.print("Conjunto de synsets recuperados:\n");
+					List<BabelNetResource.SearchObject>synsets = cnp.get_utilities().get_synsetCntx();
+					for(BabelNetResource.SearchObject so : synsets){
+						printer.print("\nSynset: " + so.getSynset() + "\n");
+						printer.print("Sentidos: " + so.getSenses() + "\n");
+						printer.print("Glosses: " + so.getGlosses() + "\n");
+					}
 				}
 				else{
 					printer.print("Não foi possível encontar synsets para esse conceito!");

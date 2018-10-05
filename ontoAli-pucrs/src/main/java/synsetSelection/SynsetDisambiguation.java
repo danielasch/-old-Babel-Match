@@ -116,8 +116,6 @@ public class SynsetDisambiguation {
         //sets the utilities of a concept
         ut.set_synsetCntx(searched);
         man.config_utilities(concept, ut);
-        searched.clear();
-        searched = null;
     }
 
     /*
