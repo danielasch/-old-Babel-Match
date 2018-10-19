@@ -43,35 +43,52 @@ public class OutFiles {
 			PrintWriter printer = new PrintWriter(arq);
 			List<String> bgwSelect;
 			for(Concept cnp: listDomain) {
-				printer.print("\nNome do conceito de domínio: " + cnp.get_className() + "\n");
+				printer.print("\n>Ontology Info.<\n");
+				printer.print("Nome do conceito de domínio: " + cnp.get_className() + "\n");
 				printer.print("Descrição: " + cnp.get_desc() + "\n");
 				printer.print("Supers: " + cnp.get_supers() + "\n");
 				printer.print("Subs: " + cnp.get_subs() + "\n");
 				printer.print("Contexto Domínio conceito: " + cnp.get_context() + "\n");
-				printer.print("Conceito Topo alinhado: " + cnp.get_aliClass() + "\n");
+				if(cnp.get_aliClass() != null) {
+					String top = cnp.get_aliClass().toString();
+					printer.print("Conceito Topo alinhado: " + top.substring(top.lastIndexOf("/")+1,top.length()-1) + "\n");
+				}else{
+					printer.print("Conceito Topo alinhado: Não foi possível realizar o alinhamento!\n");
+				}
+				printer.print("\n>BabelNet Info.<\n");
 				if(cnp.get_goodSynset() != null) {
 					printer.print("Synset selecionado BabelNet: " + cnp.get_goodSynset().getSynset().toString() + "\n");
-					printer.print("\nHiperonímio selecionado: " + cnp.get_utilities().getSelected_hypernym() +
-							" no nível de busca " + cnp.get_utilities().getLevel() + " e índice " +
-							cnp.get_utilities().getIdx() + "\n");
+					if(cnp.get_utilities().getSelected_hypernym()!=null) {
+						printer.print("Hiperonímio selecionado: " + cnp.get_utilities().getSelected_hypernym() +
+								" no nível de busca " + cnp.get_utilities().getLevel() /*+ " e índice " +
+							cnp.get_utilities().getIdx() */ + "\n");
+						printer.print("Caminho realizado: " + cnp.get_utilities().getHypernyms() + "\n");
+					}else{
+						printer.print("Hiperonímio selecionado: Não foi encontrado nenhum hiperonímio na ontologia de topo!\n");
+						printer.print("Caminho realizado: Nenhum caminho encontrado!\n");
+					}
 					printer.print("Número de Synsets recuperados: " + cnp.get_utilities().get_numSy() + "\n\n");
 					printer.print("Conjunto de synsets recuperados:\n");
 					List<BabelNetResource.SearchObject> synsets = cnp.get_utilities().get_synsetCntx();
+					int i = 1;
 					for (BabelNetResource.SearchObject so : synsets) {
-						printer.print("\n>Synset: " + so.getSynset() + "\n");
+						printer.print("\n"+i+")\n");
+						printer.print(">Synset: " + so.getSynset() + "\n");
 						printer.print(">Sentidos: " + so.getSenses() + "\n");
 						printer.print(">Glosses: " + so.getGlosses() + "\n");
 						printer.print(">BOW: " + so.getBgw().toString() + "\n");
+						i++;
 					}
 					printer.print("\n");
 					bgwSelect = cnp.get_goodSynset().getBgw();
-					printer.print("Intersecção de palavras:");
+					printer.print("Intersecção de palavras encontrada - LESK:");
 					for (String a : bgwSelect) {
 						if (cnp.get_context().contains(a)) {
 							printer.print(" " + a + " ");
 						}
 					}
-					printer.print("\n--------------------------------------------------------------------\n");
+					printer.print("\n-----------------------------------------------------------------------------------------------------\n");
+					printer.print("-------------------------------------------New concept-----------------------------------------------\n");
 				}
 				else{
 					printer.print("Não foi possível encontar synsets para esse conceito!");

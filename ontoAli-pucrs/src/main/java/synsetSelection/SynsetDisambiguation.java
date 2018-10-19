@@ -74,6 +74,7 @@ public class SynsetDisambiguation {
         List<String> context = slem.toList(concept.get_context());
         //name receive the concept name
         String name = man.conceptName_wn(concept);
+        //System.out.println(name + "'s context: " + context);
         //lemmatize the concept name
         List<String> cnpNameLemma = slem.lemmatize(name);
         int i = cnpNameLemma.size();
@@ -163,7 +164,7 @@ public class SynsetDisambiguation {
     /*
      * Overlapping between two lists
      */
-    int intersection(List<String> context, List<String> bagSynset) {
+    public int intersection(List<String> context, List<String> bagSynset) {
         int inter = 0;
         for (String word : context) {
             word = word.toLowerCase();

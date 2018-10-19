@@ -59,6 +59,14 @@ public class BabelNetResource {
         cp = new ContextProcessing(bs);
     }
 
+    public List<String> create_context(BabelSynset synset){
+        List<BabelSense> senses = synset.getSenses();
+        List<BabelGloss> glosses = synset.getGlosses();
+        SearchObject so = new SearchObject(senses ,glosses, synset);
+        List<String> bgw = so.bgw;
+        return bgw;
+    }
+
     /*Babelnet's search method (returns a list
      *of babelsynsets, senses and glosses for a given string target)
      */
@@ -89,18 +97,23 @@ public class BabelNetResource {
     }
 
 
-    public List<BabelSynset> getHypernyms(BabelSynset bs, List<BabelSynset> hypernyms) {
-        System.out.println("\nget hyp method ("+bs+")");
+    public List<BabelSynset> getHypernyms(BabelSynset bs, List<BabelSynset> hypernyms, List<BabelSynset>searched) {
+        System.out.println("\n>>>>>>get hyp method ("+bs+")");
         List<BabelSynsetRelation> lbsr = bs.getOutgoingEdges(BabelPointer.ANY_HYPERNYM);
         if(lbsr == null || lbsr.size() == 0) return hypernyms;
         for (BabelSynsetRelation bsr : lbsr) {
             BabelSynsetID bsid = bsr.getBabelSynsetIDTarget();
             BabelSynset basy = bn.getSynset(bsid);
-            hypernyms.add(basy);
-            System.out.println("added " + basy.getMainSense() + " to hyp");
+            if(!basy.getID().equals(bs.getID())) {
+                if(!searched.contains(basy)) {
+                    if (!hypernyms.contains(basy)) {
+                        hypernyms.add(basy);
+                        System.out.println("added " + basy.getMainSense() + " to hyp");
+                    }
+                }
+            }
         }
         lbsr.clear();
-        lbsr = null;
         return hypernyms;
     }
 

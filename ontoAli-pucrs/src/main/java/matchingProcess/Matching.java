@@ -1,28 +1,19 @@
 package matchingProcess;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
-import it.uniroma1.lcl.babelnet.BabelNet;
 import it.uniroma1.lcl.babelnet.BabelSynset;
-import objects.MatchingObject;
-import org.semanticweb.owlapi.model.OWLClass;
-import org.semanticweb.owlapi.model.OWLClassExpression;
-import org.semanticweb.owlapi.model.OWLOntology;
 
-import edu.mit.jwi.item.ISynset;
 import objects.Concept;
 import objects.ConceptManager;
 import objects.Ontology;
 import resources.BabelNetResource;
+import resources.BaseResource;
 import resources.Utilities;
-
-import javax.xml.bind.SchemaOutputResolver;
+import synsetSelection.SynsetDisambiguation;
 
 /*
  * This class matches Domain Ont. classes with Top Ont. classes
@@ -39,6 +30,10 @@ public class Matching {
 	private BabelNetResource bn;
 	//Synset found at disambiguation process
 	private BabelSynset goodSynset;
+	//Base resource for disambiguation process
+	private BaseResource base = new BaseResource(1, null);
+	//Lesk process class
+	private SynsetDisambiguation disamb = new SynsetDisambiguation(base);
 
 //Constructor	
 	
@@ -141,6 +136,93 @@ public class Matching {
 	 */
 
 
+	public void matchBabel(List<Concept>dom, List<Concept>up){
+		init_log();
+		List<BabelSynset> hyp = new LinkedList<>();
+		List<BabelSynset> path = new LinkedList<>();
+		List<Mapping> listM = new ArrayList<>();
+        BabelSynset selected;
+		for(Concept d : dom){
+			path.clear();
+			int levels = 0;
+			int limit = 10;
+			Boolean matched;
+			if(d.get_goodSynset() != null) {
+				System.out.println("-------------------------------------");
+                System.out.println("-------------------------------------");
+				System.out.println("Domain concept: " + d.get_className());
+				BabelSynset bs = d.get_goodSynset().getSynset();
+                String hypernym = bn.lemmatizeHypernym(bs.toString());
+                matched = try_match(hypernym,up,d,listM,levels);
+                path.add(bs);
+				while(levels != limit){
+                    if(matched) {
+                        d.get_utilities().set_hypernyms(path.toString());
+                        break;
+                    }
+                    System.out.println("Best synset: " + bs + " " + bs.getID() + " " + bs.getMainSense());
+                    System.out.println("Path: " + path);
+                    hyp = bn.getHypernyms(bs,hyp,path);
+                    System.out.println("Hypernyms: " + hyp.toString());
+                    selected = lesk_match(bs,hyp);
+                    hyp.clear();
+                    hypernym = bn.lemmatizeHypernym(selected.toString());
+                    matched = try_match(hypernym,up,d,listM,levels);
+                    levels++;
+                    bs = selected;
+                    path.add(bs);
+                    System.out.println("\n");
+				}
+				if(!matched) System.out.println("Could not match!\n");
+			}
+		}
+		this.listMap = listM;
+		final_log();
+	}
+
+	public boolean try_match(String hypernym, List<Concept>up, Concept d, List<Mapping> listM, int levels){
+		Boolean matched = false;
+		ConceptManager man = new ConceptManager();
+		for (Concept u : up) {
+			if (u.get_className().toLowerCase().equals(hypernym)) {
+				Mapping map = new Mapping();
+				map.set_source(d.get_owlClass().getIRI().toString());
+				man.config_aliClass(d, u.get_owlClass());
+				map.set_target(d.get_aliClass().getIRI().toString());
+				map.set_relation("&lt;");
+				map.set_measure("1.0");
+				listM.add(map);
+				//System.out.println(hypernym + " : " + map.get_source() + ", " + map.get_target());
+				Utilities ut = d.get_utilities();
+				ut.setSelected_hypernym(hypernym);
+				//System.out.println("*******" + hyp);
+				//ut.setIdx(idx);
+				ut.setLevel(levels);
+                System.out.println("\nMatched with: " + u.get_className());
+				matched = true;
+				break;
+			}
+		}
+		return matched;
+	}
+
+	private BabelSynset lesk_match(BabelSynset last_selected, List<BabelSynset>synsets){
+		List<String>context_last_selected = this.bn.create_context(last_selected);
+		int max_index = 0;
+		int max = 0;
+		for(BabelSynset bs : synsets) {
+			List<String> context_selected = this.bn.create_context(bs);
+			int test = this.disamb.intersection(context_last_selected, context_selected);
+			if (test > max) {
+				max_index = synsets.indexOf(bs);
+				max = test;
+			}
+		}
+		return synsets.get(max_index);
+	}
+
+	/*
+
 	public void matchBabel(List<Concept> dom, List<Concept> up) {
 		init_log();
 		ConceptManager man = new ConceptManager();
@@ -149,12 +231,12 @@ public class Matching {
 		Set<BabelSynset>searched = new HashSet<>();
 		int idx, levels, outdated, limit;
 		Boolean matched;
-		limit = 4;
+		limit = 5;
 		for (Concept d : dom) {
 			hyp.clear();
 			searched.clear();
 			idx = 0;
-			levels = 1;
+			levels = 0;
 			matched = false;
 			if(d.get_goodSynset() != null) {
 				System.out.println("-------------------------------------");
@@ -219,6 +301,8 @@ public class Matching {
 		final_log();
 	}
 
+
+
 	public List<BabelSynset> modify(int index, List<BabelSynset>hypernyms, Set<BabelSynset>searched ){
 		System.out.println(hypernyms.toString());
 		for(int i = 0; i < index; i++){
@@ -235,8 +319,9 @@ public class Matching {
 			}
 		}
 		System.out.println("Modifyed hyp: " + hypernyms.toString());
-		return parse(hypernyms);
+		return hypernyms;
 	}
+
 
 	public List<BabelSynset> parse(List<BabelSynset>hypernyms){
 		Set<BabelSynset>set = new HashSet<>();
@@ -250,6 +335,7 @@ public class Matching {
 		System.out.println("Parsed hyp: " + hypernyms.toString());
 		return hypernyms;
 	}
+
 
 
 	/*

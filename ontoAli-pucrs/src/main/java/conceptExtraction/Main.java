@@ -318,7 +318,8 @@ public class Main {
 	private static List<Concept> domain(Ontology domain) {
 		List<Concept> listDom;
 		ContextExtraction exct = new ContextExtraction();
-		listDom = exct.extract(domain.get_ontology());
+		//listDom = exct.extract(domain.get_ontology());
+		listDom = exct.extract_with_context(domain.get_ontology());
 		return listDom;
 	}
 
@@ -327,7 +328,6 @@ public class Main {
 		BaseResource base = new BaseResource(1, null);
 		ContextProcessing proc = new ContextProcessing(base);
 		proc.process(listDom);
-		
 		SynsetDisambiguation disam = new SynsetDisambiguation(base);
 		disam.disambiguation(listDom);
 	}
