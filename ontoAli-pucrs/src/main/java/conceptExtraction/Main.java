@@ -39,7 +39,8 @@ public class Main {
 	//arg 1 = rdf out
 	//arg 2 = dolce/sumo
 	//arg 3 = tec - se 2:modelo [modelo = google ou glove]
-	//arg 4 = ref align
+	//arg 4 = hole ontology as context - 0 : no, 1 : yes
+	//arg 5 = ref align
 
 	//Selects the course of execution through argued technique
 	public static void main(String[] args) {
@@ -52,7 +53,7 @@ public class Main {
 				context(args);
 				break;
 			case 2:
-				wordEmbedding(args, model);
+				//wordEmbedding(args, model);
 				break;
 			case 3:
 				//resnik(args);
@@ -215,6 +216,7 @@ public class Main {
 	// and the recovered babelnet synset bag of words
 	private static void context(String[] args) {
 		String topOnto = args[2].toLowerCase();
+		int context = Integer.parseInt(args[4]);
 		List<Concept> listDom;
 		List<Concept> listUp;
 		
@@ -222,7 +224,7 @@ public class Main {
 		switch(topOnto) {
 			case "dolce":
 				Ontology upperD = new Ontology("resources/DLP_397_Edited.owl");
-				listDom = domain(domain);
+				listDom = domain(domain,context);
 				listUp = dolce(upperD);
 				disamb(listDom);
 				match(domain, upperD, args[1], listDom, listUp);
@@ -232,7 +234,7 @@ public class Main {
 				break;
 			case "sumo":
 				Ontology upperS = new Ontology("resources/sumo.owl");
-				listDom = domain(domain);
+				listDom = domain(domain,context);
 				listUp = sumo(upperS);
 				disamb(listDom);
 				match(domain, upperS, args[1], listDom, listUp);
@@ -246,6 +248,7 @@ public class Main {
 		}
 	}
 
+	/*
 	//Unused method until now
 	private static void wordEmbedding(String[] args, String model) {
 		String topOnto = args[2].toLowerCase();
@@ -279,6 +282,7 @@ public class Main {
 				break;
 		}
 	}
+	*/
 
 	//Dolce's concept extraction
 	private static List<Concept> dolce(Ontology upper) {
@@ -315,11 +319,13 @@ public class Main {
 	*/
 
 	//Domain ontology concept extraction(using argued path)
-	private static List<Concept> domain(Ontology domain) {
+	private static List<Concept> domain(Ontology domain, int context) {
 		List<Concept> listDom;
 		ContextExtraction exct = new ContextExtraction();
-		//listDom = exct.extract(domain.get_ontology());
-		listDom = exct.extract_with_context(domain.get_ontology());
+		if(context == 0) {
+			listDom = exct.extract(domain.get_ontology());
+		}
+		else listDom = exct.extract_with_context(domain.get_ontology());
 		return listDom;
 	}
 
@@ -397,8 +403,8 @@ public class Main {
 	//(comparison between an argued reference alignment
 	//and the out file generated)
 	private static void evaluate(String[] args) {
-		if(args.length == 5) {
-			Evaluator eva = new Evaluator(args[4], args[1]); //REF, ALI
+		if(args.length == 6) {
+			Evaluator eva = new Evaluator(args[5], args[1]); //REF, ALI
 			eva.evaluate();
 		}	
 	}

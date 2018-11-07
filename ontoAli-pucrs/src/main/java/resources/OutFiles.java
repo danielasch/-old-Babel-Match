@@ -49,19 +49,20 @@ public class OutFiles {
 				printer.print("Supers: " + cnp.get_supers() + "\n");
 				printer.print("Subs: " + cnp.get_subs() + "\n");
 				printer.print("Contexto Domínio conceito: " + cnp.get_context() + "\n");
+				printer.print("Conceito Topo alinhado: ");
 				if(cnp.get_aliClass() != null) {
 					String top = cnp.get_aliClass().toString();
-					printer.print("Conceito Topo alinhado: " + top.substring(top.lastIndexOf("/")+1,top.length()-1) + "\n");
+					printer.print(top.substring(top.lastIndexOf("/")+1,top.length()-1) + "\n");
 				}else{
-					printer.print("Conceito Topo alinhado: Não foi possível realizar o alinhamento!\n");
+					printer.print("Não foi possível realizar o alinhamento!\n");
 				}
 				printer.print("\n>BabelNet Info.<\n");
+				printer.print("Synset selecionado BabelNet: ");
 				if(cnp.get_goodSynset() != null) {
-					printer.print("Synset selecionado BabelNet: " + cnp.get_goodSynset().getSynset().toString() + "\n");
+					printer.print(cnp.get_goodSynset().getSynset().toString() + "\n");
 					if(cnp.get_utilities().getSelected_hypernym()!=null) {
 						printer.print("Hiperonímio selecionado: " + cnp.get_utilities().getSelected_hypernym() +
-								" no nível de busca " + cnp.get_utilities().getLevel() /*+ " e índice " +
-							cnp.get_utilities().getIdx() */ + "\n");
+								" no nível de busca " + cnp.get_utilities().getLevel() + "\n");
 						printer.print("Caminho realizado: " + cnp.get_utilities().getHypernyms() + "\n");
 					}else{
 						printer.print("Hiperonímio selecionado: Não foi encontrado nenhum hiperonímio na ontologia de topo!\n");
@@ -120,8 +121,7 @@ public class OutFiles {
 					printer.print("Synset selecionado BabelNet: " + cnp.get_goodSynset().getSynset().toString() + "\n");
 					printer.print("Lista de hiperonímios completa: " + cnp.get_utilities().getHypernyms() + "\n");
 					printer.print("Hiperonímio selecionado: " + cnp.get_utilities().getSelected_hypernym() +
-							" no nível de busca " + cnp.get_utilities().getLevel() + " e índice " +
-							cnp.get_utilities().getIdx() + "\n");
+							" no nível de busca " + cnp.get_utilities().getLevel() + " e índice " + "\n");
 					printer.print("Número de Synsets recuperados: " + cnp.get_utilities().get_numSy() + "\n\n");
 					printer.print("Conjunto de synsets recuperados:\n");
 					List<BabelNetResource.SearchObject>synsets = cnp.get_utilities().get_synsetCntx();

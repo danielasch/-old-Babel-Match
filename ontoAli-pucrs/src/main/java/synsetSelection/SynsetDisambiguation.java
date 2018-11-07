@@ -2,9 +2,11 @@ package synsetSelection;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
+import edu.mit.jwi.item.IWord;
+import it.uniroma1.lcl.babelnet.BabelSynset;
+import it.uniroma1.lcl.jlt.util.Language;
 import objects.Concept;
 import objects.ConceptManager;
 import resources.BabelNetResource;
@@ -66,105 +68,38 @@ public class SynsetDisambiguation {
      * Disambiguation process
      */
     public void rc_goodSynset(Concept concept) throws IOException {
-        //The lemmatizer
         StanfordLemmatizer slem = base.get_lemmatizer();
         ConceptManager man = new ConceptManager();
-        //Utilities carries the temp1 list and the numSy of a concept
         Utilities ut = new Utilities();
         List<String> context = slem.toList(concept.get_context());
-        //name receive the concept name
         String name = man.conceptName_wn(concept);
-        //System.out.println(name + "'s context: " + context);
-        //lemmatize the concept name
         List<String> cnpNameLemma = slem.lemmatize(name);
+
         int i = cnpNameLemma.size();
-        //name receive the concif(idxWord != null) {ept name lemmatized
         name = cnpNameLemma.get(i - 1);
-        //numSy will receive the number of synsets recovered to a concept (OutFiles use only)
         int numSy = 0;
         BabelNetResource.SearchObject bestSynset = null;
-        //System.out.println(name);
         List<BabelNetResource.SearchObject> searched = bn.search(name);
+
         if (searched.size() != 1) {
-            int max = 0;
-            for (BabelNetResource.SearchObject s : searched) {
-                //System.out.println(s.getSynset().getMainSense());
-                //size receive the number of overlaps between two lists
-                //size of the intersection between the context of a concept and
-                //it's recovered synset's bag of words
-                int size = intersection(context, s.getBgw());
-                //if the intersection value it's greater than the older ones
-                //it must be set as the best recovered synset of a given concept
-                if (size > max) {
-                    max = size;
-                    //sets the best synset of a given concept
-                    bestSynset = s;
-                }
-                numSy++;
-            }
+            bestSynset = leskTechnique(searched, context);
             man.config_synset(concept, bestSynset);
-            //setting the number os synsets using utilities class
-            ut.set_numSy(numSy);
+            ut.set_numSy(searched.size()-1);
+
         } else {
             BabelNetResource.SearchObject synset = searched.get(0);
             man.config_synset(concept, synset);
-            //utilities set the number os synsets,
-            //in this case 1
             ut.set_numSy(1);
         }
-        //utilities sets the synset and the bag of words map
-        //>>>>>>>ut.set_synsetCntx(temp1);
-        //sets the utilities of a concept
+
         ut.set_synsetCntx(searched);
         man.config_utilities(concept, ut);
     }
 
     /*
-     * create the bag of words of a synset
-     */
-	/*
-	private List<String> createBagWords(List<IWord> wordsSynset, String glossSynset) {
-	    List<String> list = new ArrayList<String>();
-	    Set<String> set = new HashSet<String>();
-	    StanfordLemmatizer slem = this.base.get_lemmatizer();
-	    for (IWord i : wordsSynset) {
-	    	StringTokenizer st = new StringTokenizer(i.getLemma().toLowerCase().replace("_"," ")," ");
-	    	while (st.hasMoreTokens()) {
-	    		  String token = st.nextToken();
-	    	 	  if (!list.contains(token)) {
-	    	  	      list.add(token);
-	    	      }
-	    	}
-	    }
-	    glossSynset = glossSynset.replaceAll(";"," ").replaceAll("\"", " ").replaceAll("-"," ").toLowerCase();
-	    StringTokenizer st = new StringTokenizer(glossSynset," ");
-    	while (st.hasMoreTokens()) {
-    		   String token = st.nextToken().toLowerCase();
-    		   token = rm_specialChar(token);
-    		   if (!this.base.get_StpWords().contains(token) && !list.contains(token)) {
-    			   list.add(token);
-    		   }
-    	}
-    	//turn the list into a string to lemmatize the list
-    	String toLemma = slem.toLemmatize(list);
-    	//clears the list
-		list.clear();
-		//list receive the string lemmatized
-		list = slem.lemmatize(toLemma);
-		//turns the list into a set,
-		//to avoid repeated lemmatized strings
-		set =  slem.toSet(list);
-		//turns back the set into a list
-		list = slem.toList(set);
-	   return list;
-	}
-	*/
-
-
-    /*
      * Overlapping between two lists
      */
-    public int intersection(List<String> context, List<String> bagSynset) {
+    public int intersection(List<String> bagSynset,List<String> context) {
         int inter = 0;
         for (String word : context) {
             word = word.toLowerCase();
@@ -178,10 +113,24 @@ public class SynsetDisambiguation {
         return inter;
     }
 
+    public BabelNetResource.SearchObject leskTechnique(List<BabelNetResource.SearchObject>context_1,
+                                                       List<String>context_2){
+        BabelNetResource.SearchObject selected = null;
+        int max = -1;
+        for(BabelNetResource.SearchObject so : context_1) {
+            int test = intersection(so.getBgw(), context_2);
+            if (test > max) {
+                selected = so;
+                max = test;
+            }
+        }
+        return selected;
+    }
+
     /*
      * Remove some char of a string
      */
-	/*
+
 	private String rm_specialChar(String word) {
 		if(word.contains("(")) {
         	word = word.replace("(", "");
@@ -209,7 +158,5 @@ public class SynsetDisambiguation {
         }
         return word;
 	}
-	*/
-
 
 }

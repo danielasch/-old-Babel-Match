@@ -1,0 +1,1210 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (mmap) failed to map 732430336 bytes for committing reserved memory.
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   In 32 bit mode, the process size limit was hit
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Use 64 bit Java on a 64 bit OS
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (os_linux.cpp:2643), pid=5282, tid=0x00007fdd9cafe700
+#
+# JRE version: OpenJDK Runtime Environment (8.0_171-b11) (build 1.8.0_171-8u171-b11-0ubuntu0.17.10.1-b11)
+# Java VM: OpenJDK 64-Bit Server VM (25.171-b11 mixed mode linux-amd64 compressed oops)
+# Failed to write core dump. Core dumps have been disabled. To enable core dumping, try "ulimit -c unlimited" before starting Java again
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x00007fddb0149000):  VMThread [stack: 0x00007fdd9c9fe000,0x00007fdd9caff000] [id=5288]
+
+Stack: [0x00007fdd9c9fe000,0x00007fdd9caff000],  sp=0x00007fdd9cafd450,  free space=1021k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [libjvm.so+0xaab4b2]
+V  [libjvm.so+0x4d7a57]
+V  [libjvm.so+0x8e6740]
+V  [libjvm.so+0x8e0c9e]
+V  [libjvm.so+0x9614b6]
+V  [libjvm.so+0x95012a]
+V  [libjvm.so+0x9502f8]
+V  [libjvm.so+0x950f00]
+V  [libjvm.so+0x95729c]
+V  [libjvm.so+0x95f385]
+V  [libjvm.so+0x90d9f8]
+V  [libjvm.so+0xaad172]
+V  [libjvm.so+0xab1d56]
+V  [libjvm.so+0xaafff5]
+V  [libjvm.so+0xab096d]
+V  [libjvm.so+0xab0d47]
+V  [libjvm.so+0x8e3b92]
+
+VM_Operation (0x00007fddb8b64dc0): ParallelGCFailedAllocation, mode: safepoint, requested by thread 0x00007fddb0014800
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x00007fddb0a03800 JavaThread "Service Thread" daemon [_thread_blocked, id=5296, stack(0x00007fdd946ae000,0x00007fdd947af000)]
+  0x00007fddb0a01000 JavaThread "C1 CompilerThread2" daemon [_thread_blocked, id=5295, stack(0x00007fdd947af000,0x00007fdd948b0000)]
+  0x00007fddb09fe800 JavaThread "C2 CompilerThread1" daemon [_thread_blocked, id=5294, stack(0x00007fdd948b0000,0x00007fdd949b1000)]
+  0x00007fddb09fc800 JavaThread "C2 CompilerThread0" daemon [_thread_blocked, id=5293, stack(0x00007fdd97bca000,0x00007fdd97ccb000)]
+  0x00007fddb09fb000 JavaThread "Monitor Ctrl-Break" daemon [_thread_in_native, id=5292, stack(0x00007fdd97ccb000,0x00007fdd97dcc000)]
+  0x00007fddb0188800 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=5291, stack(0x00007fdd9c41e000,0x00007fdd9c51f000)]
+  0x00007fddb0155000 JavaThread "Finalizer" daemon [_thread_blocked, id=5290, stack(0x00007fdd9c7fc000,0x00007fdd9c8fd000)]
+  0x00007fddb0150800 JavaThread "Reference Handler" daemon [_thread_blocked, id=5289, stack(0x00007fdd9c8fd000,0x00007fdd9c9fe000)]
+  0x00007fddb0014800 JavaThread "main" [_thread_blocked, id=5283, stack(0x00007fddb8a66000,0x00007fddb8b67000)]
+
+Other Threads:
+=>0x00007fddb0149000 VMThread [stack: 0x00007fdd9c9fe000,0x00007fdd9caff000] [id=5288]
+  0x00007fddb0a06000 WatcherThread [stack: 0x00007fdd945ad000,0x00007fdd946ae000] [id=5297]
+
+VM state:at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x00007fddb000a240] ExpandHeap_lock - owner thread: 0x00007fddb0149000
+[0x00007fddb000a8c0] Threads_lock - owner thread: 0x00007fddb0149000
+[0x00007fddb000adc0] Heap_lock - owner thread: 0x00007fddb0014800
+
+Heap:
+ PSYoungGen      total 2797568K, used 0K [0x00000006eab00000, 0x00000007bb600000, 0x00000007c0000000)
+  eden space 2141696K, 0% used [0x00000006eab00000,0x00000006eab00000,0x000000076d680000)
+  from space 655872K, 0% used [0x000000076d680000,0x000000076d680000,0x0000000795700000)
+  to   space 615936K, 0% used [0x0000000795c80000,0x0000000795c80000,0x00000007bb600000)
+ ParOldGen       total 1473536K, used 1384181K [0x0000000540000000, 0x0000000599f00000, 0x00000006eab00000)
+  object space 1473536K, 93% used [0x0000000540000000,0x00000005947bd7a0,0x0000000599f00000)
+ Metaspace       used 20781K, capacity 21166K, committed 21248K, reserved 1069056K
+  class space    used 2393K, capacity 2521K, committed 2560K, reserved 1048576K
+
+Card table byte_map: [0x00007fdd9fbff000,0x00007fdda1000000] byte_map_base: 0x00007fdd9d1ff000
+
+Marking Bits: (ParMarkBitMap*) 0x00007fddb7d16140
+ Begin Bits: [0x00007fdd6c000000, 0x00007fdd76000000)
+ End Bits:   [0x00007fdd76000000, 0x00007fdd80000000)
+
+Polling page: 0x00007fddb8b86000
+
+CodeCache: size=245760Kb used=10821Kb max_used=11244Kb free=234938Kb
+ bounds [0x00007fdda1000000, 0x00007fdda1bb0000, 0x00007fddb0000000]
+ total_blobs=3666 nmethods=3232 adapters=348
+ compilation: enabled
+
+Compilation events (10 events):
+Event: 764,285 Thread 0x00007fddb09fe800 4039   !   4       java.io.PrintStream::write (69 bytes)
+Event: 764,445 Thread 0x00007fddb09fe800 nmethod 4039 0x00007fdda191d2d0 code [0x00007fdda191d5a0, 0x00007fdda19200e0]
+Event: 767,084 Thread 0x00007fddb0a01000 4040       3       org.apache.lucene.util.packed.BulkOperationPacked17::decode (443 bytes)
+Event: 767,085 Thread 0x00007fddb0a01000 nmethod 4040 0x00007fdda17c2710 code [0x00007fdda17c28c0, 0x00007fdda17c2fb0]
+Event: 769,492 Thread 0x00007fddb09fc800 4041       4       it.uniroma1.lcl.kb.ResourceID::equals (32 bytes)
+Event: 769,708 Thread 0x00007fddb09fc800 nmethod 4041 0x00007fdda155a810 code [0x00007fdda155a960, 0x00007fdda155ab18]
+Event: 779,825 Thread 0x00007fddb09fe800 4042       4       java.util.LinkedList::indexOf (73 bytes)
+Event: 779,906 Thread 0x00007fddb09fe800 nmethod 4042 0x00007fdda19af110 code [0x00007fdda19af280, 0x00007fdda19af4f8]
+Event: 783,411 Thread 0x00007fddb09fc800 4043       4       org.apache.lucene.util.packed.BulkOperationPacked2::decode (80 bytes)
+Event: 783,547 Thread 0x00007fddb09fc800 nmethod 4043 0x00007fdda1507210 code [0x00007fdda1507360, 0x00007fdda15074d8]
+
+GC Heap History (10 events):
+Event: 507,247 GC heap after
+Heap after GC invocations=13 (full 2):
+ PSYoungGen      total 2753536K, used 50710K [0x00000006eab00000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 2055168K, 0% used [0x00000006eab00000,0x00000006eab00000,0x0000000768200000)
+  from space 698368K, 7% used [0x0000000768200000,0x000000076b385978,0x0000000792c00000)
+  to   space 692224K, 0% used [0x0000000795c00000,0x0000000795c00000,0x00000007c0000000)
+ ParOldGen       total 1473536K, used 803510K [0x0000000540000000, 0x0000000599f00000, 0x00000006eab00000)
+  object space 1473536K, 54% used [0x0000000540000000,0x00000005710ad9b8,0x0000000599f00000)
+ Metaspace       used 20739K, capacity 21166K, committed 21248K, reserved 1069056K
+  class space    used 2392K, capacity 2521K, committed 2560K, reserved 1048576K
+}
+Event: 586,279 GC heap before
+{Heap before GC invocations=14 (full 2):
+ PSYoungGen      total 2753536K, used 2105878K [0x00000006eab00000, 0x00000007c0000000, 0x00000007c0000000)
+  eden space 2055168K, 100% used [0x00000006eab00000,0x0000000768200000,0x0000000768200000)
+  from space 698368K, 7% used [0x0000000768200000,0x000000076b385978,0x0000000792c00000)
+  to   space 692224K, 0% used [0x0000000795c00000,0x0000000795c00000,0x00000007c0000000)
+ ParOldGen       total 1473536K, used 803510K [0x0000000540000000, 0x0000000599f00000, 0x00000006eab00000)
+  object space 1473536K, 54% used [0x0000000540000000,0x00000005710ad9b8,0x0000000599f00000)
+ Metaspace       used 20767K, capacity 21166K, committed 21248K, reserved 1069056K
+  class space    used 2393K, capacity 2521K, committed 2560K, reserved 1048576K
+Event: 586,348 GC heap after
+Heap after GC invocations=14 (full 2):
+ PSYoungGen      total 2770944K, used 36829K [0x00000006eab00000, 0x00000007be700000, 0x00000007c0000000)
+  eden space 2104320K, 0% used [0x00000006eab00000,0x00000006eab00000,0x000000076b200000)
+  from space 666624K, 5% used [0x0000000795c00000,0x0000000797ff7698,0x00000007be700000)
+  to   space 682496K, 0% used [0x000000076b200000,0x000000076b200000,0x0000000794c80000)
+ ParOldGen       total 1473536K, used 803771K [0x0000000540000000, 0x0000000599f00000, 0x00000006eab00000)
+  object space 1473536K, 54% used [0x0000000540000000,0x00000005710eeda8,0x0000000599f00000)
+ Metaspace       used 20767K, capacity 21166K, committed 21248K, reserved 1069056K
+  class space    used 2393K, capacity 2521K, committed 2560K, reserved 1048576K
+}
+Event: 749,706 GC heap before
+{Heap before GC invocations=15 (full 2):
+ PSYoungGen      total 2770944K, used 2095992K [0x00000006eab00000, 0x00000007be700000, 0x00000007c0000000)
+  eden space 2104320K, 97% used [0x00000006eab00000,0x00000007685e6c68,0x000000076b200000)
+  from space 666624K, 5% used [0x0000000795c00000,0x0000000797ff7698,0x00000007be700000)
+  to   space 682496K, 0% used [0x000000076b200000,0x000000076b200000,0x0000000794c80000)
+ ParOldGen       total 1473536K, used 803771K [0x0000000540000000, 0x0000000599f00000, 0x00000006eab00000)
+  object space 1473536K, 54% used [0x0000000540000000,0x00000005710eeda8,0x0000000599f00000)
+ Metaspace       used 20769K, capacity 21166K, committed 21248K, reserved 1069056K
+  class space    used 2393K, capacity 2521K, committed 2560K, reserved 1048576K
+Event: 749,768 GC heap after
+Heap after GC invocations=15 (full 2):
+ PSYoungGen      total 2786816K, used 264747K [0x00000006eab00000, 0x00000007bd380000, 0x00000007c0000000)
+  eden space 2104320K, 0% used [0x00000006eab00000,0x00000006eab00000,0x000000076b200000)
+  from space 682496K, 38% used [0x000000076b200000,0x000000077b48afe8,0x0000000794c80000)
+  to   space 651776K, 0% used [0x0000000795700000,0x0000000795700000,0x00000007bd380000)
+ ParOldGen       total 1473536K, used 804162K [0x0000000540000000, 0x0000000599f00000, 0x00000006eab00000)
+  object space 1473536K, 54% used [0x0000000540000000,0x0000000571150878,0x0000000599f00000)
+ Metaspace       used 20769K, capacity 21166K, committed 21248K, reserved 1069056K
+  class space    used 2393K, capacity 2521K, committed 2560K, reserved 1048576K
+}
+Event: 764,707 GC heap before
+{Heap before GC invocations=16 (full 2):
+ PSYoungGen      total 2786816K, used 2369067K [0x00000006eab00000, 0x00000007bd380000, 0x00000007c0000000)
+  eden space 2104320K, 100% used [0x00000006eab00000,0x000000076b200000,0x000000076b200000)
+  from space 682496K, 38% used [0x000000076b200000,0x000000077b48afe8,0x0000000794c80000)
+  to   space 651776K, 0% used [0x0000000795700000,0x0000000795700000,0x00000007bd380000)
+ ParOldGen       total 1473536K, used 804162K [0x0000000540000000, 0x0000000599f00000, 0x00000006eab00000)
+  object space 1473536K, 54% used [0x0000000540000000,0x0000000571150878,0x0000000599f00000)
+ Metaspace       used 20780K, capacity 21166K, committed 21248K, reserved 1069056K
+  class space    used 2393K, capacity 2521K, committed 2560K, reserved 1048576K
+Event: 764,912 GC heap after
+Heap after GC invocations=16 (full 2):
+ PSYoungGen      total 2793472K, used 353141K [0x00000006eab00000, 0x00000007bea00000, 0x00000007c0000000)
+  eden space 2141696K, 0% used [0x00000006eab00000,0x00000006eab00000,0x000000076d680000)
+  from space 651776K, 54% used [0x0000000795700000,0x00000007aafdd578,0x00000007bd380000)
+  to   space 655872K, 0% used [0x000000076d680000,0x000000076d680000,0x0000000795700000)
+ ParOldGen       total 1473536K, used 834271K [0x0000000540000000, 0x0000000599f00000, 0x00000006eab00000)
+  object space 1473536K, 56% used [0x0000000540000000,0x0000000572eb7f88,0x0000000599f00000)
+ Metaspace       used 20780K, capacity 21166K, committed 21248K, reserved 1069056K
+  class space    used 2393K, capacity 2521K, committed 2560K, reserved 1048576K
+}
+Event: 786,784 GC heap before
+{Heap before GC invocations=17 (full 2):
+ PSYoungGen      total 2793472K, used 2494837K [0x00000006eab00000, 0x00000007bea00000, 0x00000007c0000000)
+  eden space 2141696K, 100% used [0x00000006eab00000,0x000000076d680000,0x000000076d680000)
+  from space 651776K, 54% used [0x0000000795700000,0x00000007aafdd578,0x00000007bd380000)
+  to   space 655872K, 0% used [0x000000076d680000,0x000000076d680000,0x0000000795700000)
+ ParOldGen       total 1473536K, used 834271K [0x0000000540000000, 0x0000000599f00000, 0x00000006eab00000)
+  object space 1473536K, 56% used [0x0000000540000000,0x0000000572eb7f88,0x0000000599f00000)
+ Metaspace       used 20781K, capacity 21166K, committed 21248K, reserved 1069056K
+  class space    used 2393K, capacity 2521K, committed 2560K, reserved 1048576K
+Event: 787,185 GC heap after
+Heap after GC invocations=17 (full 2):
+ PSYoungGen      total 2797568K, used 245695K [0x00000006eab00000, 0x00000007bb600000, 0x00000007c0000000)
+  eden space 2141696K, 0% used [0x00000006eab00000,0x00000006eab00000,0x000000076d680000)
+  from space 655872K, 37% used [0x000000076d680000,0x000000077c66fca0,0x0000000795700000)
+  to   space 615936K, 0% used [0x0000000795c80000,0x0000000795c80000,0x00000007bb600000)
+ ParOldGen       total 1473536K, used 1186440K [0x0000000540000000, 0x0000000599f00000, 0x00000006eab00000)
+  object space 1473536K, 80% used [0x0000000540000000,0x00000005886a22f8,0x0000000599f00000)
+ Metaspace       used 20781K, capacity 21166K, committed 21248K, reserved 1069056K
+  class space    used 2393K, capacity 2521K, committed 2560K, reserved 1048576K
+}
+Event: 787,192 GC heap before
+{Heap before GC invocations=18 (full 3):
+ PSYoungGen      total 2797568K, used 245695K [0x00000006eab00000, 0x00000007bb600000, 0x00000007c0000000)
+  eden space 2141696K, 0% used [0x00000006eab00000,0x00000006eab00000,0x000000076d680000)
+  from space 655872K, 37% used [0x000000076d680000,0x000000077c66fca0,0x0000000795700000)
+  to   space 615936K, 0% used [0x0000000795c80000,0x0000000795c80000,0x00000007bb600000)
+ ParOldGen       total 1473536K, used 1186440K [0x0000000540000000, 0x0000000599f00000, 0x00000006eab00000)
+  object space 1473536K, 80% used [0x0000000540000000,0x00000005886a22f8,0x0000000599f00000)
+ Metaspace       used 20781K, capacity 21166K, committed 21248K, reserved 1069056K
+  class space    used 2393K, capacity 2521K, committed 2560K, reserved 1048576K
+
+Deoptimization events (10 events):
+Event: 89,360 Thread 0x00007fddb0014800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007fdda141b060 method=it.uniroma1.lcl.babelnet.BabelSynsetRelation.fromString(Ljava/lang/String;)Lit/uniroma1/lcl/babelnet/BabelSynsetRelation; @ 10
+Event: 89,715 Thread 0x00007fddb0014800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007fdda129ca78 method=it.uniroma1.lcl.babelnet.BabelSynsetRelation.fromString(Ljava/lang/String;)Lit/uniroma1/lcl/babelnet/BabelSynsetRelation; @ 10
+Event: 162,872 Thread 0x00007fddb0014800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007fdda1474144 method=com.google.common.collect.LinkedHashMultimap$ValueEntry.matchesValue(Ljava/lang/Object;I)Z @ 5
+Event: 180,910 Thread 0x00007fddb0014800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fdda15c46e0 method=org.apache.lucene.store.DataInput.readInt()I @ 1
+Event: 180,921 Thread 0x00007fddb0014800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fdda15c46e0 method=org.apache.lucene.store.DataInput.readInt()I @ 1
+Event: 257,487 Thread 0x00007fddb0014800 Uncommon trap: reason=class_check action=maybe_recompile pc=0x00007fdda15c46e0 method=org.apache.lucene.store.DataInput.readInt()I @ 1
+Event: 467,981 Thread 0x00007fddb0014800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007fdda1753484 method=it.uniroma1.lcl.babelnet.AbstractBabelSynset.getMainSensePreferrablyIn(Lit/uniroma1/lcl/jlt/util/Language;)Ljava/util/Optional; @ 27
+Event: 485,624 Thread 0x00007fddb0014800 Uncommon trap: reason=unstable_if action=reinterpret pc=0x00007fdda1151d30 method=sun.nio.cs.UTF_8$Encoder.encodeArrayLoop(Ljava/nio/CharBuffer;Ljava/nio/ByteBuffer;)Ljava/nio/charset/CoderResult; @ 87
+Event: 566,731 Thread 0x00007fddb0014800 Uncommon trap: reason=unloaded action=reinterpret pc=0x00007fdda1149c70 method=java.lang.CharacterData.of(I)Ljava/lang/CharacterData; @ 104
+Event: 566,834 Thread 0x00007fddb0014800 Uncommon trap: reason=unloaded action=reinterpret pc=0x00007fdda12aa7f0 method=java.lang.CharacterData.of(I)Ljava/lang/CharacterData; @ 104
+
+Classes redefined (0 events):
+No events
+
+Internal exceptions (10 events):
+Event: 0,360 Thread 0x00007fddb0014800 Exception <a 'java/security/PrivilegedActionException'> (0x00000006ebbb1c98) thrown at [/build/openjdk-8-QGp3nu/openjdk-8-8u171-b11/src/hotspot/src/share/vm/prims/jvm.cpp, line 1435]
+Event: 0,360 Thread 0x00007fddb0014800 Exception <a 'java/security/PrivilegedActionException'> (0x00000006ebbb2090) thrown at [/build/openjdk-8-QGp3nu/openjdk-8-8u171-b11/src/hotspot/src/share/vm/prims/jvm.cpp, line 1435]
+Event: 0,360 Thread 0x00007fddb0014800 Exception <a 'java/security/PrivilegedActionException'> (0x00000006ebbb2f38) thrown at [/build/openjdk-8-QGp3nu/openjdk-8-8u171-b11/src/hotspot/src/share/vm/prims/jvm.cpp, line 1435]
+Event: 0,360 Thread 0x00007fddb0014800 Exception <a 'java/security/PrivilegedActionException'> (0x00000006ebbb3330) thrown at [/build/openjdk-8-QGp3nu/openjdk-8-8u171-b11/src/hotspot/src/share/vm/prims/jvm.cpp, line 1435]
+Event: 1,577 Thread 0x00007fddb0014800 Exception <a 'java/lang/NoSuchFieldError': method resolution failed> (0x00000006f393aac8) thrown at [/build/openjdk-8-QGp3nu/openjdk-8-8u171-b11/src/hotspot/src/share/vm/prims/methodHandles.cpp, line 1167]
+Event: 1,579 Thread 0x00007fddb0014800 Exception <a 'java/lang/NoSuchFieldError': method resolution failed> (0x00000006f3948658) thrown at [/build/openjdk-8-QGp3nu/openjdk-8-8u171-b11/src/hotspot/src/share/vm/prims/methodHandles.cpp, line 1167]
+Event: 1,770 Thread 0x00007fddb0014800 Exception <a 'java/lang/IncompatibleClassChangeError': Found class java.lang.Object, but interface was expected> (0x00000006f4df9570) thrown at [/build/openjdk-8-QGp3nu/openjdk-8-8u171-b11/src/hotspot/src/share/vm/interpreter/linkResolver.cpp, line 653]
+Event: 2,006 Thread 0x00007fddb0014800 Implicit null exception at 0x00007fdda1438f36 to 0x00007fdda1439339
+Event: 2,800 Thread 0x00007fddb0014800 Exception <a 'java/lang/NoClassDefFoundError': org/apache/log4j/Category> (0x00000006f7958bc0) thrown at [/build/openjdk-8-QGp3nu/openjdk-8-8u171-b11/src/hotspot/src/share/vm/classfile/systemDictionary.cpp, line 199]
+Event: 2,871 Thread 0x00007fddb0014800 Exception <a 'java/lang/NoSuchMethodError': sun.misc.Unsafe.invokeCleaner(Ljava/nio/ByteBuffer;)V> (0x00000006f7e9c878) thrown at [/build/openjdk-8-QGp3nu/openjdk-8-8u171-b11/src/hotspot/src/share/vm/interpreter/linkResolver.cpp, line 620]
+
+Events (10 events):
+Event: 566,834 Thread 0x00007fddb0014800 Uncommon trap: trap_request=0x00000037 fr.pc=0x00007fdda12aa7f0
+Event: 566,834 Thread 0x00007fddb0014800 DEOPT PACKING pc=0x00007fdda12aa7f0 sp=0x00007fddb8b64e00
+Event: 566,834 Thread 0x00007fddb0014800 DEOPT UNPACKING pc=0x00007fdda104547a sp=0x00007fddb8b64db8 mode 2
+Event: 586,120 Executing VM operation: ParallelGCFailedAllocation
+Event: 586,361 Executing VM operation: ParallelGCFailedAllocation done
+Event: 749,673 Executing VM operation: ParallelGCFailedAllocation
+Event: 749,768 Executing VM operation: ParallelGCFailedAllocation done
+Event: 764,681 Executing VM operation: ParallelGCFailedAllocation
+Event: 764,912 Executing VM operation: ParallelGCFailedAllocation done
+Event: 786,727 Executing VM operation: ParallelGCFailedAllocation
+
+
+Dynamic libraries:
+540000000-599f00000 rw-p 00000000 00:00 0 
+5c5980000-6eab00000 ---p 00000000 00:00 0 
+6eab00000-7bb600000 rw-p 00000000 00:00 0 
+7bb600000-7c0000000 ---p 00000000 00:00 0 
+7c0000000-7c0280000 rw-p 00000000 00:00 0 
+7c0280000-800000000 ---p 00000000 00:00 0 
+557b85f32000-557b85f33000 r-xp 00000000 08:01 10879406                   /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+557b86132000-557b86133000 r--p 00000000 08:01 10879406                   /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+557b86133000-557b86134000 rw-p 00001000 08:01 10879406                   /usr/lib/jvm/java-8-openjdk-amd64/jre/bin/java
+557b86c16000-557b86c37000 rw-p 00000000 00:00 0                          [heap]
+7fd11f101000-7fd11f141000 rw-p 00000000 00:00 0 
+7fd11f141000-7fd11f301000 ---p 00000000 00:00 0 
+7fd11f301000-7fd11f501000 rw-p 00000000 00:00 0 
+7fd11f501000-7fd11fb83000 r--s 00000000 08:01 24381660                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_wordnet/_0.cfs
+7fd11fb83000-7fd1201e4000 r--s 00000000 08:01 24381658                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_wordnet/_1.cfs
+7fd1201e4000-7fd1204f7000 r--s 00000000 08:01 24381663                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_wordnet/_2.cfs
+7fd1204f7000-7fd121fa5000 r--s 00000000 08:01 19534025                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_CC_BY_NC_SA_30/_d.fdt
+7fd121fa5000-7fd123a19000 r--s 00000000 08:01 19534011                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_CC_BY_NC_SA_30/_d_Lucene50_0.tim
+7fd123a19000-7fd123bb9000 r--s 00000000 08:01 19533994                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_CC_BY_NC_SA_30/_d_Lucene50_0.doc
+7fd123bb9000-7fd125943000 r--s 00000000 08:01 19534032                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_CC_BY_NC_SA_30/_z.fdt
+7fd125943000-7fd1277e4000 r--s 00000000 08:01 19533990                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_CC_BY_NC_SA_30/_z_Lucene50_0.tim
+7fd1277e4000-7fd127998000 r--s 00000000 08:01 19534015                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_CC_BY_NC_SA_30/_z_Lucene50_0.doc
+7fd127998000-7fd129626000 r--s 00000000 08:01 19533998                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_CC_BY_NC_SA_30/_o.fdt
+7fd129626000-7fd12b28c000 r--s 00000000 08:01 19534019                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_CC_BY_NC_SA_30/_o_Lucene50_0.tim
+7fd12b28c000-7fd12b445000 r--s 00000000 08:01 19533689                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_CC_BY_NC_SA_30/_o_Lucene50_0.doc
+7fd12b445000-7fd12ce6c000 r--s 00000000 08:01 19533995                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_CC_BY_NC_SA_30/_1b.fdt
+7fd12ce6c000-7fd12eaad000 r--s 00000000 08:01 19534007                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_CC_BY_NC_SA_30/_1b_Lucene50_0.tim
+7fd12eaad000-7fd12ec28000 r--s 00000000 08:01 19534028                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_CC_BY_NC_SA_30/_1b_Lucene50_0.doc
+7fd12ec28000-7fd13051e000 r--s 00000000 08:01 19534024                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_CC_BY_NC_SA_30/_1m.fdt
+7fd13051e000-7fd132002000 r--s 00000000 08:01 19533975                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_CC_BY_NC_SA_30/_1m_Lucene50_0.tim
+7fd132002000-7fd13216e000 r--s 00000000 08:01 19533993                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_CC_BY_NC_SA_30/_1m_Lucene50_0.doc
+7fd13216e000-7fd13291b000 r--s 00000000 08:01 19534003                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_CC_BY_NC_SA_30/_18.cfs
+7fd13291b000-7fd1331a5000 r--s 00000000 08:01 19534009                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_CC_BY_NC_SA_30/_1e.cfs
+7fd1331a5000-7fd133a58000 r--s 00000000 08:01 19533989                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_CC_BY_NC_SA_30/_1f.cfs
+7fd133a58000-7fd134391000 r--s 00000000 08:01 19534014                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_CC_BY_NC_SA_30/_1l.cfs
+7fd134391000-7fd13441b000 r--s 00000000 08:01 19534021                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/info_CC_BY_NC_SA_30/_1n.cfs
+7fd13441b000-7fd13939c000 r--s 40000000 08:01 19401096                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_40.fdt
+7fd13939c000-7fd17939c000 r--s 00000000 08:01 19401096                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_40.fdt
+7fd17939c000-7fd185d9b000 r--s 00000000 08:01 19401114                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_40_Lucene50_0.tim
+7fd185d9b000-7fd18d8ab000 r--s 00000000 08:01 19401142                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_40_Lucene50_0.doc
+7fd18d8ab000-7fd19790d000 r--s 40000000 08:01 19401086                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_7d.fdt
+7fd19790d000-7fd1d790d000 r--s 00000000 08:01 19401086                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_7d.fdt
+7fd1d790d000-7fd1e4321000 r--s 00000000 08:01 19401102                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_7d_Lucene50_0.tim
+7fd1e4321000-7fd1ed0f2000 r--s 00000000 08:01 19401139                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_7d_Lucene50_0.doc
+7fd1ed0f2000-7fd1f3d63000 r--s 00000000 08:01 19401151                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_2m.cfs
+7fd1f3d63000-7fd2002e7000 r--s 00000000 08:01 19401131                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_6a.cfs
+7fd2002e7000-7fd20c3c3000 r--s 00000000 08:01 19401112                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_5e.cfs
+7fd20c3c3000-7fd21902e000 r--s 00000000 08:01 19401138                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_7y.cfs
+7fd21902e000-7fd2199f6000 r--s 00000000 08:01 19401103                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_72.cfs
+7fd2199f6000-7fd21a91f000 r--s 00000000 08:01 19401109                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_74.cfs
+7fd21a91f000-7fd225b0e000 r--s 00000000 08:01 19401150                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_7n.cfs
+7fd225b0e000-7fd232545000 r--s 00000000 08:01 19401087                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_88.cfs
+7fd232545000-7fd2341d7000 r--s 00000000 08:01 19401106                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_7h.cfs
+7fd2341d7000-7fd235dce000 r--s 00000000 08:01 19401154                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_7m.cfs
+7fd235dce000-7fd237cd8000 r--s 00000000 08:01 19401136                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_7q.cfs
+7fd237cd8000-7fd2397f2000 r--s 00000000 08:01 19401110                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_7r.cfs
+7fd2397f2000-7fd23b1e3000 r--s 00000000 08:01 19401132                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_7s.cfs
+7fd23b1e3000-7fd23cdc3000 r--s 00000000 08:01 19401115                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_86.cfs
+7fd23cdc3000-7fd23ec60000 r--s 00000000 08:01 19401124                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_87.cfs
+7fd23ec60000-7fd240a1d000 r--s 00000000 08:01 19401147                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_89.cfs
+7fd240a1d000-7fd242ac0000 r--s 00000000 08:01 19401108                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_8a.cfs
+7fd242ac0000-7fd2432f8000 r--s 00000000 08:01 19401148                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/image/_8b.cfs
+7fd2432f8000-7fd243b92000 r--s 80000000 08:01 23204750                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_143.fdt
+7fd243b92000-7fd283b92000 r--s 40000000 08:01 23204750                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_143.fdt
+7fd283b92000-7fd2c3b92000 r--s 00000000 08:01 23204750                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_143.fdt
+7fd2c3b92000-7fd2c4156000 r--s 00000000 08:01 23204819                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_143.nvd
+7fd2c4156000-7fd2cd1ab000 r--s 00000000 08:01 23204799                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_143_Lucene50_0.tim
+7fd2cd1ab000-7fd2f168f000 r--s 00000000 08:01 23204759                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_143_Lucene50_0.pos
+7fd2f168f000-7fd318e38000 r--s 00000000 08:01 23204781                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_143_Lucene50_0.doc
+7fd318e38000-7fd32b768000 r--s 00000000 08:01 23204749                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_ha.fdt
+7fd32b768000-7fd32b7da000 r--s 00000000 08:01 23204766                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_ha.nvd
+7fd32b7da000-7fd32ddba000 r--s 00000000 08:01 23204742                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_ha_Lucene50_0.tim
+7fd32ddba000-7fd333616000 r--s 00000000 08:01 23204810                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_ha_Lucene50_0.pos
+7fd333616000-7fd338764000 r--s 00000000 08:01 23204796                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_ha_Lucene50_0.doc
+7fd338764000-7fd34c16f000 r--s 00000000 08:01 23204842                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_px.fdt
+7fd34c16f000-7fd34c1f8000 r--s 00000000 08:01 23204739                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_px.nvd
+7fd34c1f8000-7fd34e9bf000 r--s 00000000 08:01 23204745                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_px_Lucene50_0.tim
+7fd34e9bf000-7fd35438d000 r--s 00000000 08:01 23204808                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_px_Lucene50_0.pos
+7fd35438d000-7fd359855000 r--s 00000000 08:01 23204841                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_px_Lucene50_0.doc
+7fd359855000-7fd3606c6000 r--s 80000000 08:01 23204836                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_2pd.fdt
+7fd3606c6000-7fd3a06c6000 r--s 40000000 08:01 23204836                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_2pd.fdt
+7fd3a06c6000-7fd3e06c6000 r--s 00000000 08:01 23204836                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_2pd.fdt
+7fd3e06c6000-7fd3e0a02000 r--s 00000000 08:01 23204732                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_2pd.nvd
+7fd3e0a02000-7fd3e82a7000 r--s 00000000 08:01 23204757                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_2pd_Lucene50_0.tim
+7fd3e82a7000-7fd410f58000 r--s 00000000 08:01 23204815                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_2pd_Lucene50_0.pos
+7fd410f58000-7fd439647000 r--s 00000000 08:01 23204785                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_2pd_Lucene50_0.doc
+7fd439647000-7fd45a0dd000 r--s 00000000 08:01 23204751                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_2zk.cfs
+7fd45a0dd000-7fd48c134000 r--s 40000000 08:01 23204744                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_1xv.fdt
+7fd48c134000-7fd4cc134000 r--s 00000000 08:01 23204744                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_1xv.fdt
+7fd4cc134000-7fd4cc45b000 r--s 00000000 08:01 23204844                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_1xv.nvd
+7fd4cc45b000-7fd4d313d000 r--s 00000000 08:01 23204746                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_1xv_Lucene50_0.tim
+7fd4d313d000-7fd4f32f3000 r--s 00000000 08:01 23204768                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_1xv_Lucene50_0.pos
+7fd4f32f3000-7fd5146ba000 r--s 00000000 08:01 23204775                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_1xv_Lucene50_0.doc
+7fd5146ba000-7fd52c1e5000 r--s 00000000 08:01 23204763                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_2qw.cfs
+7fd52c1e5000-7fd54620f000 r--s 00000000 08:01 23204814                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_2tx.cfs
+7fd54620f000-7fd55b6c6000 r--s 00000000 08:01 23204776                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_362.cfs
+7fd55b6c6000-7fd5732fc000 r--s 00000000 08:01 23204820                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_2xw.cfs
+7fd5732fc000-7fd594b3f000 r--s 00000000 08:01 23204835                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_3bn.cfs
+7fd594b3f000-7fd5b53bf000 r--s 00000000 08:01 23204755                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_333.cfs
+7fd5b53bf000-7fd5ba26b000 r--s 00000000 08:01 23204837                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_34c.cfs
+7fd5ba26b000-7fd5d1a57000 r--s 00000000 08:01 23204767                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_38w.cfs
+7fd5d1a57000-7fd5d3f3b000 r--s 00000000 08:01 23204753                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_39o.cfs
+7fd5d3f3b000-7fd5d6757000 r--s 00000000 08:01 23204834                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_3a8.cfs
+7fd5d6757000-7fd5d8fb6000 r--s 00000000 08:01 23204748                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_3ai.cfs
+7fd5d8fb6000-7fd5dda60000 r--s 00000000 08:01 23204843                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_3c0.cfs
+7fd5dda60000-7fd5de1cb000 r--s 00000000 08:01 23204797                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_3bo.cfs
+7fd5de1cb000-7fd5deb05000 r--s 00000000 08:01 23204795                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_3bt.cfs
+7fd5deb05000-7fd5df3fe000 r--s 00000000 08:01 23204726                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_3by.cfs
+7fd5df3fe000-7fd5dfc08000 r--s 00000000 08:01 23204792                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_3c1.cfs
+7fd5dfc08000-7fd5e04c2000 r--s 00000000 08:01 23204817                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_3c2.cfs
+7fd5e04c2000-7fd5e0ebe000 r--s 00000000 08:01 23204818                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_3c3.cfs
+7fd5e0ebe000-7fd5e1953000 r--s 00000000 08:01 23204816                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_3c4.cfs
+7fd5e1953000-7fd5e244f000 r--s 00000000 08:01 23204825                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_3c5.cfs
+7fd5e244f000-7fd5e2c5e000 r--s 00000000 08:01 23204734                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_3c6.cfs
+7fd5e2c5e000-7fd5e34ac000 r--s 00000000 08:01 23204772                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_3c7.cfs
+7fd5e34ac000-7fd5e3c3a000 r--s 00000000 08:01 23204838                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_3c8.cfs
+7fd5e3c3a000-7fd5e401f000 r--s 00000000 08:01 23204823                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/graph_CC_BY_NC_SA_30/_3c9.cfs
+7fd5e401f000-7fd5e6937000 r--s 00000000 08:01 23857829                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_35.cfs
+7fd5e6937000-7fd5f2871000 r--s 00000000 08:01 23857801                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_40.fdt
+7fd5f2871000-7fd601c58000 r--s 00000000 08:01 23857810                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_40_Lucene50_0.tim
+7fd601c58000-7fd601f39000 r--s 00000000 08:01 23857804                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_v.cfs
+7fd601f39000-7fd602169000 r--s 00000000 08:01 23857818                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_1w.cfs
+7fd602169000-7fd604e8f000 r--s 00000000 08:01 23857802                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_3q.cfs
+7fd604e8f000-7fd607bc3000 r--s 00000000 08:01 23857846                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_4a.cfs
+7fd607bc3000-7fd60a56e000 r--s 00000000 08:01 23857815                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_4k.cfs
+7fd60a56e000-7fd60d65e000 r--s 00000000 08:01 23857827                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_55.cfs
+7fd60d65e000-7fd610016000 r--s 00000000 08:01 23857816                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_4v.cfs
+7fd610016000-7fd612a09000 r--s 00000000 08:01 23857823                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_5f.cfs
+7fd612a09000-7fd612ef2000 r--s 00000000 08:01 23857805                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_57.cfs
+7fd612ef2000-7fd6133b5000 r--s 00000000 08:01 23857851                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_58.cfs
+7fd6133b5000-7fd613b69000 r--s 00000000 08:01 23857841                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_5a.cfs
+7fd613b69000-7fd61405e000 r--s 00000000 08:01 23857792                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_5b.cfs
+7fd61405e000-7fd614529000 r--s 00000000 08:01 23857848                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_5d.cfs
+7fd614529000-7fd6148f4000 r--s 00000000 08:01 23857809                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_5e.cfs
+7fd6148f4000-7fd614d30000 r--s 00000000 08:01 23857817                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_5g.cfs
+7fd614d30000-7fd6153e2000 r--s 00000000 08:01 23857839                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_5h.cfs
+7fd6153e2000-7fd6158eb000 r--s 00000000 08:01 23857831                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_5i.cfs
+7fd6158eb000-7fd615e22000 r--s 00000000 08:01 23332789                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_GFDL_12/_0.cfs
+7fd615e22000-7fd615f99000 r--s 00000000 08:01 19401080                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_GFDL_12/_0.cfs
+7fd615f99000-7fd61611a000 r--s 00000000 08:01 24381592                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_MIT/_0.cfs
+7fd61611a000-7fd616b0d000 r--s 00000000 08:01 19400787                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_MIT/_0.cfs
+7fd616b0d000-7fd616e0f000 r--s 00000000 08:01 22546555                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_MIT/_0.cfs
+7fd616e0f000-7fd6177f2000 r--s 00000000 08:01 23595079                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_WORDNET/_0.cfs
+7fd6177f2000-7fd618047000 r--s 00000000 08:01 19401168                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_WORDNET/_0.cfs
+7fd618047000-7fd6188c5000 r--s 00000000 08:01 19401166                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_WORDNET/_1.cfs
+7fd6188c5000-7fd619149000 r--s 00000000 08:01 19401173                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_WORDNET/_2.cfs
+7fd619149000-7fd6199ee000 r--s 00000000 08:01 19401175                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_WORDNET/_3.cfs
+7fd6199ee000-7fd619db7000 r--s 00000000 08:01 19401171                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_WORDNET/_4.cfs
+7fd619db7000-7fd61a828000 r--s 00000000 08:01 22678251                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_WORDNET/_0.cfs
+7fd61a828000-7fd61a9ca000 r--s 00000000 08:01 22678249                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_WORDNET/_1.cfs
+7fd61a9ca000-7fd61ac77000 r--s 00000000 08:01 24381686                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_MLP/_0.cfs
+7fd61ac77000-7fd61b676000 r--s 00000000 08:01 19401187                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_MLP/_0.cfs
+7fd61b676000-7fd61c0bd000 r--s 00000000 08:01 19401185                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_MLP/_1.cfs
+7fd61c0bd000-7fd61c9e7000 r--s 00000000 08:01 19401193                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_MLP/_2.cfs
+7fd61c9e7000-7fd61d473000 r--s 00000000 08:01 19401197                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_MLP/_3.cfs
+7fd61d473000-7fd61de4b000 r--s 00000000 08:01 19401191                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_MLP/_4.cfs
+7fd61de4b000-7fd61e7e4000 r--s 00000000 08:01 19401198                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_MLP/_5.cfs
+7fd61e7e4000-7fd61e9a8000 r--s 00000000 08:01 19401192                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_MLP/_6.cfs
+7fd61e9a8000-7fd61f798000 r--s 00000000 08:01 23072341                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_MLP/_0.cfs
+7fd61f798000-7fd620307000 r--s 00000000 08:01 23072339                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_MLP/_1.cfs
+7fd620307000-7fd6214cc000 r--s 00000000 08:01 23726155                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_d.fdt
+7fd6214cc000-7fd622eed000 r--s 00000000 08:01 23726134                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_d_Lucene50_0.tim
+7fd622eed000-7fd622f00000 r--s 00000000 08:01 23726107                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_d_Lucene50_0.doc
+7fd622f00000-7fd62406e000 r--s 00000000 08:01 23726099                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_p.fdt
+7fd62406e000-7fd625830000 r--s 00000000 08:01 23726100                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_p_Lucene50_0.tim
+7fd625830000-7fd625843000 r--s 00000000 08:01 23726119                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_p_Lucene50_0.doc
+7fd625843000-7fd626d2e000 r--s 00000000 08:01 23726166                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_z.fdt
+7fd626d2e000-7fd628944000 r--s 00000000 08:01 23726103                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_z_Lucene50_0.tim
+7fd628944000-7fd62895c000 r--s 00000000 08:01 23726139                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_z_Lucene50_0.doc
+7fd62895c000-7fd629dbe000 r--s 00000000 08:01 23726154                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_1m.fdt
+7fd629dbe000-7fd62b8c8000 r--s 00000000 08:01 23726090                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_1m_Lucene50_0.tim
+7fd62b8c8000-7fd62b8df000 r--s 00000000 08:01 23726106                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_1m_Lucene50_0.doc
+7fd62b8df000-7fd62cccf000 r--s 00000000 08:01 23726108                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_1b.fdt
+7fd62cccf000-7fd62e77d000 r--s 00000000 08:01 23726117                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_1b_Lucene50_0.tim
+7fd62e77d000-7fd62eaf3000 r--s 00000000 08:01 23726122                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_y.cfs
+7fd62eaf3000-7fd62fe22000 r--s 00000000 08:01 23726127                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_2a.fdt
+7fd62fe22000-7fd63177b000 r--s 00000000 08:01 23726104                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_2a_Lucene50_0.tim
+7fd63177b000-7fd6329c2000 r--s 00000000 08:01 23726096                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_1y.fdt
+7fd6329c2000-7fd63424f000 r--s 00000000 08:01 23726138                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_1y_Lucene50_0.tim
+7fd63424f000-7fd6345a9000 r--s 00000000 08:01 23726102                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_1v.cfs
+7fd6345a9000-7fd6348f5000 r--s 00000000 08:01 23726126                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_1z.cfs
+7fd6348f5000-7fd634c47000 r--s 00000000 08:01 23726109                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_24.cfs
+7fd634c47000-7fd635283000 r--s 00000000 08:01 23726157                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_26.cfs
+7fd635283000-7fd635839000 r--s 00000000 08:01 23726093                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_28.cfs
+7fd635839000-7fd635d9a000 r--s 00000000 08:01 23726159                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_2b.cfs
+7fd635d9a000-7fd636477000 r--s 00000000 08:01 23726135                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_2c.cfs
+7fd636477000-7fd636592000 r--s 00000000 08:01 23726140                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_2d.cfs
+7fd636592000-7fd636a58000 r--s 00000000 08:01 19400800                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_NC_SA_30/_0.cfs
+7fd636a58000-7fd638590000 r--s 00000000 08:01 19400816                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_NC_SA_30/_d.fdt
+7fd638590000-7fd63a2d3000 r--s 00000000 08:01 19400811                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_NC_SA_30/_d_Lucene50_0.tim
+7fd63a2d3000-7fd63a780000 r--s 00000000 08:01 19400808                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_NC_SA_30/_3.cfs
+7fd63a780000-7fd63ac7f000 r--s 00000000 08:01 19400803                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_NC_SA_30/_c.cfs
+7fd63ac7f000-7fd63b23a000 r--s 00000000 08:01 19400802                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_NC_SA_30/_e.cfs
+7fd63b23a000-7fd63b56b000 r--s 00000000 08:01 19400819                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_NC_SA_30/_f.cfs
+7fd63b56b000-7fd63b7df000 r--s 00000000 08:01 19401218                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_APACHE_20/_0.cfs
+7fd63b7df000-7fd63bac0000 r--s 00000000 08:01 22808854                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_APACHE_20/_0.cfs
+7fd63bac0000-7fd63bb89000 r--s 00000000 08:01 19401211                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_APACHE_20/_0.cfs
+7fd63bb89000-7fd63c3c1000 r--s 00000000 08:01 22940307                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CECILL_C/_0.cfs
+7fd63c3c1000-7fd63c5a1000 r--s 00000000 08:01 19401160                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CECILL_C/_0.cfs
+7fd63c5a1000-7fd63d2fb000 r--s 00000000 08:01 24381679                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_30/_0.cfs
+7fd63d2fb000-7fd63f12f000 r--s 00000000 08:01 19401258                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_30/_d.fdt
+7fd63f12f000-7fd64142c000 r--s 00000000 08:01 19401250                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_30/_d_Lucene50_0.tim
+7fd64142c000-7fd64364e000 r--s 00000000 08:01 19401239                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_30/_o.fdt
+7fd64364e000-7fd645765000 r--s 00000000 08:01 19401254                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_30/_o_Lucene50_0.tim
+7fd645765000-7fd64592e000 r--s 00000000 08:01 19401223                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_30/_o_Lucene50_0.doc
+7fd64592e000-7fd645d94000 r--s 00000000 08:01 19401229                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_30/_4.cfs
+7fd645d94000-7fd6461dd000 r--s 00000000 08:01 19401252                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_30/_b.cfs
+7fd6461dd000-7fd646cad000 r--s 00000000 08:01 19401248                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_30/_n.cfs
+7fd646cad000-7fd64740e000 r--s 00000000 08:01 19401230                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_30/_p.cfs
+7fd64740e000-7fd647915000 r--s 00000000 08:01 19401235                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_30/_q.cfs
+7fd647915000-7fd647e27000 r--s 00000000 08:01 19401246                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_30/_r.cfs
+7fd647e27000-7fd6485e8000 r--s 00000000 08:01 19401245                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_30/_s.cfs
+7fd6485e8000-7fd648b73000 r--s 00000000 08:01 24122208                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_30/_0.cfs
+7fd648b73000-7fd6491a8000 r--s 00000000 08:01 24122206                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_30/_1.cfs
+7fd6491a8000-7fd6497e1000 r--s 00000000 08:01 24122215                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_30/_2.cfs
+7fd6497e1000-7fd64a0f8000 r--s 00000000 08:01 24122221                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_30/_3.cfs
+7fd64a0f8000-7fd64a7ed000 r--s 00000000 08:01 24122222                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_30/_5.cfs
+7fd64a7ed000-7fd64b107000 r--s 00000000 08:01 24122213                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_30/_4.cfs
+7fd64b107000-7fd64b732000 r--s 00000000 08:01 24122227                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_30/_7.cfs
+7fd64b732000-7fd64bba0000 r--s 00000000 08:01 24122223                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_30/_8.cfs
+7fd64bba0000-7fd64c05d000 r--s 00000000 08:01 24122214                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_30/_6.cfs
+7fd64c05d000-7fd64c46e000 r--s 00000000 08:01 19400833                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_40/_0.cfs
+7fd64c46e000-7fd6615dc000 r--s 00000000 08:01 19401067                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_d.fdt
+7fd6615dc000-7fd662fa7000 r--s 00000000 08:01 19401042                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_d_Lucene50_0.tim
+7fd662fa7000-7fd6645c6000 r--s 00000000 08:01 19401009                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_3.cfs
+7fd6645c6000-7fd67a05f000 r--s 00000000 08:01 19400993                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_p.fdt
+7fd67a05f000-7fd67b8b6000 r--s 00000000 08:01 19400995                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_p_Lucene50_0.tim
+7fd67b8b6000-7fd699679000 r--s 00000000 08:01 19400927                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_1q.fdt
+7fd699679000-7fd69b111000 r--s 00000000 08:01 19400994                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_1q_Lucene50_0.tim
+7fd69b111000-7fd6b4330000 r--s 00000000 08:01 19401002                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_1d.fdt
+7fd6b4330000-7fd6b5e62000 r--s 00000000 08:01 19400964                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_1d_Lucene50_0.tim
+7fd6b5e62000-7fd6c9299000 r--s 00000000 08:01 19401004                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_12.fdt
+7fd6c9299000-7fd6cac6f000 r--s 00000000 08:01 19401063                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_12_Lucene50_0.tim
+7fd6cac6f000-7fd6cc9fa000 r--s 00000000 08:01 19401061                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_10.cfs
+7fd6cc9fa000-7fd704034000 r--s 00000000 08:01 19401048                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_2b.fdt
+7fd704034000-7fd705b11000 r--s 00000000 08:01 19400999                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_2b_Lucene50_0.tim
+7fd705b11000-7fd730e65000 r--s 00000000 08:01 19401001                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_21.fdt
+7fd730e65000-7fd732990000 r--s 00000000 08:01 19401028                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_21_Lucene50_0.tim
+7fd732990000-7fd739a60000 r--s 00000000 08:01 19401057                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_22.cfs
+7fd739a60000-7fd75c273000 r--s 00000000 08:01 19401068                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_2l.fdt
+7fd75c273000-7fd75dcb1000 r--s 00000000 08:01 19401029                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_2l_Lucene50_0.tim
+7fd75dcb1000-7fd765595000 r--s 00000000 08:01 19401065                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_2i.cfs
+7fd765595000-7fd76c089000 r--s 00000000 08:01 19401006                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_2j.cfs
+7fd76c089000-7fd779b03000 r--s 00000000 08:01 19401046                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_2k.cfs
+7fd779b03000-7fd782748000 r--s 00000000 08:01 19401069                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_2m.cfs
+7fd782748000-7fd78e00e000 r--s 00000000 08:01 19401016                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_2n.cfs
+7fd78e00e000-7fd791b82000 r--s 00000000 08:01 19401073                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_2o.cfs
+7fd791b82000-7fd7c230f000 r--s 80000000 08:01 19400905                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_s6.fdt
+7fd7c230f000-7fd80230f000 r--s 40000000 08:01 19400905                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_s6.fdt
+7fd80230f000-7fd84230f000 r--s 00000000 08:01 19400905                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_s6.fdt
+7fd84230f000-7fd877d3e000 r--s 40000000 08:01 19400888                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_s6_Lucene50_0.tim
+7fd877d3e000-7fd8b7d3e000 r--s 00000000 08:01 19400888                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_s6_Lucene50_0.tim
+7fd8b7d3e000-7fd8bca17000 r--s 00000000 08:01 19400904                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_s6_Lucene50_0.doc
+7fd8bca17000-7fd8d09b9000 r--s 00000000 08:01 19400838                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_7d.fdt
+7fd8d09b9000-7fd8e057b000 r--s 00000000 08:01 19400860                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_7d_Lucene50_0.tim
+7fd8e057b000-7fd8e0a76000 r--s 00000000 08:01 19400896                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_7d_Lucene50_0.doc
+7fd8e0a76000-7fd91f65a000 r--s 80000000 08:01 19400870                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_1eo.fdt
+7fd91f65a000-7fd95f65a000 r--s 40000000 08:01 19400870                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_1eo.fdt
+7fd95f65a000-7fd99f65a000 r--s 00000000 08:01 19400870                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_1eo.fdt
+7fd99f65a000-7fd9c9fa5000 r--s 40000000 08:01 19400883                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_1eo_Lucene50_0.tim
+7fd9c9fa5000-7fda09fa5000 r--s 00000000 08:01 19400883                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_1eo_Lucene50_0.tim
+7fda09fa5000-7fda0dece000 r--s 00000000 08:01 19400914                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_1eo_Lucene50_0.doc
+7fda0dece000-7fda18a5c000 r--s c0000000 08:01 19400886                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_1vb.fdt
+7fda18a5c000-7fda58a5c000 r--s 80000000 08:01 19400886                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_1vb.fdt
+7fda58a5c000-7fda98a5c000 r--s 40000000 08:01 19400886                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_1vb.fdt
+7fda98a5c000-7fdad8a5c000 r--s 00000000 08:01 19400886                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_1vb.fdt
+7fdad8a5c000-7fdb004b4000 r--s 40000000 08:01 19400919                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_1vb_Lucene50_0.tim
+7fdb004b4000-7fdb404b4000 r--s 00000000 08:01 19400919                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_1vb_Lucene50_0.tim
+7fdb404b4000-7fdb4479d000 r--s 00000000 08:01 19400899                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_1vb_Lucene50_0.doc
+7fdb4479d000-7fdb78525000 r--s 00000000 08:01 19400891                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_20g.cfs
+7fdb78525000-7fdb7fe25000 r--s 40000000 08:01 19400840                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_1wu.cfs
+7fdb7fe25000-7fdbbfe25000 r--s 00000000 08:01 19400840                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_1wu.cfs
+7fdbbfe25000-7fdbcac13000 r--s 00000000 08:01 19400845                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_1xe.cfs
+7fdbcac13000-7fdbd3eaf000 r--s 00000000 08:01 19400910                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_1xy.cfs
+7fdbd3eaf000-7fdbdc541000 r--s 00000000 08:01 19400851                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_1xo.cfs
+7fdbdc541000-7fdbe2f77000 r--s 00000000 08:01 19400844                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_1zx.cfs
+7fdbe2f77000-7fdbe9a90000 r--s 00000000 08:01 19400894                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_211.cfs
+7fdbe9a90000-7fdbef9bd000 r--s 00000000 08:01 19400912                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_20s.cfs
+7fdbef9bd000-7fdbf470a000 r--s 00000000 08:01 19400864                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_21b.cfs
+7fdbf470a000-7fdbf5056000 r--s 00000000 08:01 19400852                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_210.cfs
+7fdbf5056000-7fdbfc80d000 r--s 00000000 08:01 19400890                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_21j.cfs
+7fdbfc80d000-7fdc03a59000 r--s 00000000 08:01 19400856                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_223.cfs
+7fdc03a59000-7fdc0b50d000 r--s 00000000 08:01 19400895                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_21t.cfs
+7fdc0b50d000-7fdc13220000 r--s 00000000 08:01 19400882                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_22e.cfs
+7fdc13220000-7fdc14003000 r--s 00000000 08:01 19400862                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_22c.cfs
+7fdc14003000-7fdc14cd5000 r--s 00000000 08:01 19400907                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_22f.cfs
+7fdc14cd5000-7fdc15883000 r--s 00000000 08:01 19400889                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_SA_30/_22g.cfs
+7fdc15883000-7fdc30333000 r--s 00000000 08:01 19400601                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_3q.fdt
+7fdc30333000-7fdc41cde000 r--s 00000000 08:01 19400359                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_3q_Lucene50_0.tim
+7fdc41cde000-7fdc47b5e000 r--s 00000000 08:01 19400595                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_3q_Lucene50_0.doc
+7fdc47b5e000-7fdc63bcb000 r--s 00000000 08:01 19400616                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_7o.fdt
+7fdc63bcb000-7fdc754bf000 r--s 00000000 08:01 19400649                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_7o_Lucene50_0.tim
+7fdc754bf000-7fdc7b6f0000 r--s 00000000 08:01 19400639                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_7o_Lucene50_0.doc
+7fdc7b6f0000-7fdc995be000 r--s 00000000 08:01 19400599                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_af.fdt
+7fdc995be000-7fdcaaaf6000 r--s 00000000 08:01 19400644                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_af_Lucene50_0.tim
+7fdcaaaf6000-7fdcb12b8000 r--s 00000000 08:01 19400619                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_af_Lucene50_0.doc
+7fdcb12b8000-7fdccb4b4000 r--s 00000000 08:01 19400627                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_dv.fdt
+7fdccb4b4000-7fdcdcc6e000 r--s 00000000 08:01 19400579                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_dv_Lucene50_0.tim
+7fdcdcc6e000-7fdce2291000 r--s 00000000 08:01 19400636                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_dv_Lucene50_0.doc
+7fdce2291000-7fdce84d1000 r--s 00000000 08:01 19400311                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_88.cfs
+7fdce84d1000-7fdce89cc000 r--s 00000000 08:01 19400590                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_ae.cfs
+7fdce89cc000-7fdcee8f4000 r--s 00000000 08:01 19400618                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_bm.cfs
+7fdcee8f4000-7fdcf5da8000 r--s 00000000 08:01 19400310                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_cq.cfs
+7fdcf5da8000-7fdcfcd72000 r--s 00000000 08:01 19400634                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_d1.cfs
+7fdcfcd72000-7fdcfd45b000 r--s 00000000 08:01 19400580                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_dd.cfs
+7fdcfd45b000-7fdcfdc2e000 r--s 00000000 08:01 19400631                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_dk.cfs
+7fdcfdc2e000-7fdcfe4d0000 r--s 00000000 08:01 19400309                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_dm.cfs
+7fdcfe4d0000-7fdcfedeb000 r--s 00000000 08:01 19400597                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_dn.cfs
+7fdcfedeb000-7fdcff610000 r--s 00000000 08:01 19400606                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_do.cfs
+7fdcff610000-7fdcffe64000 r--s 00000000 08:01 19400582                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_dp.cfs
+7fdcffe64000-7fdd00979000 r--s 00000000 08:01 19400623                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_dq.cfs
+7fdd00979000-7fdd01764000 r--s 00000000 08:01 19400584                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_ds.cfs
+7fdd01764000-7fdd02577000 r--s 00000000 08:01 19400645                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_dt.cfs
+7fdd02577000-7fdd03373000 r--s 00000000 08:01 19400653                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_du.cfs
+7fdd03373000-7fdd0418a000 r--s 00000000 08:01 19400586                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_dw.cfs
+7fdd0418a000-7fdd04f40000 r--s 00000000 08:01 19400651                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_dx.cfs
+7fdd04f40000-7fdd05ca5000 r--s 00000000 08:01 19400654                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_dy.cfs
+7fdd05ca5000-7fdd06a6b000 r--s 00000000 08:01 19400594                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_dz.cfs
+7fdd06a6b000-7fdd07666000 r--s 00000000 08:01 23988888                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon/_0.cfs
+7fdd07666000-7fdd081d5000 r--s 00000000 08:01 23988886                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon/_1.cfs
+7fdd081d5000-7fdd08d6c000 r--s 00000000 08:01 23988904                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon/_2.cfs
+7fdd08d6c000-7fdd098ea000 r--s 00000000 08:01 23988911                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon/_3.cfs
+7fdd098ea000-7fdd0a489000 r--s 00000000 08:01 23988901                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon/_4.cfs
+7fdd0a489000-7fdd0af9c000 r--s 00000000 08:01 23988912                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon/_5.cfs
+7fdd0af9c000-7fdd0bb4e000 r--s 00000000 08:01 23988902                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon/_6.cfs
+7fdd0bb4e000-7fdd0c71a000 r--s 00000000 08:01 23988917                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon/_7.cfs
+7fdd0c71a000-7fdd0d2aa000 r--s 00000000 08:01 23988913                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon/_8.cfs
+7fdd0d2aa000-7fdd0ddf8000 r--s 00000000 08:01 23988921                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon/_9.cfs
+7fdd0ddf8000-7fdd0e8ed000 r--s 00000000 08:01 23988930                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon/_a.cfs
+7fdd0e8ed000-7fdd1bf19000 r--s 00000000 08:01 24381652                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict/_c.fdt
+7fdd1bf19000-7fdd1eafc000 r--s 00000000 08:01 24381649                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict/_c_Lucene50_0.tim
+7fdd1eafc000-7fdd2c1e5000 r--s 00000000 08:01 24381636                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict/_n.fdt
+7fdd2c1e5000-7fdd2eda5000 r--s 00000000 08:01 24381632                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict/_n_Lucene50_0.tim
+7fdd2eda5000-7fdd30711000 r--s 00000000 08:01 24381623                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict/_h.cfs
+7fdd30711000-7fdd321f1000 r--s 00000000 08:01 24381643                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict/_i.cfs
+7fdd321f1000-7fdd3f7e1000 r--s 00000000 08:01 24381628                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict/_y.fdt
+7fdd3f7e1000-7fdd4259d000 r--s 00000000 08:01 24381638                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict/_y_Lucene50_0.tim
+7fdd4259d000-7fdd44000000 r--s 00000000 08:01 24381614                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict/_z.cfs
+7fdd44000000-7fdd44021000 rw-p 00000000 00:00 0 
+7fdd44021000-7fdd48000000 ---p 00000000 00:00 0 
+7fdd4800a000-7fdd48021000 r--s 00000000 08:01 23726160                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_1b_Lucene50_0.doc
+7fdd48021000-7fdd4803b000 r--s 00000000 08:01 23726125                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_2a_Lucene50_0.doc
+7fdd4803b000-7fdd48081000 r--s 00000000 08:01 19400804                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_NC_SA_30/_d_Lucene50_0.doc
+7fdd48081000-7fdd4814c000 r--s 00000000 08:01 19401233                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_30/_d_Lucene50_0.doc
+7fdd4814c000-7fdd481bd000 r--s 00000000 08:01 19401244                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_30/_t.cfs
+7fdd481bd000-7fdd482ed000 r--s 00000000 08:01 24381606                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_40/_0.cfs
+7fdd482ed000-7fdd48ad7000 r--s 00000000 08:01 19400625                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_dr.cfs
+7fdd48ad7000-7fdd4a565000 r--s 00000000 08:01 24381642                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict/_10.cfs
+7fdd4a565000-7fdd4c000000 r--s 00000000 08:01 24381635                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict/_11.cfs
+7fdd4c000000-7fdd4cc28000 rw-p 00000000 00:00 0 
+7fdd4cc28000-7fdd50000000 ---p 00000000 00:00 0 
+7fdd50000000-7fdd50021000 rw-p 00000000 00:00 0 
+7fdd50021000-7fdd54000000 ---p 00000000 00:00 0 
+7fdd54000000-7fdd574c4000 rw-p 00000000 00:00 0 
+7fdd574c4000-7fdd58000000 ---p 00000000 00:00 0 
+7fdd58000000-7fdd591fb000 rw-p 00000000 00:00 0 
+7fdd591fb000-7fdd5c000000 ---p 00000000 00:00 0 
+7fdd5c000000-7fdd5c021000 rw-p 00000000 00:00 0 
+7fdd5c021000-7fdd60000000 ---p 00000000 00:00 0 
+7fdd60000000-7fdd60021000 rw-p 00000000 00:00 0 
+7fdd60021000-7fdd64000000 ---p 00000000 00:00 0 
+7fdd64000000-7fdd64021000 rw-p 00000000 00:00 0 
+7fdd64021000-7fdd68000000 ---p 00000000 00:00 0 
+7fdd68000000-7fdd68021000 rw-p 00000000 00:00 0 
+7fdd68021000-7fdd6c000000 ---p 00000000 00:00 0 
+7fdd6c000000-7fdd80000000 rw-p 00000000 00:00 0 
+7fdd80000000-7fdd80021000 rw-p 00000000 00:00 0 
+7fdd80021000-7fdd84000000 ---p 00000000 00:00 0 
+7fdd84000000-7fdd84052000 rw-p 00000000 00:00 0 
+7fdd84052000-7fdd88000000 ---p 00000000 00:00 0 
+7fdd88000000-7fdd88021000 rw-p 00000000 00:00 0 
+7fdd88021000-7fdd8c000000 ---p 00000000 00:00 0 
+7fdd8c006000-7fdd8c007000 r--s 00000000 08:01 23857844                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/core_CC_BY_NC_SA_30/_40_Lucene50_0.doc
+7fdd8c007000-7fdd8c008000 r--s 00000000 08:01 23464946                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_GFDL_12/_0.cfs
+7fdd8c008000-7fdd8c009000 r--s 00000000 08:01 24381673                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_ODC_BY_10/_0.cfs
+7fdd8c009000-7fdd8c00a000 r--s 00000000 08:01 19400779                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_ODC_BY_10/_0.cfs
+7fdd8c00a000-7fdd8c00b000 r--s 00000000 08:01 24381694                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_ODC_BY_10/_0.cfs
+7fdd8c00b000-7fdd8c00c000 r--s 00000000 08:01 19400923                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_OTHER/_0.cfs
+7fdd8c00c000-7fdd8c00d000 r--s 00000000 08:01 19400794                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_OTHER/_0.cfs
+7fdd8c00d000-7fdd8c00e000 r--s 00000000 08:01 19400296                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_OTHER/_0.cfs
+7fdd8c00e000-7fdd8c010000 r--s 00000000 08:01 19400826                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_NC_SA_30/_0.cfs
+7fdd8c010000-7fdd8c024000 r--s 00000000 08:01 23726094                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict_CC_BY_NC_SA_30/_1y_Lucene50_0.doc
+7fdd8c024000-7fdd8c025000 r--s 00000000 08:01 24381599                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CECILL_C/_0.cfs
+7fdd8c025000-7fdd8c026000 r--s 00000000 08:01 19400770                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_40/_0.cfs
+7fdd8c026000-7fdd8c211000 r--s 00000000 08:01 19400396                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon_CC_BY_SA_30/_e0.cfs
+7fdd8c211000-7fdd8c3a5000 r--s 00000000 08:01 23988919                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/lexicon/_b.cfs
+7fdd8c3a5000-7fdd8d29d000 r--s 00000000 08:01 22416674                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss/_0.cfs
+7fdd8d29d000-7fdd8d49d000 rw-p 00000000 00:00 0 
+7fdd8d49d000-7fdd8eaa6000 r--s 00000000 08:01 24381640                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict/_12.cfs
+7fdd8eaa6000-7fdd8f9e3000 r--s 00000000 08:01 24381646                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict/_13.cfs
+7fdd8f9e3000-7fdd8f9ec000 r-xp 00000000 08:01 10879948                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libmanagement.so
+7fdd8f9ec000-7fdd8fbeb000 ---p 00009000 08:01 10879948                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libmanagement.so
+7fdd8fbeb000-7fdd8fbec000 r--p 00008000 08:01 10879948                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libmanagement.so
+7fdd8fbec000-7fdd8fbed000 rw-p 00009000 08:01 10879948                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libmanagement.so
+7fdd8fbed000-7fdd8fbfe000 r-xp 00000000 08:01 10879951                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnio.so
+7fdd8fbfe000-7fdd8fdfe000 ---p 00011000 08:01 10879951                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnio.so
+7fdd8fdfe000-7fdd8fdff000 r--p 00011000 08:01 10879951                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnio.so
+7fdd8fdff000-7fdd8fe00000 rw-p 00012000 08:01 10879951                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnio.so
+7fdd8fe00000-7fdd90000000 rw-p 00000000 00:00 0 
+7fdd90000000-7fdd90021000 rw-p 00000000 00:00 0 
+7fdd90021000-7fdd94000000 ---p 00000000 00:00 0 
+7fdd94000000-7fdd94001000 r--s 00000000 08:01 19401003                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_d_Lucene50_0.doc
+7fdd94001000-7fdd94002000 r--s 00000000 08:01 19401011                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_p_Lucene50_0.doc
+7fdd94002000-7fdd94003000 r--s 00000000 08:01 19401062                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_1q_Lucene50_0.doc
+7fdd94003000-7fdd94004000 r--s 00000000 08:01 19400996                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_1d_Lucene50_0.doc
+7fdd94004000-7fdd94005000 r--s 00000000 08:01 19401050                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_12_Lucene50_0.doc
+7fdd94005000-7fdd94006000 r--s 00000000 08:01 19400989                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_2b_Lucene50_0.doc
+7fdd94006000-7fdd94007000 r--s 00000000 08:01 19400983                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_21_Lucene50_0.doc
+7fdd94007000-7fdd94008000 r--s 00000000 08:01 19400997                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/gloss_CC_BY_SA_30/_2l_Lucene50_0.doc
+7fdd94008000-7fdd94082000 r--s 00000000 08:01 24381620                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict/_c_Lucene50_0.doc
+7fdd94082000-7fdd94105000 r--s 00000000 08:01 24381639                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict/_n_Lucene50_0.doc
+7fdd94105000-7fdd941ad000 r--s 00000000 08:01 24381621                   /home/pln/Documents/henrique_kops_babelnet-4.0.1-index/BabelNet-4.0.1/dict/_y_Lucene50_0.doc
+7fdd941ad000-7fdd943ad000 rw-p 00000000 00:00 0 
+7fdd943ad000-7fdd945ad000 rw-p 00000000 00:00 0 
+7fdd945ad000-7fdd945ae000 ---p 00000000 00:00 0 
+7fdd945ae000-7fdd946ae000 rw-p 00000000 00:00 0 
+7fdd946ae000-7fdd946b1000 ---p 00000000 00:00 0 
+7fdd946b1000-7fdd947af000 rw-p 00000000 00:00 0 
+7fdd947af000-7fdd947b2000 ---p 00000000 00:00 0 
+7fdd947b2000-7fdd948b0000 rw-p 00000000 00:00 0 
+7fdd948b0000-7fdd948b3000 ---p 00000000 00:00 0 
+7fdd948b3000-7fdd979b2000 rw-p 00000000 00:00 0 
+7fdd979b2000-7fdd979c8000 r-xp 00000000 08:01 10879950                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnet.so
+7fdd979c8000-7fdd97bc8000 ---p 00016000 08:01 10879950                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnet.so
+7fdd97bc8000-7fdd97bc9000 r--p 00016000 08:01 10879950                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnet.so
+7fdd97bc9000-7fdd97bca000 rw-p 00017000 08:01 10879950                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libnet.so
+7fdd97bca000-7fdd97bcd000 ---p 00000000 00:00 0 
+7fdd97bcd000-7fdd97ccb000 rw-p 00000000 00:00 0 
+7fdd97ccb000-7fdd97cce000 ---p 00000000 00:00 0 
+7fdd97cce000-7fdd97dcc000 rw-p 00000000 00:00 0 
+7fdd97dcc000-7fdd97dce000 r--s 0001a000 07:03 299                        /snap/intellij-idea-ultimate/86/lib/idea_rt.jar
+7fdd97dce000-7fdd97dd0000 r--s 00009000 08:01 24382377                   /home/pln/.m2/repository/org/babelnet/slf4j-api/1.7.25/slf4j-api-1.7.25.jar
+7fdd97dd0000-7fdd97ddb000 r--s 00069000 08:01 24382365                   /home/pln/.m2/repository/org/babelnet/logback-core/1.2.3/logback-core-1.2.3.jar
+7fdd97ddb000-7fdd97de1000 r--s 00041000 08:01 24382359                   /home/pln/.m2/repository/org/babelnet/logback-classic/1.2.3/logback-classic-1.2.3.jar
+7fdd97de1000-7fdd97de6000 r--s 0004d000 08:01 24381426                   /home/pln/.m2/repository/org/babelnet/lcl-jlt/2.4/lcl-jlt-2.4.jar
+7fdd97de6000-7fdd97de9000 r--s 00020000 08:01 24381418                   /home/pln/.m2/repository/org/babelnet/jwi/2.2.3/jwi-2.2.3.jar
+7fdd97de9000-7fdd97e4a000 r--s 00a1a000 08:01 24381412                   /home/pln/.m2/repository/org/babelnet/icu4j/56.1/icu4j-56.1.jar
+7fdd97e4a000-7fdd97e51000 r--s 0003f000 08:01 24381406                   /home/pln/.m2/repository/org/babelnet/httpcore/4.3.3/httpcore-4.3.3.jar
+7fdd97e51000-7fdd97e5d000 r--s 00085000 08:01 24381396                   /home/pln/.m2/repository/org/babelnet/httpclient/4.3.6/httpclient-4.3.6.jar
+7fdd97e5d000-7fdd97e8d000 r--s 0024f000 08:01 24381390                   /home/pln/.m2/repository/org/babelnet/guava/23.0/guava-23.0.jar
+7fdd97e8d000-7fdd97e92000 r--s 00034000 08:01 24381384                   /home/pln/.m2/repository/org/babelnet/gson/2.8.2/gson-2.8.2.jar
+7fdd97e92000-7fdd97e93000 r--s 0000c000 08:01 24381378                   /home/pln/.m2/repository/org/babelnet/commons-logging/1.1/commons-logging-1.1.jar
+7fdd97e93000-7fdd97e97000 r--s 00038000 08:01 24381372                   /home/pln/.m2/repository/org/babelnet/commons-lang/2.3/commons-lang-2.3.jar
+7fdd97e97000-7fdd97e9b000 r--s 00020000 08:01 24381264                   /home/pln/.m2/repository/org/babelnet/commons-digester/1.8/commons-digester-1.8.jar
+7fdd97e9b000-7fdd97ea1000 r--s 0003d000 08:01 24381008                   /home/pln/.m2/repository/org/babelnet/commons-configuration/1.5/commons-configuration-1.5.jar
+7fdd97ea1000-7fdd97eae000 r--s 0007f000 08:01 24380626                   /home/pln/.m2/repository/org/babelnet/commons-collections/3.2/commons-collections-3.2.jar
+7fdd97eae000-7fdd97eb5000 r--s 0003a000 08:01 24380035                   /home/pln/.m2/repository/org/babelnet/commons-codec/1.8/commons-codec-1.8.jar
+7fdd97eb5000-7fdd97eb9000 r--s 00026000 08:01 24381186                   /home/pln/.m2/repository/org/babelnet/commons-beanutils-core/1.7.0/commons-beanutils-core-1.7.0.jar
+7fdd97eb9000-7fdd97ebe000 r--s 0002a000 08:01 24380804                   /home/pln/.m2/repository/org/babelnet/commons-beanutils/1.7.0/commons-beanutils-1.7.0.jar
+7fdd97ebe000-7fdd97ec2000 r--s 00013000 08:01 24380798                   /home/pln/.m2/repository/org/babelnet/babelscape-data-commons/1.0/babelscape-data-commons-1.0.jar
+7fdd97ec2000-7fdd97ec6000 r--s 0002c000 08:01 24381324                   /home/pln/.m2/repository/org/babelnet/babelnet-api/4.0.1/babelnet-api-4.0.1.jar
+7fdd97ec6000-7fdd97ed7000 r--s 0017b000 08:01 24380049                   /home/pln/.m2/repository/org/apache/lucene/lucene-analyzers-common/7.2.0/lucene-analyzers-common-7.2.0.jar
+7fdd97ed7000-7fdd97f05000 r--s 0027c000 08:01 19534040                   /home/pln/.m2/repository/org/apache/lucene/lucene-core/7.2.0/lucene-core-7.2.0.jar
+7fdd97f05000-7fdd97f0c000 r--s 00039000 08:01 24379979                   /home/pln/.m2/repository/org/apache/lucene/lucene-queries/7.2.0/lucene-queries-7.2.0.jar
+7fdd97f0c000-7fdd97f15000 r--s 00055000 08:01 24379977                   /home/pln/.m2/repository/org/apache/lucene/lucene-queryparser/7.2.0/lucene-queryparser-7.2.0.jar
+7fdd97f15000-7fdd97f18000 r--s 0002a000 08:01 23988931                   /home/pln/.m2/repository/org/apache/lucene/lucene-sandbox/7.2.0/lucene-sandbox-7.2.0.jar
+7fdd97f18000-7fdd97f1a000 r--s 00003000 08:01 24117323                   /home/pln/.m2/repository/fr/inria/gforge/alignapi-align/4.9/alignapi-align-4.9.jar
+7fdd97f1a000-7fdd97f1c000 r--s 00011000 08:01 24117321                   /home/pln/.m2/repository/fr/inria/gforge/alignapi-ontowrap/4.9/alignapi-ontowrap-4.9.jar
+7fdd97f1c000-7fdd97f22000 r--s 00073000 08:01 24117319                   /home/pln/.m2/repository/fr/inria/gforge/alignapi-procalign/4.9/alignapi-procalign-4.9.jar
+7fdd97f22000-7fdd97f27000 r--s 00024000 08:01 20451630                   /home/pln/.m2/repository/com/github/andrewoma/dexx/collection/0.7/collection-0.7.jar
+7fdd97f27000-7fdd97f28000 r--s 00009000 08:01 20058183                   /home/pln/.m2/repository/org/apache/commons/commons-csv/1.4/commons-csv-1.4.jar
+7fdd97f28000-7fdd97f60000 r--s 0024e000 08:01 20058181                   /home/pln/.m2/repository/org/apache/jena/jena-shaded-guava/3.5.0/jena-shaded-guava-3.5.0.jar
+7fdd97f60000-7fdd97f65000 r--s 00031000 08:01 20058179                   /home/pln/.m2/repository/org/apache/jena/jena-base/3.5.0/jena-base-3.5.0.jar
+7fdd97f65000-7fdd97f67000 r--s 0000c000 08:01 19924884                   /home/pln/.m2/repository/commons-cli/commons-cli/1.4/commons-cli-1.4.jar
+7fdd97f67000-7fdd97f69000 r--s 00020000 08:01 19793117                   /home/pln/.m2/repository/org/apache/jena/jena-iri/3.5.0/jena-iri-3.5.0.jar
+7fdd97f69000-7fdd97f83000 r--s 00142000 08:01 19662385                   /home/pln/.m2/repository/org/apache/jena/jena-core/3.5.0/jena-core-3.5.0.jar
+7fdd97f83000-7fdd97f84000 r--s 00002000 08:01 24118439                   /home/pln/.m2/repository/org/slf4j/slf4j-simple/1.7.12/slf4j-simple-1.7.12.jar
+7fdd97f84000-7fdd97f94000 r--s 000a8000 08:01 24118437                   /home/pln/.m2/repository/org/apache/commons/commons-collections4/4.1/commons-collections4-4.1.jar
+7fdd97f94000-7fdd97f97000 r--s 00020000 08:01 24118435                   /home/pln/.m2/repository/edu/mit/jwi/2.2.3/jwi-2.2.3.jar
+7fdd97f97000-7fdd97fa0000 r--s 0002d000 08:01 19924882                   /home/pln/.m2/repository/xml-apis/xml-apis/1.4.01/xml-apis-1.4.01.jar
+7fdd97fa0000-7fdd97fb9000 r--s 00135000 08:01 19924880                   /home/pln/.m2/repository/xerces/xercesImpl/2.11.0/xercesImpl-2.11.0.jar
+7fdd97fb9000-7fdd97fbf000 r--s 159a4000 08:01 23988808                   /home/pln/.m2/repository/edu/stanford/nlp/stanford-corenlp/3.8.0/stanford-corenlp-3.8.0-models.jar
+7fdd97fbf000-7fdd97fce000 r--s 0013a000 08:01 24118423                   /home/pln/.m2/repository/com/google/protobuf/protobuf-java/3.2.0/protobuf-java-3.2.0.jar
+7fdd97fce000-7fdd97fd1000 r--s 00012000 08:01 24118421                   /home/pln/.m2/repository/org/glassfish/javax.json/1.0.4/javax.json-1.0.4.jar
+7fdd97fd1000-7fdd97fe2000 r--s 00089000 08:01 23988806                   /home/pln/.m2/repository/joda-time/joda-time/2.9.4/joda-time-2.9.4.jar
+7fdd97fe2000-7fdd98000000 r--s 0027d000 08:01 23988804                   /home/pln/.m2/repository/xalan/xalan/2.7.0/xalan-2.7.0.jar
+7fdd98000000-7fdd98021000 rw-p 00000000 00:00 0 
+7fdd98021000-7fdd9c000000 ---p 00000000 00:00 0 
+7fdd9c000000-7fdd9c001000 r--s 00007000 08:01 21498429                   /home/pln/.m2/repository/org/slf4j/slf4j-api/1.7.12/slf4j-api-1.7.12.jar
+7fdd9c001000-7fdd9c006000 r--s 00045000 08:01 24118144                   /home/pln/.m2/repository/com/googlecode/efficient-java-matrix-library/ejml/0.23/ejml-0.23.jar
+7fdd9c006000-7fdd9c00d000 r--s 00046000 08:01 23988802                   /home/pln/.m2/repository/com/io7m/xom/xom/1.2.10/xom-1.2.10.jar
+7fdd9c00d000-7fdd9c010000 r--s 00012000 08:01 23988800                   /home/pln/.m2/repository/javax/servlet/javax.servlet-api/3.0.1/javax.servlet-api-3.0.1.jar
+7fdd9c010000-7fdd9c014000 r--s 00015000 08:01 23988788                   /home/pln/.m2/repository/javax/xml/bind/jaxb-api/2.2.7/jaxb-api-2.2.7.jar
+7fdd9c014000-7fdd9c019000 r--s 00030000 08:01 23988786                   /home/pln/.m2/repository/de/jollyday/jollyday/0.4.9/jollyday-0.4.9.jar
+7fdd9c019000-7fdd9c01a000 r--s 00002000 08:01 23988784                   /home/pln/.m2/repository/com/apple/AppleJavaExtensions/1.4/AppleJavaExtensions-1.4.jar
+7fdd9c01a000-7fdd9c06c000 r--s 00753000 08:01 23988782                   /home/pln/.m2/repository/edu/stanford/nlp/stanford-corenlp/3.8.0/stanford-corenlp-3.8.0.jar
+7fdd9c06c000-7fdd9c06e000 r--s 00004000 08:01 19399544                   /home/pln/.m2/repository/net/sourceforge/owlapi/owlapi-contract/3.5.0/owlapi-contract-3.5.0.jar
+7fdd9c06e000-7fdd9c071000 r--s 00027000 08:01 19399542                   /home/pln/.m2/repository/net/sourceforge/owlapi/owlapi-oboformat/3.5.0/owlapi-oboformat-3.5.0.jar
+7fdd9c071000-7fdd9c086000 r--s 000fc000 08:01 19399540                   /home/pln/.m2/repository/net/sourceforge/owlapi/owlapi-parsers/3.5.0/owlapi-parsers-3.5.0.jar
+7fdd9c086000-7fdd9c08d000 r--s 00058000 08:01 19399538                   /home/pln/.m2/repository/net/sourceforge/owlapi/owlapi-impl/3.5.0/owlapi-impl-3.5.0.jar
+7fdd9c08d000-7fdd9c091000 r--s 00025000 08:01 19399536                   /home/pln/.m2/repository/net/sourceforge/owlapi/owlapi-tools/3.5.0/owlapi-tools-3.5.0.jar
+7fdd9c091000-7fdd9c0a2000 r--s 00091000 08:01 19399534                   /home/pln/.m2/repository/net/sourceforge/owlapi/owlapi-api/3.5.0/owlapi-api-3.5.0.jar
+7fdd9c0a2000-7fdd9c0a5000 r--s 00016000 08:01 19399532                   /home/pln/.m2/repository/org/apache/felix/org.osgi.core/1.4.0/org.osgi.core-1.4.0.jar
+7fdd9c0a5000-7fdd9c0a6000 r--s 00002000 08:01 19399530                   /home/pln/.m2/repository/net/sourceforge/owlapi/owlapi-apibinding/3.5.0/owlapi-apibinding-3.5.0.jar
+7fdd9c0a6000-7fdd9c0d5000 r--s 00238000 08:01 19399528                   /home/pln/.m2/repository/net/sourceforge/owlapi/owlapi-distribution/3.5.0/owlapi-distribution-3.5.0.jar
+7fdd9c0d5000-7fdd9c0d6000 r--s 000c1000 08:01 23988780                   /home/pln/.m2/repository/org/nd4j/nd4j-native/0.9.1/nd4j-native-0.9.1-linux-ppc64le.jar
+7fdd9c0d6000-7fdd9c0d7000 r--s 00207000 08:01 23988778                   /home/pln/.m2/repository/org/nd4j/nd4j-native/0.9.1/nd4j-native-0.9.1-windows-x86_64.jar
+7fdd9c0d7000-7fdd9c0d8000 r--s 0015e000 08:01 23988776                   /home/pln/.m2/repository/org/nd4j/nd4j-native/0.9.1/nd4j-native-0.9.1-macosx-x86_64.jar
+7fdd9c0d8000-7fdd9c0da000 r--s 000ea000 08:01 23988774                   /home/pln/.m2/repository/org/nd4j/nd4j-native/0.9.1/nd4j-native-0.9.1-linux-x86_64.jar
+7fdd9c0da000-7fdd9c0db000 r--s 00284000 08:01 23988772                   /home/pln/.m2/repository/org/nd4j/nd4j-native/0.9.1/nd4j-native-0.9.1-android-x86.jar
+7fdd9c0db000-7fdd9c0dd000 r--s 0020a000 08:01 23988770                   /home/pln/.m2/repository/org/nd4j/nd4j-native/0.9.1/nd4j-native-0.9.1-android-arm.jar
+7fdd9c0dd000-7fdd9c0df000 r--s 00015000 08:01 23988768                   /home/pln/.m2/repository/org/nd4j/nd4j-native/0.9.1/nd4j-native-0.9.1.jar
+7fdd9c0df000-7fdd9c0e0000 r--s 00ad9000 08:01 23988766                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/openblas/0.2.19-1.3/openblas-0.2.19-1.3-windows-x86_64.jar
+7fdd9c0e0000-7fdd9c0e2000 r--s 007e8000 08:01 23988764                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/openblas/0.2.19-1.3/openblas-0.2.19-1.3-windows-x86.jar
+7fdd9c0e2000-7fdd9c0e4000 r--s 00bd4000 08:01 23988762                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/openblas/0.2.19-1.3/openblas-0.2.19-1.3-macosx-x86_64.jar
+7fdd9c0e4000-7fdd9c0e5000 r--s 00639000 08:01 23988760                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/openblas/0.2.19-1.3/openblas-0.2.19-1.3-linux-ppc64le.jar
+7fdd9c0e5000-7fdd9c0e6000 r--s 005d2000 08:01 23988758                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/openblas/0.2.19-1.3/openblas-0.2.19-1.3-linux-armhf.jar
+7fdd9c0e6000-7fdd9c0e7000 r--s 00b04000 08:01 23988756                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/openblas/0.2.19-1.3/openblas-0.2.19-1.3-linux-x86_64.jar
+7fdd9c0e7000-7fdd9c0e9000 r--s 0079c000 08:01 23988754                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/openblas/0.2.19-1.3/openblas-0.2.19-1.3-linux-x86.jar
+7fdd9c0e9000-7fdd9c0ea000 r--s 00104000 08:01 23988752                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/openblas/0.2.19-1.3/openblas-0.2.19-1.3-android-x86.jar
+7fdd9c0ea000-7fdd9c0eb000 r--s 0009e000 08:01 23988750                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/openblas/0.2.19-1.3/openblas-0.2.19-1.3-android-arm.jar
+7fdd9c0eb000-7fdd9c0ec000 r--s 0001c000 08:01 23988748                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/openblas/0.2.19-1.3/openblas-0.2.19-1.3.jar
+7fdd9c0ec000-7fdd9c0ed000 r--s 00000000 08:01 23988746                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/openblas-platform/0.2.19-1.3/openblas-platform-0.2.19-1.3.jar
+7fdd9c0ed000-7fdd9c0ee000 r--s 00000000 08:01 23988744                   /home/pln/.m2/repository/org/nd4j/nd4j-native-platform/0.9.1/nd4j-native-platform-0.9.1.jar
+7fdd9c0ee000-7fdd9c0f5000 r--s 00064000 08:01 20189102                   /home/pln/.m2/repository/org/apache/commons/commons-lang3/3.4/commons-lang3-3.4.jar
+7fdd9c0f5000-7fdd9c0fa000 r--s 0003e000 08:01 23988742                   /home/pln/.m2/repository/commons-net/commons-net/3.1/commons-net-3.1.jar
+7fdd9c0fa000-7fdd9c0fc000 r--s 00000000 08:01 23988740                   /home/pln/.m2/repository/org/nd4j/nd4j-base64/0.9.1/nd4j-base64-0.9.1.jar
+7fdd9c0fc000-7fdd9c0fd000 r--s 00002000 08:01 23988738                   /home/pln/.m2/repository/org/nd4j/nd4j-jackson/0.9.1/nd4j-jackson-0.9.1.jar
+7fdd9c0fd000-7fdd9c104000 r--s 0003f000 08:01 23988736                   /home/pln/.m2/repository/commons-codec/commons-codec/1.10/commons-codec-1.10.jar
+7fdd9c104000-7fdd9c107000 r--s 00014000 08:01 23988734                   /home/pln/.m2/repository/org/deeplearning4j/deeplearning4j-ui-components/0.9.1/deeplearning4j-ui-components-0.9.1.jar
+7fdd9c107000-7fdd9c109000 r--s 00291000 08:01 23988732                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/leptonica/1.73-1.3/leptonica-1.73-1.3-windows-x86_64.jar
+7fdd9c109000-7fdd9c10b000 r--s 002ac000 08:01 23988730                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/leptonica/1.73-1.3/leptonica-1.73-1.3-windows-x86.jar
+7fdd9c10b000-7fdd9c10c000 r--s 00254000 08:01 23988728                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/leptonica/1.73-1.3/leptonica-1.73-1.3-macosx-x86_64.jar
+7fdd9c10c000-7fdd9c10d000 r--s 00239000 08:01 23988726                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/leptonica/1.73-1.3/leptonica-1.73-1.3-linux-ppc64le.jar
+7fdd9c10d000-7fdd9c10f000 r--s 001e0000 08:01 23988724                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/leptonica/1.73-1.3/leptonica-1.73-1.3-linux-armhf.jar
+7fdd9c10f000-7fdd9c111000 r--s 00242000 08:01 23988722                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/leptonica/1.73-1.3/leptonica-1.73-1.3-linux-x86_64.jar
+7fdd9c111000-7fdd9c112000 r--s 00204000 08:01 23988720                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/leptonica/1.73-1.3/leptonica-1.73-1.3-linux-x86.jar
+7fdd9c112000-7fdd9c113000 r--s 00245000 08:01 23988718                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/leptonica/1.73-1.3/leptonica-1.73-1.3-android-x86.jar
+7fdd9c113000-7fdd9c114000 r--s 001e0000 08:01 23988716                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/leptonica/1.73-1.3/leptonica-1.73-1.3-android-arm.jar
+7fdd9c114000-7fdd9c117000 r--s 00021000 08:01 23988714                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/leptonica/1.73-1.3/leptonica-1.73-1.3.jar
+7fdd9c117000-7fdd9c118000 r--s 00000000 08:01 23988712                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/leptonica-platform/1.73-1.3/leptonica-platform-1.73-1.3.jar
+7fdd9c118000-7fdd9c11a000 r--s 00c6c000 08:01 23988710                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/opencv/3.2.0-1.3/opencv-3.2.0-1.3-windows-x86_64.jar
+7fdd9c11a000-7fdd9c11c000 r--s 00a5c000 08:01 23988708                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/opencv/3.2.0-1.3/opencv-3.2.0-1.3-windows-x86.jar
+7fdd9c11c000-7fdd9c11e000 r--s 00aa7000 08:01 23988706                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/opencv/3.2.0-1.3/opencv-3.2.0-1.3-macosx-x86_64.jar
+7fdd9c11e000-7fdd9c121000 r--s 00c39000 08:01 23988702                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/opencv/3.2.0-1.3/opencv-3.2.0-1.3-linux-ppc64le.jar
+7fdd9c121000-7fdd9c124000 r--s 00a26000 08:01 23988696                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/opencv/3.2.0-1.3/opencv-3.2.0-1.3-linux-armhf.jar
+7fdd9c124000-7fdd9c126000 r--s 00a3c000 08:01 23988694                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/opencv/3.2.0-1.3/opencv-3.2.0-1.3-linux-x86_64.jar
+7fdd9c126000-7fdd9c129000 r--s 00a10000 08:01 23988692                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/opencv/3.2.0-1.3/opencv-3.2.0-1.3-linux-x86.jar
+7fdd9c129000-7fdd9c12b000 r--s 00efe000 08:01 23988690                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/opencv/3.2.0-1.3/opencv-3.2.0-1.3-android-x86.jar
+7fdd9c12b000-7fdd9c12d000 r--s 00b87000 08:01 23988688                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/opencv/3.2.0-1.3/opencv-3.2.0-1.3-android-arm.jar
+7fdd9c12d000-7fdd9c12e000 r--s 00000000 08:01 23988686                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/opencv-platform/3.2.0-1.3/opencv-platform-3.2.0-1.3.jar
+7fdd9c12e000-7fdd9c12f000 r--s 00002000 08:01 23988684                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/flandmark/1.07-1.3/flandmark-1.07-1.3.jar
+7fdd9c12f000-7fdd9c130000 r--s 00005000 08:01 23988682                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/artoolkitplus/2.3.1-1.3/artoolkitplus-2.3.1-1.3.jar
+7fdd9c130000-7fdd9c131000 r--s 00003000 08:01 23988680                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/videoinput/0.200-1.3/videoinput-0.200-1.3.jar
+7fdd9c131000-7fdd9c134000 r--s 00009000 08:01 23988678                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/librealsense/1.9.6-1.3/librealsense-1.9.6-1.3.jar
+7fdd9c134000-7fdd9c135000 r--s 00005000 08:01 23988676                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/libfreenect2/0.2.0-1.3/libfreenect2-0.2.0-1.3.jar
+7fdd9c135000-7fdd9c137000 r--s 00004000 08:01 23988674                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/libfreenect/0.5.3-1.3/libfreenect-0.5.3-1.3.jar
+7fdd9c137000-7fdd9c139000 r--s 00006000 08:01 23988672                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/libdc1394/2.2.4-1.3/libdc1394-2.2.4-1.3.jar
+7fdd9c139000-7fdd9c13d000 r--s 0001f000 08:01 23988670                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/flycapture/2.9.3.43-1.3/flycapture-2.9.3.43-1.3.jar
+7fdd9c13d000-7fdd9c144000 r--s 00033000 08:01 23988668                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/ffmpeg/3.2.1-1.3/ffmpeg-3.2.1-1.3.jar
+7fdd9c144000-7fdd9c155000 r--s 000a6000 08:01 23988666                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/opencv/3.2.0-1.3/opencv-3.2.0-1.3.jar
+7fdd9c155000-7fdd9c15a000 r--s 0005a000 08:01 23988664                   /home/pln/.m2/repository/org/bytedeco/javacv/1.3.3/javacv-1.3.3.jar
+7fdd9c15a000-7fdd9c15c000 r--s 0000b000 08:01 23988662                   /home/pln/.m2/repository/com/twelvemonkeys/imageio/imageio-bmp/3.1.1/imageio-bmp-3.1.1.jar
+7fdd9c15c000-7fdd9c15e000 r--s 0000f000 08:01 23988660                   /home/pln/.m2/repository/com/twelvemonkeys/imageio/imageio-psd/3.1.1/imageio-psd-3.1.1.jar
+7fdd9c15e000-7fdd9c160000 r--s 0000e000 08:01 23988658                   /home/pln/.m2/repository/com/twelvemonkeys/imageio/imageio-tiff/3.1.1/imageio-tiff-3.1.1.jar
+7fdd9c160000-7fdd9c163000 r--s 00012000 08:01 23988656                   /home/pln/.m2/repository/com/twelvemonkeys/common/common-image/3.1.1/common-image-3.1.1.jar
+7fdd9c163000-7fdd9c165000 r--s 00014000 08:01 23988654                   /home/pln/.m2/repository/com/twelvemonkeys/common/common-io/3.1.1/common-io-3.1.1.jar
+7fdd9c165000-7fdd9c168000 r--s 0001a000 08:01 23988652                   /home/pln/.m2/repository/com/twelvemonkeys/common/common-lang/3.1.1/common-lang-3.1.1.jar
+7fdd9c168000-7fdd9c16b000 r--s 0000e000 08:01 23988650                   /home/pln/.m2/repository/com/twelvemonkeys/imageio/imageio-metadata/3.1.1/imageio-metadata-3.1.1.jar
+7fdd9c16b000-7fdd9c16e000 r--s 0000c000 08:01 23988648                   /home/pln/.m2/repository/com/twelvemonkeys/imageio/imageio-core/3.1.1/imageio-core-3.1.1.jar
+7fdd9c16e000-7fdd9c170000 r--s 0000d000 08:01 23988646                   /home/pln/.m2/repository/com/twelvemonkeys/imageio/imageio-jpeg/3.1.1/imageio-jpeg-3.1.1.jar
+7fdd9c170000-7fdd9c17b000 r--s 00088000 08:01 23988644                   /home/pln/.m2/repository/com/github/jai-imageio/jai-imageio-core/1.3.0/jai-imageio-core-1.3.0.jar
+7fdd9c17b000-7fdd9c17d000 r--s 00015000 08:01 23988642                   /home/pln/.m2/repository/org/datavec/datavec-data-image/0.9.1/datavec-data-image-0.9.1.jar
+7fdd9c17d000-7fdd9c17e000 r--s 00004000 08:01 23988640                   /home/pln/.m2/repository/net/sf/opencsv/opencsv/2.3/opencsv-2.3.jar
+7fdd9c17e000-7fdd9c2a3000 r--s 00efa000 08:01 23988638                   /home/pln/.m2/repository/it/unimi/dsi/fastutil/6.5.7/fastutil-6.5.7.jar
+7fdd9c2a3000-7fdd9c2a6000 r--s 00028000 08:01 23988636                   /home/pln/.m2/repository/com/clearspring/analytics/stream/2.7.0/stream-2.7.0.jar
+7fdd9c2a6000-7fdd9c2be000 r--s 00132000 08:01 23988634                   /home/pln/.m2/repository/org/freemarker/freemarker/2.3.23/freemarker-2.3.23.jar
+7fdd9c2be000-7fdd9c2cd000 r--s 000aa000 08:01 23988632                   /home/pln/.m2/repository/org/datavec/datavec-api/0.9.1/datavec-api-0.9.1.jar
+7fdd9c2cd000-7fdd9c2e3000 r--s 0014a000 08:01 23988630                   /home/pln/.m2/repository/org/projectlombok/lombok/1.16.16/lombok-1.16.16.jar
+7fdd9c2e3000-7fdd9c2e7000 r--s 00024000 08:01 23988628                   /home/pln/.m2/repository/org/codehaus/woodstox/stax2-api/3.1.4/stax2-api-3.1.4.jar
+7fdd9c2e7000-7fdd9c2ee000 r--s 0003c000 08:01 23988626                   /home/pln/.m2/repository/org/yaml/snakeyaml/1.12/snakeyaml-1.12.jar
+7fdd9c2ee000-7fdd9c30e000 r--s 001ac000 08:01 23988624                   /home/pln/.m2/repository/org/nd4j/jackson/0.9.1/jackson-0.9.1.jar
+7fdd9c30e000-7fdd9c33d000 r--s 00226000 08:01 23988622                   /home/pln/.m2/repository/com/google/guava/guava/20.0/guava-20.0.jar
+7fdd9c33d000-7fdd9c341000 r--s 00015000 08:01 23988620                   /home/pln/.m2/repository/org/tukaani/xz/1.5/xz-1.5.jar
+7fdd9c341000-7fdd9c348000 r--s 00053000 08:01 23988618                   /home/pln/.m2/repository/org/apache/commons/commons-compress/1.8/commons-compress-1.8.jar
+7fdd9c348000-7fdd9c34c000 r--s 0002a000 08:01 23988616                   /home/pln/.m2/repository/commons-io/commons-io/2.4/commons-io-2.4.jar
+7fdd9c34c000-7fdd9c370000 r--s 001cd000 08:01 23988614                   /home/pln/.m2/repository/org/apache/commons/commons-math3/3.4.1/commons-math3-3.4.1.jar
+7fdd9c370000-7fdd9c372000 r--s 00002000 08:01 23988612                   /home/pln/.m2/repository/com/github/stephenc/findbugs/findbugs-annotations/1.3.9-1/findbugs-annotations-1.3.9-1.jar
+7fdd9c372000-7fdd9c375000 r--s 00024000 08:01 23988610                   /home/pln/.m2/repository/org/nd4j/nd4j-common/0.9.1/nd4j-common-0.9.1.jar
+7fdd9c375000-7fdd9c385000 r--s 00100000 08:01 23988608                   /home/pln/.m2/repository/org/deeplearning4j/deeplearning4j-nn/0.9.1/deeplearning4j-nn-0.9.1.jar
+7fdd9c385000-7fdd9c387000 r--s 00206000 08:01 23988606                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/hdf5/1.10.0-patch1-1.3/hdf5-1.10.0-patch1-1.3-windows-x86_64.jar
+7fdd9c387000-7fdd9c388000 r--s 001d7000 08:01 23988604                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/hdf5/1.10.0-patch1-1.3/hdf5-1.10.0-patch1-1.3-windows-x86.jar
+7fdd9c388000-7fdd9c389000 r--s 001bf000 08:01 23988602                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/hdf5/1.10.0-patch1-1.3/hdf5-1.10.0-patch1-1.3-macosx-x86_64.jar
+7fdd9c389000-7fdd9c38b000 r--s 001d0000 08:01 23988600                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/hdf5/1.10.0-patch1-1.3/hdf5-1.10.0-patch1-1.3-linux-ppc64le.jar
+7fdd9c38b000-7fdd9c38c000 r--s 001e7000 08:01 23988598                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/hdf5/1.10.0-patch1-1.3/hdf5-1.10.0-patch1-1.3-linux-x86_64.jar
+7fdd9c38c000-7fdd9c38d000 r--s 001bf000 08:01 23988596                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/hdf5/1.10.0-patch1-1.3/hdf5-1.10.0-patch1-1.3-linux-x86.jar
+7fdd9c38d000-7fdd9c391000 r--s 00025000 08:01 23988594                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/hdf5/1.10.0-patch1-1.3/hdf5-1.10.0-patch1-1.3.jar
+7fdd9c391000-7fdd9c393000 r--s 00015000 08:01 23988590                   /home/pln/.m2/repository/org/deeplearning4j/deeplearning4j-modelimport/0.9.1/deeplearning4j-modelimport-0.9.1.jar
+7fdd9c393000-7fdd9c396000 r--s 00019000 08:01 23988588                   /home/pln/.m2/repository/org/deeplearning4j/nearestneighbor-core/0.9.1/nearestneighbor-core-0.9.1.jar
+7fdd9c396000-7fdd9c39a000 r--s 0001f000 08:01 23988586                   /home/pln/.m2/repository/org/deeplearning4j/deeplearning4j-core/0.9.1/deeplearning4j-core-0.9.1.jar
+7fdd9c39a000-7fdd9c39f000 r--s 00041000 08:01 23988584                   /home/pln/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar
+7fdd9c39f000-7fdd9c3a4000 r--s 0004c000 08:01 23988582                   /home/pln/.m2/repository/org/bytedeco/javacpp/1.3.3/javacpp-1.3.3.jar
+7fdd9c3a4000-7fdd9c3a8000 r--s 0000f000 08:01 23988580                   /home/pln/.m2/repository/com/google/code/findbugs/annotations/2.0.1/annotations-2.0.1.jar
+7fdd9c3a8000-7fdd9c3b1000 r--s 000ae000 08:01 23988578                   /home/pln/.m2/repository/org/javassist/javassist/3.19.0-GA/javassist-3.19.0-GA.jar
+7fdd9c3b1000-7fdd9c3b4000 r--s 0001d000 08:01 23988576                   /home/pln/.m2/repository/org/reflections/reflections/0.9.10/reflections-0.9.10.jar
+7fdd9c3b4000-7fdd9c3ba000 r--s 00034000 08:01 23988574                   /home/pln/.m2/repository/junit/junit/4.8.2/junit-4.8.2.jar
+7fdd9c3ba000-7fdd9c3cb000 r--s 00103000 08:01 23988570                   /home/pln/.m2/repository/org/nd4j/nd4j-api/0.9.1/nd4j-api-0.9.1.jar
+7fdd9c3cb000-7fdd9c3d5000 r--s 004f6000 08:01 23988558                   /home/pln/.m2/repository/org/deeplearning4j/deeplearning4j-nlp/0.9.1/deeplearning4j-nlp-0.9.1.jar
+7fdd9c3d5000-7fdd9c3e8000 r--s 00346000 08:01 10884933                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/resources.jar
+7fdd9c3e8000-7fdd9c403000 r--s 00394000 08:01 10884907                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/cldrdata.jar
+7fdd9c403000-7fdd9c41e000 r--s 001d6000 08:01 10884912                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/nashorn.jar
+7fdd9c41e000-7fdd9c421000 ---p 00000000 00:00 0 
+7fdd9c421000-7fdd9c51f000 rw-p 00000000 00:00 0 
+7fdd9c51f000-7fdd9c7fc000 r--p 00000000 08:01 10756109                   /usr/lib/locale/locale-archive
+7fdd9c7fc000-7fdd9c7ff000 ---p 00000000 00:00 0 
+7fdd9c7ff000-7fdd9c8fd000 rw-p 00000000 00:00 0 
+7fdd9c8fd000-7fdd9c900000 ---p 00000000 00:00 0 
+7fdd9c900000-7fdd9c9fe000 rw-p 00000000 00:00 0 
+7fdd9c9fe000-7fdd9c9ff000 ---p 00000000 00:00 0 
+7fdd9c9ff000-7fdd9da5c000 rw-p 00000000 00:00 0 
+7fdd9da5c000-7fdd9dc2b000 r--s 03c2f000 08:01 10884935                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/rt.jar
+7fdd9dc2b000-7fdd9f8fc000 rw-p 00000000 00:00 0 
+7fdd9f8fc000-7fdd9f8fd000 ---p 00000000 00:00 0 
+7fdd9f8fd000-7fdd9f9fd000 rw-p 00000000 00:00 0 
+7fdd9f9fd000-7fdd9f9fe000 ---p 00000000 00:00 0 
+7fdd9f9fe000-7fdd9fafe000 rw-p 00000000 00:00 0 
+7fdd9fafe000-7fdd9faff000 ---p 00000000 00:00 0 
+7fdd9faff000-7fdd9fecf000 rw-p 00000000 00:00 0 
+7fdd9fecf000-7fdda0954000 ---p 00000000 00:00 0 
+7fdda0954000-7fdda0fda000 rw-p 00000000 00:00 0 
+7fdda0fda000-7fdda0fff000 ---p 00000000 00:00 0 
+7fdda0fff000-7fdda1000000 rw-p 00000000 00:00 0 
+7fdda1000000-7fdda1bb0000 rwxp 00000000 00:00 0 
+7fdda1bb0000-7fddb0000000 ---p 00000000 00:00 0 
+7fddb0000000-7fddb136e000 rw-p 00000000 00:00 0 
+7fddb136e000-7fddb4000000 ---p 00000000 00:00 0 
+7fddb4000000-7fddb4003000 r--s 0000b000 08:01 23988572                   /home/pln/.m2/repository/net/ericaro/neoitertools/1.0.0/neoitertools-1.0.0.jar
+7fddb4003000-7fddb4005000 r--s 00001000 08:01 23988564                   /home/pln/.m2/repository/org/nd4j/nd4j-context/0.9.1/nd4j-context-0.9.1.jar
+7fddb4005000-7fddb4008000 r--s 00011000 08:01 23988562                   /home/pln/.m2/repository/org/nd4j/nd4j-buffer/0.9.1/nd4j-buffer-0.9.1.jar
+7fddb4008000-7fddb400d000 r--s 0009d000 08:01 10884928                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jsse.jar
+7fddb400d000-7fddb400e000 ---p 00000000 00:00 0 
+7fddb400e000-7fddb43de000 rw-p 00000000 00:00 0 
+7fddb43de000-7fddb4e64000 ---p 00000000 00:00 0 
+7fddb4e64000-7fddb4e93000 rw-p 00000000 00:00 0 
+7fddb4e93000-7fddb5224000 ---p 00000000 00:00 0 
+7fddb5224000-7fddb522c000 r-xp 00000000 08:01 10884896                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libzip.so
+7fddb522c000-7fddb542b000 ---p 00008000 08:01 10884896                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libzip.so
+7fddb542b000-7fddb542c000 r--p 00007000 08:01 10884896                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libzip.so
+7fddb542c000-7fddb542d000 rw-p 00008000 08:01 10884896                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libzip.so
+7fddb542d000-7fddb5438000 r-xp 00000000 08:01 43255158                   /lib/x86_64-linux-gnu/libnss_files-2.26.so
+7fddb5438000-7fddb5637000 ---p 0000b000 08:01 43255158                   /lib/x86_64-linux-gnu/libnss_files-2.26.so
+7fddb5637000-7fddb5638000 r--p 0000a000 08:01 43255158                   /lib/x86_64-linux-gnu/libnss_files-2.26.so
+7fddb5638000-7fddb5639000 rw-p 0000b000 08:01 43255158                   /lib/x86_64-linux-gnu/libnss_files-2.26.so
+7fddb5639000-7fddb563f000 rw-p 00000000 00:00 0 
+7fddb563f000-7fddb564a000 r-xp 00000000 08:01 43255160                   /lib/x86_64-linux-gnu/libnss_nis-2.26.so
+7fddb564a000-7fddb5849000 ---p 0000b000 08:01 43255160                   /lib/x86_64-linux-gnu/libnss_nis-2.26.so
+7fddb5849000-7fddb584a000 r--p 0000a000 08:01 43255160                   /lib/x86_64-linux-gnu/libnss_nis-2.26.so
+7fddb584a000-7fddb584b000 rw-p 0000b000 08:01 43255160                   /lib/x86_64-linux-gnu/libnss_nis-2.26.so
+7fddb584b000-7fddb5862000 r-xp 00000000 08:01 43255155                   /lib/x86_64-linux-gnu/libnsl-2.26.so
+7fddb5862000-7fddb5a61000 ---p 00017000 08:01 43255155                   /lib/x86_64-linux-gnu/libnsl-2.26.so
+7fddb5a61000-7fddb5a62000 r--p 00016000 08:01 43255155                   /lib/x86_64-linux-gnu/libnsl-2.26.so
+7fddb5a62000-7fddb5a63000 rw-p 00017000 08:01 43255155                   /lib/x86_64-linux-gnu/libnsl-2.26.so
+7fddb5a63000-7fddb5a65000 rw-p 00000000 00:00 0 
+7fddb5a65000-7fddb5a6d000 r-xp 00000000 08:01 43255156                   /lib/x86_64-linux-gnu/libnss_compat-2.26.so
+7fddb5a6d000-7fddb5c6c000 ---p 00008000 08:01 43255156                   /lib/x86_64-linux-gnu/libnss_compat-2.26.so
+7fddb5c6c000-7fddb5c6d000 r--p 00007000 08:01 43255156                   /lib/x86_64-linux-gnu/libnss_compat-2.26.so
+7fddb5c6d000-7fddb5c6e000 rw-p 00008000 08:01 43255156                   /lib/x86_64-linux-gnu/libnss_compat-2.26.so
+7fddb5c6e000-7fddb5c78000 r-xp 00000000 08:01 10879934                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libinstrument.so
+7fddb5c78000-7fddb5e77000 ---p 0000a000 08:01 10879934                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libinstrument.so
+7fddb5e77000-7fddb5e78000 r--p 00009000 08:01 10879934                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libinstrument.so
+7fddb5e78000-7fddb5e79000 rw-p 0000a000 08:01 10879934                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libinstrument.so
+7fddb5e79000-7fddb5ea7000 r-xp 00000000 08:01 10879939                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libjava.so
+7fddb5ea7000-7fddb60a6000 ---p 0002e000 08:01 10879939                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libjava.so
+7fddb60a6000-7fddb60a7000 r--p 0002d000 08:01 10879939                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libjava.so
+7fddb60a7000-7fddb60a9000 rw-p 0002e000 08:01 10879939                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libjava.so
+7fddb60a9000-7fddb60b9000 r-xp 00000000 08:01 10884158                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libverify.so
+7fddb60b9000-7fddb62b8000 ---p 00010000 08:01 10884158                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libverify.so
+7fddb62b8000-7fddb62ba000 r--p 0000f000 08:01 10884158                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libverify.so
+7fddb62ba000-7fddb62bb000 rw-p 00011000 08:01 10884158                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/libverify.so
+7fddb62bb000-7fddb62c2000 r-xp 00000000 08:01 43255165                   /lib/x86_64-linux-gnu/librt-2.26.so
+7fddb62c2000-7fddb64c1000 ---p 00007000 08:01 43255165                   /lib/x86_64-linux-gnu/librt-2.26.so
+7fddb64c1000-7fddb64c2000 r--p 00006000 08:01 43255165                   /lib/x86_64-linux-gnu/librt-2.26.so
+7fddb64c2000-7fddb64c3000 rw-p 00007000 08:01 43255165                   /lib/x86_64-linux-gnu/librt-2.26.so
+7fddb64c3000-7fddb64d9000 r-xp 00000000 08:01 43255231                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7fddb64d9000-7fddb66d8000 ---p 00016000 08:01 43255231                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7fddb66d8000-7fddb66d9000 r--p 00015000 08:01 43255231                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7fddb66d9000-7fddb66da000 rw-p 00016000 08:01 43255231                   /lib/x86_64-linux-gnu/libgcc_s.so.1
+7fddb66da000-7fddb682f000 r-xp 00000000 08:01 43255152                   /lib/x86_64-linux-gnu/libm-2.26.so
+7fddb682f000-7fddb6a2e000 ---p 00155000 08:01 43255152                   /lib/x86_64-linux-gnu/libm-2.26.so
+7fddb6a2e000-7fddb6a2f000 r--p 00154000 08:01 43255152                   /lib/x86_64-linux-gnu/libm-2.26.so
+7fddb6a2f000-7fddb6a30000 rw-p 00155000 08:01 43255152                   /lib/x86_64-linux-gnu/libm-2.26.so
+7fddb6a30000-7fddb6ba8000 r-xp 00000000 08:01 10751153                   /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24
+7fddb6ba8000-7fddb6da7000 ---p 00178000 08:01 10751153                   /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24
+7fddb6da7000-7fddb6db1000 r--p 00177000 08:01 10751153                   /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24
+7fddb6db1000-7fddb6db3000 rw-p 00181000 08:01 10751153                   /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.24
+7fddb6db3000-7fddb6db6000 rw-p 00000000 00:00 0 
+7fddb6db6000-7fddb7a47000 r-xp 00000000 08:01 10884898                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+7fddb7a47000-7fddb7c47000 ---p 00c91000 08:01 10884898                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+7fddb7c47000-7fddb7cda000 r--p 00c91000 08:01 10884898                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+7fddb7cda000-7fddb7d02000 rw-p 00d24000 08:01 10884898                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/server/libjvm.so
+7fddb7d02000-7fddb7d33000 rw-p 00000000 00:00 0 
+7fddb7d33000-7fddb7d4d000 r-xp 00000000 08:01 43255163                   /lib/x86_64-linux-gnu/libpthread-2.26.so
+7fddb7d4d000-7fddb7f4c000 ---p 0001a000 08:01 43255163                   /lib/x86_64-linux-gnu/libpthread-2.26.so
+7fddb7f4c000-7fddb7f4d000 r--p 00019000 08:01 43255163                   /lib/x86_64-linux-gnu/libpthread-2.26.so
+7fddb7f4d000-7fddb7f4e000 rw-p 0001a000 08:01 43255163                   /lib/x86_64-linux-gnu/libpthread-2.26.so
+7fddb7f4e000-7fddb7f52000 rw-p 00000000 00:00 0 
+7fddb7f52000-7fddb7f55000 r-xp 00000000 08:01 43255151                   /lib/x86_64-linux-gnu/libdl-2.26.so
+7fddb7f55000-7fddb8154000 ---p 00003000 08:01 43255151                   /lib/x86_64-linux-gnu/libdl-2.26.so
+7fddb8154000-7fddb8155000 r--p 00002000 08:01 43255151                   /lib/x86_64-linux-gnu/libdl-2.26.so
+7fddb8155000-7fddb8156000 rw-p 00003000 08:01 43255151                   /lib/x86_64-linux-gnu/libdl-2.26.so
+7fddb8156000-7fddb8172000 r-xp 00000000 08:01 43258449                   /lib/x86_64-linux-gnu/libz.so.1.2.11
+7fddb8172000-7fddb8371000 ---p 0001c000 08:01 43258449                   /lib/x86_64-linux-gnu/libz.so.1.2.11
+7fddb8371000-7fddb8372000 r--p 0001b000 08:01 43258449                   /lib/x86_64-linux-gnu/libz.so.1.2.11
+7fddb8372000-7fddb8373000 rw-p 0001c000 08:01 43258449                   /lib/x86_64-linux-gnu/libz.so.1.2.11
+7fddb8373000-7fddb8549000 r-xp 00000000 08:01 43255148                   /lib/x86_64-linux-gnu/libc-2.26.so
+7fddb8549000-7fddb8749000 ---p 001d6000 08:01 43255148                   /lib/x86_64-linux-gnu/libc-2.26.so
+7fddb8749000-7fddb874d000 r--p 001d6000 08:01 43255148                   /lib/x86_64-linux-gnu/libc-2.26.so
+7fddb874d000-7fddb874f000 rw-p 001da000 08:01 43255148                   /lib/x86_64-linux-gnu/libc-2.26.so
+7fddb874f000-7fddb8753000 rw-p 00000000 00:00 0 
+7fddb8753000-7fddb8761000 r-xp 00000000 08:01 10879923                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/jli/libjli.so
+7fddb8761000-7fddb8960000 ---p 0000e000 08:01 10879923                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/jli/libjli.so
+7fddb8960000-7fddb8961000 r--p 0000d000 08:01 10879923                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/jli/libjli.so
+7fddb8961000-7fddb8962000 rw-p 0000e000 08:01 10879923                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/amd64/jli/libjli.so
+7fddb8962000-7fddb8989000 r-xp 00000000 08:01 43255144                   /lib/x86_64-linux-gnu/ld-2.26.so
+7fddb8989000-7fddb898a000 r--s 00000000 08:01 23988592                   /home/pln/.m2/repository/org/bytedeco/javacpp-presets/hdf5-platform/1.10.0-patch1-1.3/hdf5-platform-1.10.0-patch1-1.3.jar
+7fddb898a000-7fddb898c000 r--s 00008000 08:01 23988560                   /home/pln/.m2/repository/org/nd4j/nd4j-native-api/0.9.1/nd4j-native-api-0.9.1.jar
+7fddb898c000-7fddb898e000 r--s 00016000 08:01 10884926                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/jce.jar
+7fddb898e000-7fddb8993000 r--s 002f9000 08:01 10884899                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/charsets.jar
+7fddb8993000-7fddb8996000 r--s 0000f000 08:01 10884909                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/icedtea-sound.jar
+7fddb8996000-7fddb8998000 r--s 00008000 08:01 10884913                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunec.jar
+7fddb8998000-7fddb899e000 r--s 0003b000 08:01 10884914                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunjce_provider.jar
+7fddb899e000-7fddb8a66000 rw-p 00000000 00:00 0 
+7fddb8a66000-7fddb8a69000 ---p 00000000 00:00 0 
+7fddb8a69000-7fddb8b69000 rw-p 00000000 00:00 0 
+7fddb8b69000-7fddb8b6a000 r--s 00000000 08:01 10884930                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/management-agent.jar
+7fddb8b6a000-7fddb8b6b000 r--s 00010000 08:01 10884916                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/zipfs.jar
+7fddb8b6b000-7fddb8b6c000 r--s 0000a000 08:01 10884910                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/jaccess.jar
+7fddb8b6c000-7fddb8b6f000 r--s 00038000 08:01 10884915                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/sunpkcs11.jar
+7fddb8b6f000-7fddb8b79000 r--s 00116000 08:01 10884911                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/localedata.jar
+7fddb8b79000-7fddb8b7b000 r--s 00001000 08:01 10884908                   /usr/lib/jvm/java-8-openjdk-amd64/jre/lib/ext/dnsns.jar
+7fddb8b7b000-7fddb8b7d000 r--s 00007000 08:01 11142922                   /usr/share/java/java-atk-wrapper.jar
+7fddb8b7d000-7fddb8b85000 rw-s 00000000 08:01 9306138                    /tmp/hsperfdata_pln/5282
+7fddb8b85000-7fddb8b86000 rw-p 00000000 00:00 0 
+7fddb8b86000-7fddb8b87000 ---p 00000000 00:00 0 
+7fddb8b87000-7fddb8b89000 rw-p 00000000 00:00 0 
+7fddb8b89000-7fddb8b8a000 r--p 00027000 08:01 43255144                   /lib/x86_64-linux-gnu/ld-2.26.so
+7fddb8b8a000-7fddb8b8b000 rw-p 00028000 08:01 43255144                   /lib/x86_64-linux-gnu/ld-2.26.so
+7fddb8b8b000-7fddb8b8c000 rw-p 00000000 00:00 0 
+7ffcda62b000-7ffcda650000 rw-p 00000000 00:00 0                          [stack]
+7ffcda6f2000-7ffcda6f5000 r--p 00000000 00:00 0                          [vvar]
+7ffcda6f5000-7ffcda6f7000 r-xp 00000000 00:00 0                          [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0                  [vsyscall]
+
+VM Arguments:
+jvm_args: -Xms1024m -Xmx10g -javaagent:/snap/intellij-idea-ultimate/86/lib/idea_rt.jar=36911:/snap/intellij-idea-ultimate/86/bin -Dfile.encoding=UTF-8 
+java_command: conceptExtraction.Main /home/pln/Desktop/conference-ontologies/Conference/edas /home/pln/Desktop/ dolce 1
+java_class_path (initial): /usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/charsets.jar:/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/ext/cldrdata.jar:/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/ext/dnsns.jar:/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/ext/icedtea-sound.jar:/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/ext/jaccess.jar:/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/ext/java-atk-wrapper.jar:/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/ext/localedata.jar:/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/ext/nashorn.jar:/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/ext/sunec.jar:/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/ext/sunjce_provider.jar:/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/ext/sunpkcs11.jar:/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/ext/zipfs.jar:/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/jce.jar:/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/jsse.jar:/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/management-agent.jar:/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/resources.jar:/usr/lib/jvm/java-1.8.0-openjdk-amd64/jre/lib/rt.jar:/home/pln/Documents/intellij-workspace/Ontology-Matcher-master/ontoAli-pucrs/target/classes:/home/pln/.m2/repository/org/deeplearning4j/deeplearning4j-nlp/0.9.1/deeplearning4j-nlp-0.9.1.jar:/home/pln/.m2/repository/org/nd4j/nd4j-native-api/0.9.1/nd4j-native-api-0.9.1.jar:/home/pln/.m2/repository/org/nd4j/nd4j-buffer/0.9.1/nd4j-buffer-0.9.1.jar:/home/pln/.m2/repository/org/nd4j/nd4j-context/0.9.1/nd4j-context-0.9.1.jar:/home/pln/.m2/repository/org/nd4j/nd4j-api/0.9.1/nd4j-api-0.9.1.jar:/home/pln/.m2/repository/net/ericaro/neoitertools/1.0.0/neoitertools-1.0.0.jar:/home/pln/.m2/repository/junit/junit/4.8.2/junit-4.8.2.jar:/home/pln/.m2/repository/org/reflections/reflections/0.9.10/reflections-0.9.10.jar:/home/pln/.m2/repository/org/javassist/javassist/3.19.0-GA/javassist-3.19.0-GA.jar:/home/pln/.m2/repository/com/google/code/findbugs/annotations/2.0.1/annotations-2.0.1.jar:/home/pln/.m2/repository/org/byted
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+USERNAME=pln
+SHELL=/bin/bash
+DISPLAY=:0
+
+Signal Handlers:
+SIGSEGV: [libjvm.so+0xaabe00], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGBUS: [libjvm.so+0xaabe00], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGFPE: [libjvm.so+0x8e1dd0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGPIPE: [libjvm.so+0x8e1dd0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGXFSZ: [libjvm.so+0x8e1dd0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGILL: [libjvm.so+0x8e1dd0], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGUSR1: SIG_DFL, sa_mask[0]=00000000000000000000000000000000, sa_flags=none
+SIGUSR2: [libjvm.so+0x8e1c80], sa_mask[0]=00100000000000000000000000000000, sa_flags=SA_RESTART|SA_SIGINFO
+SIGHUP: [libjvm.so+0x8e2130], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGINT: [libjvm.so+0x8e2130], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGTERM: [libjvm.so+0x8e2130], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+SIGQUIT: [libjvm.so+0x8e2130], sa_mask[0]=11111111011111111101111111111110, sa_flags=SA_RESTART|SA_SIGINFO
+
+
+---------------  S Y S T E M  ---------------
+
+OS:DISTRIB_ID=Ubuntu
+DISTRIB_RELEASE=17.10
+DISTRIB_CODENAME=artful
+DISTRIB_DESCRIPTION="Ubuntu 17.10"
+
+uname:Linux 4.13.0-46-generic #51-Ubuntu SMP Tue Jun 12 12:36:29 UTC 2018 x86_64
+libc:glibc 2.26 NPTL 2.26 
+rlimit: STACK 8192k, CORE 0k, NPROC 23130, NOFILE 1048576, AS infinity
+load average:6,90 5,05 3,54
+
+/proc/meminfo:
+MemTotal:        5975808 kB
+MemFree:          109332 kB
+MemAvailable:      25772 kB
+Buffers:            5432 kB
+Cached:           105396 kB
+SwapCached:       125292 kB
+Active:          4909820 kB
+Inactive:         730112 kB
+Active(anon):    4893488 kB
+Inactive(anon):   700112 kB
+Active(file):      16332 kB
+Inactive(file):    30000 kB
+Unevictable:          16 kB
+Mlocked:              16 kB
+SwapTotal:       2097148 kB
+SwapFree:         361468 kB
+Dirty:               104 kB
+Writeback:         49248 kB
+AnonPages:       5457536 kB
+Mapped:            62844 kB
+Shmem:             64300 kB
+Slab:              87892 kB
+SReclaimable:      39812 kB
+SUnreclaim:        48080 kB
+KernelStack:       11376 kB
+PageTables:        67856 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     5085052 kB
+Committed_AS:   12048468 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:           0 kB
+VmallocChunk:          0 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+CmaTotal:              0 kB
+CmaFree:               0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:      147892 kB
+DirectMap2M:     6014976 kB
+
+
+CPU:total 4 (initial active 4) (4 cores per cpu, 1 threads per core) family 6 model 58 stepping 9, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3, sse4.1, sse4.2, popcnt, avx, aes, clmul, erms, tsc, tscinvbit, tscinv
+
+/proc/cpuinfo:
+processor	: 0
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 58
+model name	: Intel(R) Core(TM) i5-3470S CPU @ 2.90GHz
+stepping	: 9
+microcode	: 0x1f
+cpu MHz		: 3263.836
+cache size	: 6144 KB
+physical id	: 0
+siblings	: 4
+core id		: 0
+cpu cores	: 4
+apicid		: 0
+initial apicid	: 0
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm cpuid_fault epb pti retpoline spec_ctrl tpr_shadow vnmi flexpriority ept vpid fsgsbase smep erms xsaveopt dtherm ida arat pln pts
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass
+bogomips	: 5788.31
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+processor	: 1
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 58
+model name	: Intel(R) Core(TM) i5-3470S CPU @ 2.90GHz
+stepping	: 9
+microcode	: 0x1f
+cpu MHz		: 3405.980
+cache size	: 6144 KB
+physical id	: 0
+siblings	: 4
+core id		: 1
+cpu cores	: 4
+apicid		: 2
+initial apicid	: 2
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm cpuid_fault epb pti retpoline spec_ctrl tpr_shadow vnmi flexpriority ept vpid fsgsbase smep erms xsaveopt dtherm ida arat pln pts
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass
+bogomips	: 5788.31
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+processor	: 2
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 58
+model name	: Intel(R) Core(TM) i5-3470S CPU @ 2.90GHz
+stepping	: 9
+microcode	: 0x1f
+cpu MHz		: 3301.578
+cache size	: 6144 KB
+physical id	: 0
+siblings	: 4
+core id		: 2
+cpu cores	: 4
+apicid		: 4
+initial apicid	: 4
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm cpuid_fault epb pti retpoline spec_ctrl tpr_shadow vnmi flexpriority ept vpid fsgsbase smep erms xsaveopt dtherm ida arat pln pts
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass
+bogomips	: 5788.31
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+processor	: 3
+vendor_id	: GenuineIntel
+cpu family	: 6
+model		: 58
+model name	: Intel(R) Core(TM) i5-3470S CPU @ 2.90GHz
+stepping	: 9
+microcode	: 0x1f
+cpu MHz		: 3287.830
+cache size	: 6144 KB
+physical id	: 0
+siblings	: 4
+core id		: 3
+cpu cores	: 4
+apicid		: 6
+initial apicid	: 6
+fpu		: yes
+fpu_exception	: yes
+cpuid level	: 13
+wp		: yes
+flags		: fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm cpuid_fault epb pti retpoline spec_ctrl tpr_shadow vnmi flexpriority ept vpid fsgsbase smep erms xsaveopt dtherm ida arat pln pts
+bugs		: cpu_meltdown spectre_v1 spectre_v2 spec_store_bypass
+bogomips	: 5788.31
+clflush size	: 64
+cache_alignment	: 64
+address sizes	: 36 bits physical, 48 bits virtual
+power management:
+
+
+
+Memory: 4k page, physical 5975808k(109332k free), swap 2097148k(361468k free)
+
+vm_info: OpenJDK 64-Bit Server VM (25.171-b11) for linux-amd64 JRE (1.8.0_171-8u171-b11-0ubuntu0.17.10.1-b11), built on Apr 26 2018 15:59:34 by "buildd" with gcc 7.2.0
+
+time: Mon Oct 22 17:00:29 2018
+elapsed time: 803 seconds (0d 0h 13m 23s)
+

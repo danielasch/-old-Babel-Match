@@ -16,7 +16,7 @@ public class Utilities {
 	//private Map<BabelSynset, List<String>> synsetCntxt;
 	private List<BabelNetResource.SearchObject> synsetCntxt;
 	//The number of synsets retrieved for a concept
-	private int numSy, level, idx;
+	private int numSy, level;
 	//This list saves the averages between the context and the bag of words of a synset
 	//Only used on the Word Embeddigs technique
 	private List<Double> listMedia;
@@ -29,7 +29,7 @@ public class Utilities {
 	
 	public Utilities() {
 		this.synsetCntxt = null;
-		this.numSy = level = idx = 0;
+		this.numSy = level = 0;
 		this.listMedia = null;
 		this.hypernyms = null;
 		this.selected_hypernym = null;
@@ -63,10 +63,6 @@ public class Utilities {
     public int getLevel() { return level; }
 
     public void setLevel(int level) { this.level = level; }
-
-    public int getIdx() { return idx; }
-
-    public void setIdx(int idx) { this.idx = idx; }
 
     public void set_synsetMedia(List<Double> _synsetMedia) { this.listMedia = _synsetMedia; }
 	

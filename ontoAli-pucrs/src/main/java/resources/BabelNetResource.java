@@ -19,30 +19,28 @@ public class BabelNetResource {
     */
     public class SearchObject {
 
-        private ArrayList<String> senses;
-        private ArrayList<String> glosses;
+        private List<String> senses;
+        private List<String> glosses;
         private List<String> bgw;
         private BabelSynset bs;
 
         public SearchObject(List<BabelSense> senses, List<BabelGloss> glosses, BabelSynset bs) {
             this.senses = lemmatizeSenses(senses.toString());
             this.glosses = lemmatizeGloss(glosses.toString());
-            setBgw(babelBow(this.senses, this.glosses));
             this.bs = bs;
+            setBgw(babelBow(this.senses, this.glosses));
         }
 
         //Getters
-        public ArrayList<String> getSenses() {
+        public List<String> getSenses() {
             return senses;
         }
 
-        public ArrayList<String> getGlosses() { return glosses; }
+        public List<String> getGlosses() { return glosses; }
 
         public void setBgw(List<String> bgw){ this.bgw = bgw; }
 
-        public List<String> getBgw() {
-            return bgw;
-        }
+        public List<String> getBgw() { return bgw; }
 
         public BabelSynset getSynset() {
             return bs;
@@ -59,14 +57,6 @@ public class BabelNetResource {
         cp = new ContextProcessing(bs);
     }
 
-    public List<String> create_context(BabelSynset synset){
-        List<BabelSense> senses = synset.getSenses();
-        List<BabelGloss> glosses = synset.getGlosses();
-        SearchObject so = new SearchObject(senses ,glosses, synset);
-        List<String> bgw = so.bgw;
-        return bgw;
-    }
-
     /*Babelnet's search method (returns a list
      *of babelsynsets, senses and glosses for a given string target)
      */
@@ -77,14 +67,7 @@ public class BabelNetResource {
         List<BabelSynset> bsl = getSynset(target);
         for (BabelSynset bs : bsl) {
             if (bs != null) {
-                List<BabelSense> senses = bs.getSenses(Language.EN);
-                List<BabelGloss> glosses = bs.getGlosses(Language.EN);
-                SearchObject so = new SearchObject(senses, glosses, bs);
-                searchedObjects.add(so);
-                senses.clear();
-                glosses.clear();
-                senses = null;
-                glosses = null;
+                searchedObjects.add( createSearchObject(bs));
             }
         }
         return searchedObjects;
@@ -97,89 +80,104 @@ public class BabelNetResource {
     }
 
 
-    public List<BabelSynset> getHypernyms(BabelSynset bs, List<BabelSynset> hypernyms, List<BabelSynset>searched) {
+    public List<SearchObject> getHypernyms(BabelSynset bs, List<SearchObject> hypernyms, List<BabelSynset>searched) {
         System.out.println("\n>>>>>>get hyp method ("+bs+")");
         List<BabelSynsetRelation> lbsr = bs.getOutgoingEdges(BabelPointer.ANY_HYPERNYM);
-        if(lbsr == null || lbsr.size() == 0) return hypernyms;
+
+        if(lbsr == null || lbsr.size() == 0) return null;
+
         for (BabelSynsetRelation bsr : lbsr) {
+
             BabelSynsetID bsid = bsr.getBabelSynsetIDTarget();
             BabelSynset basy = bn.getSynset(bsid);
+            SearchObject so = createSearchObject(basy);
+
             if(!basy.getID().equals(bs.getID())) {
                 if(!searched.contains(basy)) {
-                    if (!hypernyms.contains(basy)) {
-                        hypernyms.add(basy);
+                    if (!hypernyms.contains(so)) {
+                        hypernyms.add(so);
                         System.out.println("added " + basy.getMainSense() + " to hyp");
                     }
                 }
             }
         }
         lbsr.clear();
+
         return hypernyms;
     }
 
-    /*
-    public List<BabelSynset> getHypernyms(BabelSynset synset){
-        List<BabelSynset> hypernyms = new LinkedList<>();
-        List<BabelSynsetRelation> lbsr = synset.getOutgoingEdges(BabelPointer.ANY_HYPERNYM);
-        for (BabelSynsetRelation bsr : lbsr) {
-            BabelSynsetID bsid = bsr.getBabelSynsetIDTarget();
-            BabelSynset basy = bn.getSynset(bsid);
-            if(!hypernyms.contains(basy)) {
-                hypernyms.add(basy);
-            }
-        }
-        return hypernyms;
+    private SearchObject createSearchObject(BabelSynset bs){
+        List<BabelSense> senses = bs.getSenses(Language.EN);
+        List<BabelGloss> glosses = bs.getGlosses(Language.EN);
+        SearchObject so = new SearchObject(senses, glosses, bs);
+        senses.clear();
+        glosses.clear();
+        return so;
     }
-    */
 
     //Lemmatizers
     public String lemmatizeHypernym(String hypernym) {
+
         ArrayList<String> ans = new ArrayList<>(1);
         ans.add(hypernym);
+
         if (hypernym.contains("#n")) {
             ans.set(0, hypernym.substring(0, hypernym.indexOf("#")));
         }
+
         if (hypernym.contains(":") && hypernym.contains("]")) {
             ans.set(0, hypernym.substring(hypernym.lastIndexOf(":") + 1, hypernym.indexOf("]")));
         }
+
         if (hypernym.contains(":")) {
             ans.set(0, hypernym.substring(hypernym.lastIndexOf(":") + 1));
         }
-        String r = ans.get(0);
+
+        String toReturn = ans.get(0);
         ans.clear();
-        return r;
+
+        return toReturn;
     }
 
-    public ArrayList<String> lemmatizeSenses(String senses) {
+    public List<String> lemmatizeSenses(String senses) {
+
         String shortSense = senses.substring(1, senses.length() - 1);
-        ArrayList<String> lemmaSense = transferArray(shortSense.split(", "));
+        List<String> lemmaSense = transferArray(shortSense.split(", "));
+
         for (int i = 0; i < lemmaSense.size(); i++) {
             if (lemmaSense.get(i).equals("&")) {
                 lemmaSense.remove(i);
                 i--;
             }
+
             if (lemmaSense.get(i).contains("、")) {
                 String g = lemmaSense.get(i).replaceAll("、", "");
                 lemmaSense.set(i, g);
             }
+
             if (lemmaSense.get(i).contains(",")) {
                 String g = lemmaSense.get(i).replaceAll(",", "");
                 lemmaSense.set(i, g);
             }
+
             if (lemmaSense.get(i).contains("-")) {
                 String g = lemmaSense.get(i).replaceAll("-", "");
                 lemmaSense.set(i, g);
             }
+
             if (lemmaSense.get(i).contains(".")) {
                 String g = lemmaSense.get(i).replaceAll(".", "");
                 lemmaSense.set(i, g);
             }
+
             if (lemmaSense.get(i).contains(":")) {
                 lemmaSense.set(i, lemmaSense.get(i).substring(lemmaSense.get(i).lastIndexOf(":") + 1));
             }
+
             if (lemmaSense.get(i).contains("(")) {
                 lemmaSense.set(i, lemmaSense.get(i).replaceAll("[()]", ""));
             }
+
             if (isInteger(lemmaSense.get(i)) || lemmaSense.get(i).contains("_")) {
                 if (isInteger(lemmaSense.get(i))) {
                     lemmaSense.remove(i);
@@ -194,21 +192,26 @@ public class BabelNetResource {
                 i--;
             }
         }
-        return transferSet(lemmaSense);
+
+        return lemmatize(lemmaSense);
     }
 
-    public ArrayList<String> lemmatizeGloss(String gloss) {
+    public List<String> lemmatizeGloss(String gloss) {
+
         String shortGloss = gloss.substring(1, gloss.length() - 1);
-        ArrayList<String> lemmaGloss = transferArray(shortGloss.split(" "));
+        List<String> lemmaGloss = transferArray(shortGloss.split(" "));
+
         for (int i = 0; i < lemmaGloss.size(); i++) {
             if (lemmaGloss.get(i).contains(",")) {
                 String g = lemmaGloss.get(i).replace(",", "");
                 lemmaGloss.set(i, g);
             }
+
             if (lemmaGloss.get(i).contains(".")) {
                 String g = lemmaGloss.get(i).replaceAll(".", "");
                 lemmaGloss.set(i, g);
             }
+
             if (lemmaGloss.get(i).contains("(")) {
                 String g = lemmaGloss.get(i).replaceAll("[()]", "");
                 lemmaGloss.set(i, g);
@@ -217,10 +220,12 @@ public class BabelNetResource {
                 String g = lemmaGloss.get(i).replaceAll(";", "");
                 lemmaGloss.set(i, g);
             }
+
             if (lemmaGloss.get(i).contains((":"))) {
                 String g = lemmaGloss.get(i).replaceAll(":", "");
                 lemmaGloss.set(i, g);
             }
+
             if (lemmaGloss.get(i).equals("—")) {
                 lemmaGloss.remove(i);
                 i--;
@@ -241,37 +246,33 @@ public class BabelNetResource {
                 i--;
             }
         }
-        return transferSet(lemmaGloss);
+
+        return lemmatize(lemmaGloss);
     }
 
     //Auxiliary methods for string treatment
     public ArrayList<String> transferArray(String[] array) {
-        if (array == null) return null;
-        ArrayList<String> newArray = new ArrayList<>();
-        for (int i = 0; i < array.length; i++) {
-            newArray.add(array[i].toLowerCase());
+        if (array != null) {
+            ArrayList<String> newArray = new ArrayList<>();
+            for (String element : array) newArray.add(element.toLowerCase());
+            return newArray;
         }
-        array = null;
-        return newArray;
+        return null;
     }
 
-    public ArrayList<String> transferSet(ArrayList<String> array) {
+    public List<String> lemmatize(List<String> context) {
         Set<String> set = new HashSet<>();
-        for (String s : array) {
-            set.add(s);
-        }
-        array.clear();
+        set.addAll(context);
+        context.clear();
         set = this.cp.rm_stopWords(set);
-        for (String s : set) {
-            array.add(s);
-        }
+        context.addAll(set);
         set.clear();
-        return array;
+        return context;
     }
 
     public boolean isInteger(String value) {
         try {
-            int k = Integer.parseInt(value);
+            int testInteger = Integer.parseInt(value);
             return true;
         } catch (Exception e) {
             return false;
@@ -279,11 +280,13 @@ public class BabelNetResource {
     }
 
     public List<String> babelBow(List<String> senses, List<String> glosses) {
-        List<String> bow = senses;
-        for (String s : glosses) {
-            if (!bow.contains(s)) bow.add(s);
-        }
-        return bow;
+        List toReturn = new LinkedList(senses);
+        glosses.forEach(element -> {
+            if(!toReturn.contains(element)){
+                toReturn.add(element);
+            }
+        });
+        return lemmatize(toReturn);
     }
 
 }

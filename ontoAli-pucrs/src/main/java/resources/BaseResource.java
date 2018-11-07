@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.InvalidParameterException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -24,10 +25,6 @@ public class BaseResource {
 	
 	//Stop words list
 	private List<String> stpWords = new ArrayList<String>();
-	//WordNet path
-	//private String wnhome = "resources/WordNet-3.0";
-	//WN dictionary
-	//private IDictionary dict;
 	//Lemmatizer resource
 	private StanfordLemmatizer slem;
 	//Word2Vector resource
@@ -41,7 +38,6 @@ public class BaseResource {
 	public BaseResource() {
 			init_log();
 			rd_StpWords();
-			//rc_dictionary();
 			this.slem = new StanfordLemmatizer();
 			this.w2v = null;
 	}
@@ -51,20 +47,21 @@ public class BaseResource {
 	 * the technique select which resources should be initialized  
 	 */
 	public BaseResource(int x, String model) {
+
 		if(x == 1) {
 			init_log();
 			rd_StpWords();
-			//rc_dictionary();
 			this.slem = new StanfordLemmatizer();
-			this.w2v = null;	
+			this.w2v = null;
+
 		} else if(x == 2) {
 			init_log();
 			rd_StpWords();
-			//rc_dictionary();
 			this.slem = new StanfordLemmatizer();
 			this.w2v = new Word2Vector(model);
+
 		} else {
-			System.out.println("ERROR*****");
+			throw new InvalidParameterException("Parameters lead to an invalid option for resourcing.");
 		}
 	}
 	
@@ -79,18 +76,13 @@ public class BaseResource {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		System.out.println(sdf.format(Calendar.getInstance().getTime()) + " - [log] - Reading Stop Words..." );
 	}
-	/*
-	private void dictionary_log() {
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-		System.out.println(sdf.format(Calendar.getInstance().getTime()) + " - [log] - Accessing WordNet..." );
-	}
-	*/
 
 //Reader method
 	/*
 	 * This method read the stopwords2.text file, 
 	 * and put the lines into a list
 	 */
+
 	private void rd_StpWords() {
 		stpWords_log();
 		try {
@@ -109,36 +101,14 @@ public class BaseResource {
 	    	System.out.println("error: " + e);
 	    }
 	}
-//Recover method
-	
-	/*
-	 * This method recovers the IDictionary used to access the WN
-	 */
-	/*
-	private void rc_dictionary() {
-		dictionary_log();
-		try {
-			String path = wnhome + File.separator + "dict";
-			URL url = new URL("file",null,path);
-			this.dict = new Dictionary(url);
-		} catch(MalformedURLException e) {
-			System.out.println("WordNet URL malformed!");
-			System.out.println("error: " + e);
-		}
-	}
-	*/
-	
-//Getters and setters
+
+//Getters
 	
 	public List<String> get_StpWords() {
 		return this.stpWords;
 	}
 
-	//public IDictionary get_dictionary() { return this.dict;	}
-	
-	public StanfordLemmatizer get_lemmatizer() {
-		return this.slem;
-	}
+	public StanfordLemmatizer get_lemmatizer() { return this.slem; }
 	
 	public Word2Vector get_word2vec() {
 		return this.w2v;
