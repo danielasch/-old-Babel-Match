@@ -1,6 +1,6 @@
 package matchingProcess;
 
-/*
+/**
  * This class maps the alignment between domain Ont. classes and top Ont. classes
  */
 public class Mapping {
@@ -16,37 +16,37 @@ public class Mapping {
 	//trust measure
 	private String measure;
 
-//Getters and setters 
+
+//Getters
 	
-	void set_source(String _source) {
-		source = _source;
-	}
-	
-	String get_source(){
+	String getSource(){
 		return source;
 	}
-	
-	void set_target(String _target) {
-		target = _target;
-	}
-	
-	String get_target() {
+
+	String getTarget() {
 		return target;
 	}
-	
-	void set_relation(String _relation) {
-		relation = _relation;
-	}
-	
-	String get_relation() {
-		return relation;
-	}
-	
-	void set_measure(String _measure) {
-		measure = _measure;
-	}
-	
-	String get_measure() {
-		return measure;
-	}
+
+    String getRelation() {
+        return relation;
+    }
+
+    String getMeasure() {
+        return measure;
+    }
+
+
+//Setters
+
+    void setSource(String _source) {
+        source = _source;
+    }
+
+    void setTarget(String _target) {
+        target = _target;
+    }
+
+    void setRelation(String _relation) { relation = _relation; }
+
+	void setMeasure(String _measure) { measure = _measure; }
 }

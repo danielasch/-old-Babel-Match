@@ -3,14 +3,11 @@ package resources;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import it.uniroma1.lcl.babelnet.BabelSynset;
 import objects.Concept;
 
-/*
+/**
  * This class generates the text files
  */
 public class OutFiles {
@@ -20,9 +17,10 @@ public class OutFiles {
 	//Contains path to write the text files
 	private String outPath;
 
+
 //Constructor	
 	
-	/*
+	/**
 	 * This constructor receive the path to the alignment and
 	 * change .rdf by _1.text, this way, the text file will be
 	 * generated at the save folder as the alignment
@@ -31,46 +29,47 @@ public class OutFiles {
 		String aux = path.replace(".rdf", "_1.txt");
 		this.outPath = aux;
 	}
-	
+
+
 //Methods
 	
-	/*
+	/**
 	 * Generates the text file for the overlapping technique
 	 */
-	public void out_file(List<Concept> listDomain) {
+	public void outFile(List<Concept> listDomain) {
 		try {
 			FileWriter arq = new FileWriter(this.outPath);
 			PrintWriter printer = new PrintWriter(arq);
 			List<String> bgwSelect;
 			for(Concept cnp: listDomain) {
 				printer.print("\n>Ontology Info.<\n");
-				printer.print("Nome do conceito de domínio: " + cnp.get_className() + "\n");
-				printer.print("Descrição: " + cnp.get_desc() + "\n");
-				printer.print("Supers: " + cnp.get_supers() + "\n");
-				printer.print("Subs: " + cnp.get_subs() + "\n");
-				printer.print("Contexto Domínio conceito: " + cnp.get_context() + "\n");
+				printer.print("Nome do conceito de domínio: " + cnp.getClassName() + "\n");
+				printer.print("Descrição: " + cnp.getDesc() + "\n");
+				printer.print("Supers: " + cnp.getSupers() + "\n");
+				printer.print("Subs: " + cnp.getSubs() + "\n");
+				printer.print("Contexto Domínio conceito: " + cnp.getContext() + "\n");
 				printer.print("Conceito Topo alinhado: ");
-				if(cnp.get_aliClass() != null) {
-					String top = cnp.get_aliClass().toString();
+				if(cnp.getAliClass() != null) {
+					String top = cnp.getAliClass().toString();
 					printer.print(top.substring(top.lastIndexOf("/")+1,top.length()-1) + "\n");
 				}else{
 					printer.print("Não foi possível realizar o alinhamento!\n");
 				}
 				printer.print("\n>BabelNet Info.<\n");
 				printer.print("Synset selecionado BabelNet: ");
-				if(cnp.get_goodSynset() != null) {
-					printer.print(cnp.get_goodSynset().getSynset().toString() + "\n");
-					if(cnp.get_utilities().getSelected_hypernym()!=null) {
-						printer.print("Hiperonímio selecionado: " + cnp.get_utilities().getSelected_hypernym() +
-								" no nível de busca " + cnp.get_utilities().getLevel() + "\n");
-						printer.print("Caminho realizado: " + cnp.get_utilities().getHypernyms() + "\n");
+				if(cnp.getGoodSynset() != null) {
+					printer.print(cnp.getGoodSynset().getSynset().toString() + "\n");
+					if(cnp.getUtilities().getSelectedHypernym()!=null) {
+						printer.print("Hiperonímio selecionado: " + cnp.getUtilities().getSelectedHypernym() +
+								" no nível de busca " + cnp.getUtilities().getLevel() + "\n");
+						printer.print("Caminho realizado: " + cnp.getUtilities().getHypernyms() + "\n");
 					}else{
 						printer.print("Hiperonímio selecionado: Não foi encontrado nenhum hiperonímio na ontologia de topo!\n");
 						printer.print("Caminho realizado: Nenhum caminho encontrado!\n");
 					}
-					printer.print("Número de Synsets recuperados: " + cnp.get_utilities().get_numSy() + "\n\n");
+					printer.print("Número de Synsets recuperados: " + cnp.getUtilities().getNumSy() + "\n\n");
 					printer.print("Conjunto de synsets recuperados:\n");
-					List<BabelNetResource.SearchObject> synsets = cnp.get_utilities().get_synsetCntx();
+					List<BabelNetResource.SearchObject> synsets = cnp.getUtilities().getSynsetCntx();
 					int i = 1;
 					for (BabelNetResource.SearchObject so : synsets) {
 						printer.print("\n"+i+")\n");
@@ -81,10 +80,10 @@ public class OutFiles {
 						i++;
 					}
 					printer.print("\n");
-					bgwSelect = cnp.get_goodSynset().getBgw();
+					bgwSelect = cnp.getGoodSynset().getBgw();
 					printer.print("Intersecção de palavras encontrada - LESK:");
 					for (String a : bgwSelect) {
-						if (cnp.get_context().contains(a)) {
+						if (cnp.getContext().contains(a)) {
 							printer.print(" " + a + " ");
 						}
 					}
@@ -102,29 +101,30 @@ public class OutFiles {
 		}
 	}
 
-	/*
+
+	/**
 	 * Generates the text file for the Word Embeddings technique
 	 */
-	public void out_file_we_wn(List<Concept> listDomain) {
+	public void outFileWeWn(List<Concept> listDomain) {
 		try {
 			FileWriter arq = new FileWriter(this.outPath);
 			PrintWriter printer = new PrintWriter(arq);
 			
 			for(Concept cnp: listDomain) {
-				printer.print("Nome do conceito de domínio: " + cnp.get_className() + "\n");
-				printer.print("Descrição: " + cnp.get_desc() + "\n");
-				printer.print("Supers: " + cnp.get_supers() + "\n");
-				printer.print("Subs: " + cnp.get_subs() + "\n");
-				printer.print("Contexto: " + cnp.get_context() + "\n");
-				printer.print("Conceito Topo alinhado: " + cnp.get_aliClass() + "\n");
-				if(cnp.get_goodSynset() != null) {
-					printer.print("Synset selecionado BabelNet: " + cnp.get_goodSynset().getSynset().toString() + "\n");
-					printer.print("Lista de hiperonímios completa: " + cnp.get_utilities().getHypernyms() + "\n");
-					printer.print("Hiperonímio selecionado: " + cnp.get_utilities().getSelected_hypernym() +
-							" no nível de busca " + cnp.get_utilities().getLevel() + " e índice " + "\n");
-					printer.print("Número de Synsets recuperados: " + cnp.get_utilities().get_numSy() + "\n\n");
+				printer.print("Nome do conceito de domínio: " + cnp.getClassName() + "\n");
+				printer.print("Descrição: " + cnp.getDesc() + "\n");
+				printer.print("Supers: " + cnp.getSupers() + "\n");
+				printer.print("Subs: " + cnp.getSubs() + "\n");
+				printer.print("Contexto: " + cnp.getContext() + "\n");
+				printer.print("Conceito Topo alinhado: " + cnp.getAliClass() + "\n");
+				if(cnp.getGoodSynset() != null) {
+					printer.print("Synset selecionado BabelNet: " + cnp.getGoodSynset().getSynset().toString() + "\n");
+					printer.print("Lista de hiperonímios completa: " + cnp.getUtilities().getHypernyms() + "\n");
+					printer.print("Hiperonímio selecionado: " + cnp.getUtilities().getSelectedHypernym() +
+							" no nível de busca " + cnp.getUtilities().getLevel() + " e índice " + "\n");
+					printer.print("Número de Synsets recuperados: " + cnp.getUtilities().getNumSy() + "\n\n");
 					printer.print("Conjunto de synsets recuperados:\n");
-					List<BabelNetResource.SearchObject>synsets = cnp.get_utilities().get_synsetCntx();
+					List<BabelNetResource.SearchObject>synsets = cnp.getUtilities().getSynsetCntx();
 					for(BabelNetResource.SearchObject so : synsets){
 						printer.print("\nSynset: " + so.getSynset() + "\n");
 						printer.print("Sentidos: " + so.getSenses() + "\n");
@@ -135,11 +135,11 @@ public class OutFiles {
 					printer.print("Não foi possível encontar synsets para esse conceito!");
 				}
 				int index = 0;
-				for(BabelNetResource.SearchObject so : cnp.get_utilities().get_synsetCntx()) {
+				for(BabelNetResource.SearchObject so : cnp.getUtilities().getSynsetCntx()) {
 					List<String> cntxt = so.getBgw();
 					printer.print(so.getSynset() + " | " + so.getGlosses() + "\n");
 					printer.print("BOW: " + cntxt.toString() + "\n");
-					printer.print("MEDIA: " + cnp.get_utilities().get_synsetMedia().get(index).toString());
+					printer.print("MEDIA: " + cnp.getUtilities().getSynsetMedia().get(index).toString());
 					index++;	
 					printer.print("\n\n");
 				}
@@ -160,17 +160,17 @@ public class OutFiles {
 			PrintWriter printer = new PrintWriter(arq);
 			
 			for(Concept cnp: listDomain) {
-				printer.print("NOME: " + cnp.get_className() + "\n");
-				printer.print("Desc: " + cnp.get_desc() + "\n");
-				printer.print("Supers: " + cnp.get_supers() + "\n");
-				printer.print("Subs: " + cnp.get_subs() + "\n");
-				printer.print("Contexto: " + cnp.get_context() + "\n");
-				printer.print("Conceito Topo alinhado: " + cnp.get_aliClass() + "\n");
-				printer.print("Synset selecionado: " + cnp.get_goodSynset() + "\n");
+				printer.print("NOME: " + cnp.getClassName() + "\n");
+				printer.print("Desc: " + cnp.getDesc() + "\n");
+				printer.print("Supers: " + cnp.getSupers() + "\n");
+				printer.print("Subs: " + cnp.getSubs() + "\n");
+				printer.print("Contexto: " + cnp.getContext() + "\n");
+				printer.print("Conceito Topo alinhado: " + cnp.getAliClass() + "\n");
+				printer.print("Synset selecionado: " + cnp.getGoodSynset() + "\n");
 				printer.print("Conjunto de synsets recuperados:\n");
 				
 				int index = 0;
-				for(Entry<BabelSynset, LinkedHashMap<String, LinkedHashMap<String, Double>> > entry : cnp.get_utilities().get_pairSim().entrySet()) {
+				for(Entry<BabelSynset, LinkedHashMap<String, LinkedHashMap<String, Double>> > entry : cnp.getUtilities().getPairSim().entrySet()) {
 					LinkedHashMap<String, LinkedHashMap<String, Double>> value = entry.getValue();
 					printer.print("\n" + entry.getKey() + "\n");
 	Complmenting 				printer.print(String.format("%20s%16s\r\n", "ELEMENTO CONTEXTO|", "BAG OF WORDS"));
@@ -184,7 +184,7 @@ public class OutFiles {
 						}
 						printer.print("\n\n");
 					}
-					printer.print("MEDIA FINAL: " + cnp.get_utilities().get_synsetMedia().get(index).floatValue());
+					printer.print("MEDIA FINAL: " + cnp.getUtilities().getSynsetMedia().get(index).floatValue());
 					printer.print("\n\n");
 					index++;
 				}
@@ -204,21 +204,21 @@ public class OutFiles {
 			PrintWriter printer = new PrintWriter(arq);
 
 			for (Concept cnp : listDomain) {
-				printer.print("NOME: " + cnp.get_className() + "\n");
-				printer.print("Desc: " + cnp.get_desc() + "\n");
-				printer.print("Supers: " + cnp.get_supers() + "\n");
-				printer.print("Subs: " + cnp.get_subs() + "\n");
-				printer.print("Contexto: " + cnp.get_context() + "\n");
-				printer.print("Conceito Topo alinhado: " + cnp.get_aliClass() + "\n");
+				printer.print("NOME: " + cnp.getClassName() + "\n");
+				printer.print("Desc: " + cnp.getDesc() + "\n");
+				printer.print("Supers: " + cnp.getSupers() + "\n");
+				printer.print("Subs: " + cnp.getSubs() + "\n");
+				printer.print("Contexto: " + cnp.getContext() + "\n");
+				printer.print("Conceito Topo alinhado: " + cnp.getAliClass() + "\n");
 				
-				List<OutObjectWE> ooList = (List<OutObjectWE>) cnp.get_obj();
+				List<OutObjectWE> ooList = (List<OutObjectWE>) cnp.getObject();
 				for (OutObjectWE oo : ooList) {
 					int aux = 0;
-					Double[] vec = oo.get_vec();
-					String name = oo.get_topConcept().get_className();
+					Double[] vec = oo.getVector();
+					String name = oo.getTopConcept().getClassName();
 					printer.print("\nConceito Topo: " + name + "\n");
 					printer.print(String.format("%20s%16s\r\n", "ELEMENTO CONTEXTO|", "BAG OF WORDS"));
-					for (Entry<String, Object> entry : oo.get_map().entrySet()) {
+					for (Entry<String, Object> entry : oo.getMap().entrySet()) {
 						HashMap<String, Double> value = (HashMap<String, Double>) entry.getValue();
 						
 						printer.print(String.format("%20s", entry.getKey() + "=" + vec[aux] + "|"));
@@ -229,7 +229,7 @@ public class OutFiles {
 						aux++;
 					}
 					printer.print("\n");
-					printer.print("MEDIA FINAL: " + oo.get_mediaTotal());
+					printer.print("MEDIA FINAL: " + oo.getTotalAverage());
 					printer.print("\n\n");
 				}
 				printer.print("----------\n");

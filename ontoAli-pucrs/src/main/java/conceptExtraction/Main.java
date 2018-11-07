@@ -13,7 +13,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.output.TeeOutputStream;
@@ -46,7 +45,7 @@ public class Main {
 	public static void main(String[] args) {
 		long start = sTime();
 		verify(args);
-		String model = sp_model(args);
+		String model = spModel(args);
 		int tec = Integer.parseInt(args[3]);
 		switch(tec) {
 			case 1:
@@ -288,7 +287,7 @@ public class Main {
 	private static List<Concept> dolce(Ontology upper) {
 		List<Concept> listUp;
 		ContextExtraction exct = new ContextExtraction();
-		listUp = exct.extract_upper(upper.get_ontology());
+		listUp = exct.extractUpper(upper.getOntology());
 		return listUp;
 	}
 
@@ -296,7 +295,7 @@ public class Main {
 	private static List<Concept> sumo(Ontology upperS) {
 		List<Concept> listUp;
 		ContextExtraction exct = new ContextExtraction();
-		listUp = exct.extract_upper(upperS.get_ontology());
+		listUp = exct.extractUpper(upperS.getOntology());
 		return listUp;
 	}
 
@@ -305,7 +304,7 @@ public class Main {
 		List<Concept> listUp = new ArrayList<Concept>();
 
 		ContextExtraction exct = new ContextExtraction();
-		listUp = exct.extract_upperWE(upperS.get_ontology());
+		listUp = exct.extractUpperWE(upperS.getOntology());
 		return listUp;
 	}
 
@@ -313,7 +312,7 @@ public class Main {
 		List<Concept> listUp = new ArrayList<Concept>();
 
 		ContextExtraction exct = new ContextExtraction();
-		listUp = exct.extract_upperWE(upperS.get_ontology());
+		listUp = exct.extractUpperWE(upperS.getOntology());
 		return listUp;
 	}
 	*/
@@ -323,9 +322,9 @@ public class Main {
 		List<Concept> listDom;
 		ContextExtraction exct = new ContextExtraction();
 		if(context == 0) {
-			listDom = exct.extract(domain.get_ontology());
+			listDom = exct.extract(domain.getOntology());
 		}
-		else listDom = exct.extract_with_context(domain.get_ontology());
+		else listDom = exct.extractWithContext(domain.getOntology());
 		return listDom;
 	}
 
@@ -352,7 +351,7 @@ public class Main {
 	private static void match(Ontology dom, Ontology up, String outPath, List<Concept>listDom, List<Concept>listUp){
 		Matching match = new Matching(outPath);
 		match.matchBabel(listDom, listUp);
-		match.out_rdf(dom, up);
+		match.outRdf(dom, up);
 	}
 
 	//Unused method until now
@@ -364,27 +363,27 @@ public class Main {
 
 		MatchingWE match = new MatchingWE(outPath, base);
 		match.matchInv(listDom, listUp);
-		match.out_rdf(domain, upper);
+		match.outRdf(domain, upper);
 	}
 
 	//Unused method until now (dolce's previous alignment)
 	private static void matchDolce(Ontology domain, Ontology upper, String outPath, List<Concept> listDom, List<Concept> listUp) {
 		Matching mat = new Matching(outPath);
 		//mat.compare_dolce(listDom, listUp);
-		mat.out_rdf(domain, upper);
+		mat.outRdf(domain, upper);
 	}
 
 	//Unused method until now (sumo's previous alignment)
 	private static void matchSumo(Ontology domain, Ontology upper, String outPath, List<Concept> listDom, List<Concept> listUp) {
 		Matching mat = new Matching(outPath);
 		//mat.compare_sumo(listDom, listUp);
-		mat.out_rdf(domain, upper);
+		mat.outRdf(domain, upper);
 	}
 
 	//Method that generates the .txt and .rdf files
 	private static void out(String outPath, List<Concept> listDom) {
 		OutFiles out = new OutFiles(outPath);
-		out.out_file(listDom);
+		out.outFile(listDom);
 	}
 
 	//Unused method until now
@@ -459,10 +458,10 @@ public class Main {
 		if(!args[1].endsWith("/")) {
 			args[1] = args[1].concat("/");
 		}
-		args[1] = verifyRDF(args);
+		args[1] = verifyRdf(args);
 	}
 	
-	private static String verifyRDF(String[] args) {
+	private static String verifyRdf(String[] args) {
 		String outFile = args[1];
 		String outFileLog = args[1];
 		
@@ -504,7 +503,7 @@ public class Main {
 		}
 	}
 	
-	private static String sp_model(String[] args) {
+	private static String spModel(String[] args) {
 		if(args[3].contains(":")) {
 			int aux = args[3].indexOf(":");
 			String model = args[3].substring(aux+1);

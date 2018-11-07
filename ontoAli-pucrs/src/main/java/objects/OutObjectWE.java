@@ -4,54 +4,67 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 
 public class OutObjectWE implements Comparable<OutObjectWE> {
-	
+
+//Attributes
+
 	private Concept cnpUp;
 	private HashMap<String, Object> map;
 	private Double[] vec;
 	private double mediaT;
-	
+
+
+//Constructor
 	public OutObjectWE(int size) {
 		cnpUp = null;
 		map = new HashMap<String, Object>();
 		vec = new Double[size];
 		mediaT = 0;
 	}
-	
-	public Concept get_topConcept() {
+
+
+//Getters
+
+	public Concept getTopConcept() {
 		return this.cnpUp;
 	}
 	
-	public HashMap<String, Object> get_map() {
+	public HashMap<String, Object> getMap() {
 		return this.map;
 	}
 	
-	public Double[] get_vec() {
+	public Double[] getVector() {
 		return this.vec;
 	}
 	
-	public double get_mediaTotal() {
+	public double getTotalAverage() {
 		return this.mediaT;
 	}
-	
-	public void set_topConcept(Concept cnp) {
-		this.cnpUp = cnp;
+
+
+//Setters
+
+    public void setTopConcept(Concept cnp) {
+        this.cnpUp = cnp;
+    }
+
+	public void setMap(HashMap<String, Object> map) {
+		this.map = map;
 	}
-	
-	public void set_map(HashMap<String, Object> _map) {
-		this.map = _map;
+
+	public void setVector(Double[] vec) {
+		this.vec = vec;
 	}
-	
-	public void set_vec(Double[] _vec) {
-		this.vec = _vec;
-	}
-	
-	public void set_mediaTotal(double media) {
+
+	public void setTotalAverage(double media) {
 		this.mediaT = media;
 	}
-	
+
+
+//Methods
+
 	@SuppressWarnings("unchecked")
 	public void info() {
-		System.out.println("NAME: " + cnpUp.get_className());
+		System.out.println("NAME: " + cnpUp.getClassName());
 		System.out.println("SIMILARIDADE:");
 		int aux = 0;
 		for(Entry<String, Object> entry: map.entrySet()) {
@@ -70,11 +83,12 @@ public class OutObjectWE implements Comparable<OutObjectWE> {
 		System.out.println("TOTAL AVERAGE: " + mediaT);
 	}
 
+
 	@Override
 	public int compareTo(OutObjectWE o) {
-		if(this.mediaT > o.get_mediaTotal()) {
+		if(this.mediaT > o.getTotalAverage()) {
 			return -1;
-		} else if(this.mediaT < o.get_mediaTotal()) {
+		} else if(this.mediaT < o.getTotalAverage()) {
 			return 1;
 		}
 		return 0;

@@ -14,15 +14,19 @@ import java.util.*;
 
 public class BabelNetResource {
 
-    /*Public object related to babelnet's search
+    /**
+    *Public object related to babelnet's search
     *which keeps the senses, glosses and context of a given babelsynset
     */
     public class SearchObject {
+
+    //Attributes
 
         private List<String> senses;
         private List<String> glosses;
         private List<String> bgw;
         private BabelSynset bs;
+
 
         public SearchObject(List<BabelSense> senses, List<BabelGloss> glosses, BabelSynset bs) {
             this.senses = lemmatizeSenses(senses.toString());
@@ -31,21 +35,30 @@ public class BabelNetResource {
             setBgw(babelBow(this.senses, this.glosses));
         }
 
-        //Getters
+
+    //Getters
+
         public List<String> getSenses() {
             return senses;
         }
 
         public List<String> getGlosses() { return glosses; }
 
-        public void setBgw(List<String> bgw){ this.bgw = bgw; }
-
         public List<String> getBgw() { return bgw; }
 
         public BabelSynset getSynset() {
             return bs;
         }
+
+
+    //Setters
+
+        public void setBgw(List<String> bgw){ this.bgw = bgw; }
     }
+
+
+//Attributes
+
 
     private BabelNet bn;
     private ContextProcessing cp;
@@ -57,23 +70,9 @@ public class BabelNetResource {
         cp = new ContextProcessing(bs);
     }
 
-    /*Babelnet's search method (returns a list
-     *of babelsynsets, senses and glosses for a given string target)
-     */
-    public List<SearchObject> search(String target) {
-        //List of SearchObject objects which represents the aggregation of recovered synsets,
-        // glosses and words that composes the synset's definition
-        List<BabelNetResource.SearchObject> searchedObjects = new LinkedList<>();
-        List<BabelSynset> bsl = getSynset(target);
-        for (BabelSynset bs : bsl) {
-            if (bs != null) {
-                searchedObjects.add( createSearchObject(bs));
-            }
-        }
-        return searchedObjects;
-    }
 
-    //Search complement methods
+//Getters
+
     public List<BabelSynset> getSynset(String target) {
         BabelNetQuery query = new BabelNetQuery.Builder(target).from(Language.EN).POS(UniversalPOS.NOUN).build();
         return bn.getSynsets(query);
@@ -106,6 +105,27 @@ public class BabelNetResource {
         return hypernyms;
     }
 
+
+//Methods
+
+    /**
+     * Babelnet's search method (returns a list
+     *of babelsynsets, senses and glosses for a given string target)
+     */
+    public List<SearchObject> search(String target) {
+        //List of SearchObject objects which represents the aggregation of recovered synsets,
+        // glosses and words that composes the synset's definition
+        List<BabelNetResource.SearchObject> searchedObjects = new LinkedList<>();
+        List<BabelSynset> bsl = getSynset(target);
+        for (BabelSynset bs : bsl) {
+            if (bs != null) {
+                searchedObjects.add( createSearchObject(bs));
+            }
+        }
+        return searchedObjects;
+    }
+
+
     private SearchObject createSearchObject(BabelSynset bs){
         List<BabelSense> senses = bs.getSenses(Language.EN);
         List<BabelGloss> glosses = bs.getGlosses(Language.EN);
@@ -115,7 +135,10 @@ public class BabelNetResource {
         return so;
     }
 
-    //Lemmatizers
+
+//Lemmatizers
+
+
     public String lemmatizeHypernym(String hypernym) {
 
         ArrayList<String> ans = new ArrayList<>(1);
@@ -138,6 +161,7 @@ public class BabelNetResource {
 
         return toReturn;
     }
+
 
     public List<String> lemmatizeSenses(String senses) {
 
@@ -196,6 +220,7 @@ public class BabelNetResource {
         return lemmatize(lemmaSense);
     }
 
+
     public List<String> lemmatizeGloss(String gloss) {
 
         String shortGloss = gloss.substring(1, gloss.length() - 1);
@@ -250,7 +275,9 @@ public class BabelNetResource {
         return lemmatize(lemmaGloss);
     }
 
-    //Auxiliary methods for string treatment
+
+//Auxiliary methods
+
     public ArrayList<String> transferArray(String[] array) {
         if (array != null) {
             ArrayList<String> newArray = new ArrayList<>();
@@ -260,15 +287,17 @@ public class BabelNetResource {
         return null;
     }
 
+
     public List<String> lemmatize(List<String> context) {
         Set<String> set = new HashSet<>();
         set.addAll(context);
         context.clear();
-        set = this.cp.rm_stopWords(set);
+        set = this.cp.rmStopWords(set);
         context.addAll(set);
         set.clear();
         return context;
     }
+
 
     public boolean isInteger(String value) {
         try {
@@ -278,6 +307,7 @@ public class BabelNetResource {
             return false;
         }
     }
+
 
     public List<String> babelBow(List<String> senses, List<String> glosses) {
         List toReturn = new LinkedList(senses);

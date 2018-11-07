@@ -1,22 +1,16 @@
 package resources;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.security.InvalidParameterException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import edu.mit.jwi.Dictionary;
-import edu.mit.jwi.IDictionary;
-
-/*
+/**
  * This class contains and initiate the resources used in the process 
  */
 public class BaseResource {
@@ -30,33 +24,35 @@ public class BaseResource {
 	//Word2Vector resource
 	private Word2Vector w2v;
 
+
 //Constructors
 	
-	/*
-	 * Default
+	/**
+	 * Default Constructor
 	 */
 	public BaseResource() {
-			init_log();
-			rd_StpWords();
+			initLog();
+			rdStpWords();
 			this.slem = new StanfordLemmatizer();
 			this.w2v = null;
 	}
-	
-	/*
+
+
+	/**
 	 * This constructor receive an integer and select based on 
 	 * the technique select which resources should be initialized  
 	 */
 	public BaseResource(int x, String model) {
 
 		if(x == 1) {
-			init_log();
-			rd_StpWords();
+			initLog();
+			rdStpWords();
 			this.slem = new StanfordLemmatizer();
 			this.w2v = null;
 
 		} else if(x == 2) {
-			init_log();
-			rd_StpWords();
+			initLog();
+			rdStpWords();
 			this.slem = new StanfordLemmatizer();
 			this.w2v = new Word2Vector(model);
 
@@ -64,27 +60,43 @@ public class BaseResource {
 			throw new InvalidParameterException("Parameters lead to an invalid option for resourcing.");
 		}
 	}
-	
+
+
 //Log methods
 	
-	private void init_log() {
+	private void initLog() {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		System.out.println(sdf.format(Calendar.getInstance().getTime()) + " - [log] - Initializing resources!" );
 	}
-	
-	private void stpWords_log() {
+
+
+	private void stpWordsLog() {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		System.out.println(sdf.format(Calendar.getInstance().getTime()) + " - [log] - Reading Stop Words..." );
 	}
 
-//Reader method
-	/*
+
+//Getters
+
+    public List<String> getStpWords() {
+        return this.stpWords;
+    }
+
+    public StanfordLemmatizer getLemmatizer() { return this.slem; }
+
+    public Word2Vector getWord2Vec() {
+        return this.w2v;
+    }
+
+
+//Methods
+
+	/**
 	 * This method read the stopwords2.text file, 
 	 * and put the lines into a list
 	 */
-
-	private void rd_StpWords() {
-		stpWords_log();
+	private void rdStpWords() {
+		stpWordsLog();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("resources/stopwords2.txt"));
 			String line;
@@ -101,18 +113,5 @@ public class BaseResource {
 	    	System.out.println("error: " + e);
 	    }
 	}
-
-//Getters
-	
-	public List<String> get_StpWords() {
-		return this.stpWords;
-	}
-
-	public StanfordLemmatizer get_lemmatizer() { return this.slem; }
-	
-	public Word2Vector get_word2vec() {
-		return this.w2v;
-	}
-	
 
 }

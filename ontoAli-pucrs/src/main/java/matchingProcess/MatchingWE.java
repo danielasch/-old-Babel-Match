@@ -18,20 +18,21 @@ import objects.OutObjectWE;
 import resources.BaseResource;
 
 	
-/*
+/**
  * This class matches Domain Ont. classes with Top Ont. classes
  */
 public class MatchingWE {
 
-	//Attributes
+//Attributes
 		
 		//Map list
 		private List<Mapping> listMap;
 		//path to write the rdf file
 		private String localfile;
-		
 		private BaseResource baseresource;
-	//Constructor	
+
+
+//Constructor
 		
 		public MatchingWE(String _file, BaseResource br) {
 			log();
@@ -40,50 +41,53 @@ public class MatchingWE {
 			baseresource = br;
 		}
 
-	//Log methods	
+
+//Log methods
 		
 		private void log() {
 			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 			System.out.println(sdf.format(Calendar.getInstance().getTime()) + " - [log] - Word Embeddings Matcher selected!" );
 		}
 		
-		private void init_log() {
+		private void initLog() {
 			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 			System.out.println(sdf.format(Calendar.getInstance().getTime()) + " - [log] - Matching ontologies..." );
 		}
 		
-		private void final_log() {
+		private void finalLog() {
 			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 			System.out.println(sdf.format(Calendar.getInstance().getTime()) + " - [log] - Ontologies matched!" );
 		}
 		
-		private void out_log() {
+		private void outLog() {
 			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 			System.out.println(sdf.format(Calendar.getInstance().getTime()) + " - [log] - RDF file generated!" );
 		}
 
-	//Methods
+
+//Methods
 		
-		/*
+		/**
 		 * Turn the mapping class into a string
 		 * to write the rdf file
 		 */
-		private String toRDF(Mapping m) {
+		private String toRdf(Mapping m) {
 			
 			String out = "\t<map>\n" +
 					"\t\t<Cell>\n" +
-					"\t\t\t<entity1 rdf:resource='"+ m.get_target() +"'/>\n" +
-					"\t\t\t<entity2 rdf:resource='"+ m.get_source() +"'/>\n" +
-					"\t\t\t<relation>" + m.get_relation().toString() + "</relation>\n" +
-					"\t\t\t<measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>"+ m.get_measure() +"</measure>\n" +
+					"\t\t\t<entity1 rdf:resource='"+ m.getTarget() +"'/>\n" +
+					"\t\t\t<entity2 rdf:resource='"+ m.getSource() +"'/>\n" +
+					"\t\t\t<relation>" + m.getRelation().toString() + "</relation>\n" +
+					"\t\t\t<measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>"+ m.getMeasure() +"</measure>\n" +
 					"\t\t</Cell>\n" + "\t</map>\n";
 			return out;		
 		}
-		
-		/*
+
+
+		/**
 		 * Writes the rdf file
 		 */
-		public void out_rdf(Ontology onto1, Ontology onto2) {
+		public void outRdf(Ontology onto1, Ontology onto2) {
 			
 			try {
 				FileWriter arq = new FileWriter(localfile);
@@ -100,35 +104,36 @@ public class MatchingWE {
 							"\t<level>0</level>\n" + 
 							"\t<type>11</type>\n");
 			
-				print.print("\t<onto1>\n" + "\t\t<Ontology rdf:about=" + '"' + onto2.get_ontologyID().getOntologyIRI().toString() + '"' + ">\n" + 
-							"\t\t\t<location>file:" + onto2.get_fileName() + "</location>\n" + 
+				print.print("\t<onto1>\n" + "\t\t<Ontology rdf:about=" + '"' + onto2.getOntologyID().getOntologyIRI().toString() + '"' + ">\n" +
+							"\t\t\t<location>file:" + onto2.getFileName() + "</location>\n" +
 								"\t\t</Ontology>\n" + "\t</onto1>\n");
 			
-				print.print("\t<onto2>\n" + "\t\t<Ontology rdf:about=" + '"' + onto1.get_ontologyID().getOntologyIRI().toString() + '"' + ">\n" + 
-					"\t\t\t<location>file:" + onto1.get_fileName() + "</location>\n" + 
+				print.print("\t<onto2>\n" + "\t\t<Ontology rdf:about=" + '"' + onto1.getOntologyID().getOntologyIRI().toString() + '"' + ">\n" +
+					"\t\t\t<location>file:" + onto1.getFileName() + "</location>\n" +
 						"\t\t</Ontology>\n" + "\t</onto2>\n");
 			
 				for(Mapping m: listMap) {
-					if(!m.get_measure().equals("false")) {
-						print.print(toRDF(m));
+					if(!m.getMeasure().equals("false")) {
+						print.print(toRdf(m));
 					}
 				}
 			
 				print.print("</Alignment>\n" + "</rdf:RDF>");
 			
 				arq.close();
-				out_log();
+				outLog();
 			} catch(IOException e) {
 				System.out.println("Operacão I/O interrompida, no arquivo de saída .RDF!");
 		    	System.out.println("erro: " + e);
 				
 			}
 		}
-		
+
+
 		public void match(List<Concept> listDom, List<Concept> listUp) {
-			init_log();
+			initLog();
 			for(Concept cnpDom: listDom) {
-				Set<String> contextDom = cnpDom.get_context();
+				Set<String> contextDom = cnpDom.getContext();
 				double max = 0;
 				Concept align = null;
 				ConceptManager man = new ConceptManager();
@@ -139,7 +144,7 @@ public class MatchingWE {
 
 				for(Concept cnpUp: listUp) {
 					OutObjectWE oo = new OutObjectWE(sizeDom);
-					Set<String> contextUp = cnpUp.get_context();
+					Set<String> contextUp = cnpUp.getContext();
 					double mediaT = 0;
 					int sizeUp = contextUp.size();
 					
@@ -174,13 +179,13 @@ public class MatchingWE {
 					
 					//System.out.println("============OO==============");
 					//System.out.println(cnpUp);
-					oo.set_topConcept(cnpUp);
+					oo.setTopConcept(cnpUp);
 					//System.out.println(map);
-					oo.set_map(map);
+					oo.setMap(map);
 					//System.out.println(vec);
-					oo.set_vec(vec);
+					oo.setVector(vec);
 					//System.out.println(mediaT);
-					oo.set_mediaTotal(mediaT);
+					oo.setTotalAverage(mediaT);
 					
 					if(aux < 5) {
 						ooList.add(oo);
@@ -195,21 +200,22 @@ public class MatchingWE {
 				}
 				
 				Mapping map = new Mapping();
-				man.config_aliClass(cnpDom, align.get_owlClass());
-				man.config_object(cnpDom, ooList);
-				map.set_source(cnpDom.get_classID());
-				map.set_target(align.get_classID());
-				map.set_measure("1.0");
-				map.set_relation("&lt;");
+				man.configAliClass(cnpDom, align.get_owlClass());
+				man.configObject(cnpDom, ooList);
+				map.setSource(cnpDom.getClassID());
+				map.setTarget(align.getClassID());
+				map.setMeasure("1.0");
+				map.setRelation("&lt;");
 				this.listMap.add(map);			
 			}
-			final_log();	
+			finalLog();
 		}
-		
+
+
 		public void matchInv(List<Concept> listDom, List<Concept> listUp) {
-			init_log();
+			initLog();
 			for(Concept cnpDom: listDom) {
-				Set<String> contextDom = cnpDom.get_context();
+				Set<String> contextDom = cnpDom.getContext();
 				double max = 0;
 				Concept align = null;
 				ConceptManager man = new ConceptManager();
@@ -220,7 +226,7 @@ public class MatchingWE {
 
 				for(Concept cnpUp: listUp) {
 					OutObjectWE oo = new OutObjectWE(sizeDom);
-					Set<String> contextUp = cnpUp.get_context();
+					Set<String> contextUp = cnpUp.getContext();
 					double mediaT = 0;
 					int sizeUp = contextUp.size();
 					
@@ -255,13 +261,13 @@ public class MatchingWE {
 					
 					//System.out.println("============OO==============");
 					//System.out.println(cnpUp);
-					oo.set_topConcept(cnpUp);
+					oo.setTopConcept(cnpUp);
 					//System.out.println(map);
-					oo.set_map(map);
+					oo.setMap(map);
 					//System.out.println(vec);
-					oo.set_vec(vec);
+					oo.setVector(vec);
 					//System.out.println(mediaT);
-					oo.set_mediaTotal(mediaT);
+					oo.setTotalAverage(mediaT);
 					
 					if(aux < 5) {
 						ooList.add(oo);
@@ -276,19 +282,20 @@ public class MatchingWE {
 				}
 				
 				Mapping map = new Mapping();
-				man.config_aliClass(cnpDom, align.get_owlClass());
-				man.config_object(cnpDom, ooList);
-				map.set_source(cnpDom.get_classID());
-				map.set_target(align.get_classID());
-				map.set_measure("1.0");
-				map.set_relation("&lt;");
+				man.configAliClass(cnpDom, align.get_owlClass());
+				man.configObject(cnpDom, ooList);
+				map.setSource(cnpDom.getClassID());
+				map.setTarget(align.getClassID());
+				map.setMeasure("1.0");
+				map.setRelation("&lt;");
 				this.listMap.add(map);			
 			}
-			final_log();	
+			finalLog();
 		}
-		
+
+
 		private double similarity(String elDom, String elUp) {
-			double sim = this.baseresource.get_word2vec().get_word2Vec().similarity(elDom, elUp);
+			double sim = this.baseresource.getWord2Vec().getword2Vec().similarity(elDom, elUp);
 			if(!(Double.isNaN(sim))) {
 				//increment the media and adds the similarity
 				return (sim * 10);

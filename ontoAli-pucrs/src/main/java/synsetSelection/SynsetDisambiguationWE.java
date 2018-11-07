@@ -14,7 +14,8 @@ import resources.BabelNetResource;
 import resources.BaseResource;
 import resources.StanfordLemmatizer;
 import resources.Utilities;
-/*
+
+/**
  * This class disambiguate the synset using the Word Embedding model from GloVe.
  * Model specifications - 6B tokens, 400K vocab, uncased, & 200d vectors.
  *
@@ -27,6 +28,7 @@ public class SynsetDisambiguationWE {
 	private BaseResource base;
 	private BabelNetResource bn;
 
+
 //Constructor	
 	
 	public SynsetDisambiguationWE(BaseResource _base) {
@@ -35,54 +37,58 @@ public class SynsetDisambiguationWE {
 		this.base = _base;
 	}
 
+
 //Log methods
 	
-	private void init_log() {
+	private void initLog() {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		System.out.println(sdf.format(Calendar.getInstance().getTime()) + " - [log] - Disambiguating Synsets..." );
 	}
-	
-	private void final_log() {
+
+
+	private void finalLog() {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		System.out.println(sdf.format(Calendar.getInstance().getTime()) + " - [log] - Synsets disambiguated!" );
 	}
 
+
 //Methods
 
-	/*
+	/**
 	 * This method selects the right synset to a concept
 	 *
      */
 	public void disambiguation(List<Concept> listCon) {
 		try {
-			init_log();
+			initLog();
 			for(Concept concept: listCon) {
-				rc_goodSynset(concept);
+				rcGoodSynset(concept);
 			}
-			final_log();
+			finalLog();
 		} catch(IOException e) {
 			System.out.println("I/O operation failed - WN dictinoary!");
 			System.out.println("error: " + e);
 		}
 	}
 
-	/*
+
+	/**
 	 * Disambiguation process 
 	 *
 	 */
-	void rc_goodSynset(Concept concept) throws IOException {
+	void rcGoodSynset(Concept concept) throws IOException {
 		//The lemmatizer
 		bn = new BabelNetResource();
-		StanfordLemmatizer slem = this.base.get_lemmatizer();
+		StanfordLemmatizer slem = this.base.getLemmatizer();
 		ConceptManager man = new ConceptManager();
 		//Utilities carries the temp1 list and the temp2 list of a concept
 		Utilities ut = new Utilities();
 		//temp2 saves the averages between the context and the bag of words of a concept (OutFiles use only)
 		ArrayList<Double> temp2 = new ArrayList<Double>();
 		LinkedHashMap<BabelSynset, LinkedHashMap<String, LinkedHashMap<String, Double> > > temp3 = new LinkedHashMap<>();
-		List<String> context = slem.toList(concept.get_context());
+		List<String> context = slem.toList(concept.getContext());
 		//name receive the concept name
-		String name = man.conceptName_wn(concept);
+		String name = man.getConceptNameWn(concept);
 		//lemmatize the concept name
 		List<String> cnpNameLemma = slem.lemmatize(name);
 		int i = cnpNameLemma.size();
@@ -101,7 +107,7 @@ public class SynsetDisambiguationWE {
 			    	//For each element of the bag of words
 			    	for(String bgwEl: s.getBgw()) {
 			    		//Verifies the similarity between the context element and the bag of words element
-			    		double sim = this.base.get_word2vec().get_word2Vec().similarity(cntxtEl, bgwEl);
+			    		double sim = this.base.getWord2Vec().getword2Vec().similarity(cntxtEl, bgwEl);
 			    		//condition that verifies if the similarity recovered is not null,
 			    		//if is null then the similarity receives 0
 			    		if(!(Double.isNaN(sim))) {
@@ -128,20 +134,21 @@ public class SynsetDisambiguationWE {
 			    	//sets the synset of a concept
                     bestSynset = s;
 			    }
-                man.config_synset(concept, bestSynset);
+                man.configSynset(concept, bestSynset);
                 temp3.put(s.getSynset(), temp4);
 			}
 		}
 		//utilities sets the synset and the bag of words map
-		ut.set_synsetCntx(searched);
+		ut.setSynsetCntx(searched);
 		//utilities sets the total average list
-		ut.set_synsetMedia(temp2);
-		ut.set_pairSim(temp3);
+		ut.setSynsetMedia(temp2);
+		ut.setPairSim(temp3);
 		//sets the utilities of a concept
-		man.config_utilities(concept, ut);
+		man.configUtilities(concept, ut);
 	}
 
-	/*
+
+	/**
 	 * create the bag of words of a synset
 	 */
 
@@ -149,7 +156,7 @@ public class SynsetDisambiguationWE {
 	private List<String> createBagWords(List<IWord> wordsSynset, String glossSynset) {
 	    List<String> list = new LinkedList<String>();
 	    Set<String> set = new HashSet<String>();
-	    StanfordLemmatizer slem = this.base.get_lemmatizer();
+	    StanfordLemmatizer slem = this.base.getLemmatizer();
 	    for (IWord i : wordsSynset) {
 	    	StringTokenizer st = new StringTokenizer(i.getLemma().toLowerCase().replace("_"," ")," ");
 	    	while (st.hasMoreTokens()) {
@@ -164,7 +171,7 @@ public class SynsetDisambiguationWE {
     	while (st.hasMoreTokens()) {
     		   String token = st.nextToken().toLowerCase();
     		   token = rm_specialChar(token);
-    		   if (!this.base.get_StpWords().contains(token) && !list.contains(token)) {
+    		   if (!this.base.getStpWords().contains(token) && !list.contains(token)) {
     			   list.add(token);
     		   }
     	}

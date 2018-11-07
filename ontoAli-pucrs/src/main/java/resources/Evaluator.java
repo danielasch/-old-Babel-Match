@@ -7,11 +7,10 @@ import java.util.Properties;
 import org.semanticweb.owl.align.Alignment;
 import org.semanticweb.owl.align.AlignmentException;
 
-import fr.inrialpes.exmo.align.impl.BasicAlignment;
 import fr.inrialpes.exmo.align.impl.eval.PRecEvaluator;
 import fr.inrialpes.exmo.align.parser.AlignmentParser;
 
-/*
+/**
  * This class makes the evaluation between the alignment generated and the reference alignment
  */
 public class Evaluator {
@@ -25,12 +24,14 @@ public class Evaluator {
 	//The evaluator
 	PRecEvaluator evaluator;
 
+
 //Constructor
 	
 	public Evaluator(String ref, String alin) {
-		set_alignment(alin);
-		set_reference(ref);
+		setAlignment(alin);
+		setReference(ref);
 	}
+
 
 //Log methods
 	
@@ -39,44 +40,49 @@ public class Evaluator {
 		System.out.println(sdf.format(Calendar.getInstance().getTime()) + " - [log] - Evaluating the matching..." );
 	}
 
-//Getters and setters	
-	
-	void set_reference(String _ref) {
-		this.ref = _ref;
-	}
-	
-	String get_reference() {
+
+//Getters
+
+    protected PRecEvaluator getEvaluator() {
+        return this.evaluator;
+    }
+
+	String getReference() {
 		return this.ref;
 	}
-	
-	void set_alignment(String _alin) {
+
+    String getAlignment() {
+        return this.alin;
+    }
+
+
+//Setters
+
+    void setReference(String _ref) {
+        this.ref = _ref;
+    }
+
+	void setAlignment(String _alin) {
 		this.alin = _alin;
 	}
+
+
+//Methods
 	
-	String get_alignment() {
-		return this.alin;
-	}
-	
-	protected PRecEvaluator get_evaluator() {
-		return this.evaluator;
-	}
-	
-//Method	
-	
-	/*
+	/**
 	 * This method makes the evaluation
 	 */
 	public void evaluate() {
-		Alignment ref = new BasicAlignment();
-		Alignment alin = new BasicAlignment();
+		Alignment ref;
+		Alignment alin;
 		
 		//The parser shows how to analyze the XML file
 		AlignmentParser ap1 = new AlignmentParser(0);
 		AlignmentParser ap2 = new AlignmentParser(0);
 		log();
 		try {
-			ref = ap1.parse(new File(get_reference()).toURI() );
-			alin = ap2.parse(new File(get_alignment()).toURI());
+			ref = ap1.parse(new File(getReference()).toURI() );
+			alin = ap2.parse(new File(getAlignment()).toURI());
 			
 			Properties p = new Properties();
 			//Instantiation of the evaluator

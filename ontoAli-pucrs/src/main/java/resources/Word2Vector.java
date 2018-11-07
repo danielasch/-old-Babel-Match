@@ -6,7 +6,7 @@ import java.util.Calendar;
 import org.deeplearning4j.models.embeddings.loader.WordVectorSerializer;
 import org.deeplearning4j.models.word2vec.Word2Vec;
 
-/*
+/**
  * This class is used to read the Word Embeddings model
  */
 public class Word2Vector {
@@ -17,27 +17,34 @@ public class Word2Vector {
 	private File gModel;
 	//Word2Vec contains the model read
 	private Word2Vec w2V;
-	
+
+
 //Log method
 	
-	private void init_log() {
+	private void initLog() {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		System.out.println(sdf.format(Calendar.getInstance().getTime()) + " - [log] - Reading Word2Vec Model!" );
 	}
 
+
 //Constructor
 	
 	protected Word2Vector(String model) {
-		init_log();
+		initLog();
 		verifyModel(model);
 		//read the w2v model from the gModel attribute (that contains the model file)
 		this.w2V = WordVectorSerializer.readWord2VecModel(gModel);
 	}
 
-//Getter method
-	public Word2Vec get_word2Vec() {
+
+//Getters
+
+	public Word2Vec getword2Vec() {
 		return this.w2V;
 	}
+
+
+//Methods
 	
 	private void verifyModel(String model) {
 		switch(model.toLowerCase()) {

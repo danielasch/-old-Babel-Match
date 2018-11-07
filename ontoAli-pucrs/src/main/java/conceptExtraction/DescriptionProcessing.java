@@ -14,12 +14,13 @@ import resources.StanfordLemmatizer;
 
 public class DescriptionProcessing {
 	
-	//Attributes
+//Attributes
 	
 		//BaseResource contains the necessary resources to execute the context process
 		private BaseResource base;
 
-	//Constructor	
+
+//Constructor
 		
 		DescriptionProcessing(BaseResource _base) {
 			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -27,65 +28,70 @@ public class DescriptionProcessing {
 			this.base = _base;
 		}
 
-	//Log methods	
+
+//Log methods
 		
-		private void init_log() {
+		private void initLog() {
 			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 			System.out.println(sdf.format(Calendar.getInstance().getTime()) + " - [log] - Processing the Description..." );
 		}
-		private void final_log() {
+		private void finalLog() {
 			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 			System.out.println(sdf.format(Calendar.getInstance().getTime()) + " - [log] - Description processed!" );
 		}
 
-	//Methods
+
+//Methods
 		
-		/*
+		/**
 		 * This method process the context 
 		 */
 		protected void process(List<Concept> listCon) {
 			ConceptManager man = new ConceptManager();
-			init_log();
+			initLog();
 			
 			for(Concept concept: listCon) {
 				Set<String> context = new HashSet<String>();
 				//desc will receive the processed description of a concept
-				context = init(concept.get_desc());
+				context = init(concept.getDesc());
 				//sets the description of a concept as the context
-				man.config_context(concept, context);
+				man.configContext(concept, context);
 			}
-			final_log();
+			finalLog();
 		}
-		
-		/*
+
+
+		/**
 		 * Split process
 		 */
 		private Set<String> init(String desc) {
 			
-			String aux = rm_specialChar(desc);
+			String aux = rmSpecialChar(desc);
 			Set<String> temp = new HashSet<String>();
 			//Lemmatize the context
 			temp = lemmatizer(aux);
 			//Remove the stop words
-			temp = rm_stopWords(temp);
+			temp = rmStopWords(temp);
 			return temp;
 		}
+
 		
 		private Set<String> lemmatizer(String desc) {
 			List<String> lemma = new ArrayList<String>();
-			StanfordLemmatizer slem = this.base.get_lemmatizer();
+			StanfordLemmatizer slem = this.base.getLemmatizer();
 			lemma = slem.lemmatize(desc);
 			return slem.toSet(lemma);
 		}
-		
+
+
 //Auxiliary methods
 		
-		/*
+		/**
 		 * Removes the stopwords of a set
 		 */
-		private Set<String> rm_stopWords(Set<String> set) {
+		private Set<String> rmStopWords(Set<String> set) {
 		    Set<String> wordSet = new HashSet<String>();
-		    List<String> stpWords = this.base.get_StpWords();
+		    List<String> stpWords = this.base.getStpWords();
 			for(String word: set) {            
 				String wordLow = word.toLowerCase();
 		        if(!(stpWords.contains(wordLow))) {  
@@ -96,8 +102,9 @@ public class DescriptionProcessing {
 		    }
 			return wordSet;
 		}		
-		
-		private String rm_specialChar(String word) {
+
+
+		private String rmSpecialChar(String word) {
 			if(word.endsWith("-")) {
 				word = word.replace("-", "");
 			}

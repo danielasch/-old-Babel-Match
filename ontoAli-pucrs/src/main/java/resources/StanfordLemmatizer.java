@@ -15,7 +15,7 @@ import edu.stanford.nlp.pipeline.Annotation;
 import edu.stanford.nlp.pipeline.StanfordCoreNLP;
 import edu.stanford.nlp.util.CoreMap;
 
-/*
+/**
  * This class is used to lemmatize strings
  */
 public class StanfordLemmatizer {
@@ -23,7 +23,8 @@ public class StanfordLemmatizer {
 //Attributes
 	
 	protected StanfordCoreNLP pipeline;
-	
+
+
 //Constructor
 	
 	public StanfordLemmatizer() {
@@ -33,21 +34,23 @@ public class StanfordLemmatizer {
 	    // Default property to create the lemmatizer 
 	    props.put("annotators", "tokenize, ssplit, pos, lemma");
 	    
-	    init_log();
+	    initLog();
 	    this.pipeline = new StanfordCoreNLP(props);
 
 	}
 
+
 //Log methods
 	
-	private void init_log() {
+	private void initLog() {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		System.out.println(sdf.format(Calendar.getInstance().getTime()) + " - [log] - Initializing Lemmatizer..." );
 	}
 
+
 //Methods
 	
-	/*
+	/**
 	 * This method lemmatize a String
 	 */
 	public List<String> lemmatize(String documentText) {
@@ -69,9 +72,8 @@ public class StanfordLemmatizer {
     	return lemmas;
 	}
 
-//conversion methods
 	
-	/*
+	/**
 	 * Turn a list into a string, separating the list elements by space
 	 */
 	public String toLemmatize(List<String> list) {
@@ -81,8 +83,9 @@ public class StanfordLemmatizer {
 		}
 		return full;
 	}
-	
-	/*
+
+
+	/**
 	 * Turn a list into HashSet
 	 */
 	public HashSet<String> toSet(List<String> list) {
@@ -92,8 +95,9 @@ public class StanfordLemmatizer {
 		}
 		return set;
 	}
-	
-	/*
+
+
+	/**
 	 * Turn a Set into a list
 	 */
 	public List<String> toList(Set<String> set) {

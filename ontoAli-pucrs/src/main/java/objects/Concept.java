@@ -14,7 +14,7 @@ import edu.mit.jwi.item.ISynset;
 import resources.BabelNetResource;
 import resources.Utilities;
 
-/*
+/**
  * Concept class contains all the information about a OWLClass
  */
 public class Concept {
@@ -50,6 +50,7 @@ public class Concept {
 	//OWLClass aligned to this concept
 	private OWLClass aliClass;
 
+
 //Constructor
 	
 	public Concept() {
@@ -58,120 +59,127 @@ public class Concept {
 		this.ut = null;
 	}
 
-//Getters and setters	
+
+//Getters
 	
-	protected void set_owlOntology(OWLOntology onto) {
-		this.ontology = onto; 
+	public OWLOntology getOwlOntology() {
+		return this.ontology;
 	}
-	public OWLOntology get_owlOntology() {
-		return this.ontology; 
-	}
-	
-	protected void set_owlClass(OWLClass owlclass) {
-		owlClass = owlclass; 
-	}
-	
+
 	public OWLClass get_owlClass() {
 		return owlClass;
 	}
-	
-	void set_ontologyID(String _ontologyID) {
-		ontologyID = _ontologyID;
-	}
-	
-	String get_ontologyID() {
+
+	String getOntologyID() {
 		return ontologyID;
 	}
 
-	void set_classID(String _classID) {
-		classID = _classID;
-	}
-	
-	public String get_classID() {
+	public String getClassID() {
 		return classID;
 	}
-	
-	void set_ontologyName(String _ontologyName) {
-		ontologyName = _ontologyName;
-	}
-	
-	public String get_ontologyName() {
+
+	public String getOntologyName() {
 		return ontologyName;
 	}
-	
-	void set_className(String _className) {
-		className = _className;
-	}
-	
-	public String get_className() {
+
+	public String getClassName() {
 		return className;
 	}
-	
-	protected void set_desc(String _desc) {
-		desc = _desc; 
-	}
-	
-	public String get_desc() {
+
+	public String getDesc() {
 		return desc;
 	}
-	
-	protected void set_context(Set<String> set) {
-		context = set;
-	}
-	
-	public Set<String> get_context() {
+
+	public Set<String> getContext() {
 		return context;
 	}
-	
-	protected void set_utilities(Utilities ut) {
-		this.ut = ut; 
-	}
 
-	public Utilities get_utilities() {
-		return this.ut; 
-	}
-	
-	protected void set_supers(List<OWLClassExpression> _supers) {
+    public Utilities getUtilities() {
+        return this.ut;
+    }
+
+    public List<OWLClassExpression> getSupers() {
+        return supers;
+    }
+
+    public List<OWLClassExpression> getSubs() {
+        return subs;
+    }
+
+    public BabelNetResource.SearchObject getGoodSynset() {
+        return goodSynset;
+    }
+
+    public OWLClass getAliClass() {
+        return aliClass;
+    }
+
+    public Object getObject() {
+        return obj;
+    } //this changed to used instead of unused when i've refactored it <<<
+
+
+//Setters
+
+    protected void setOwlOntology(OWLOntology onto) {
+        this.ontology = onto;
+    } //HERE
+
+    protected void setOwlClass(OWLClass owlclass) { owlClass = owlclass; }
+
+    void setOntologyID(String _ontologyID) {
+        ontologyID = _ontologyID;
+    }
+
+    void setClassID(String _classID) {
+        classID = _classID;
+    }
+
+    void setOntologyName(String _ontologyName) {
+        ontologyName = _ontologyName;
+    }
+
+    void setClassName(String _className) {
+        className = _className;
+    }
+
+    protected void setContext(Set<String> set) {
+        context = set;
+    }
+
+    protected void setDesc(String _desc) {
+        desc = _desc;
+    }
+
+    protected void set_utilities(Utilities ut) {
+        this.ut = ut;
+    }
+
+	protected void setSupers(List<OWLClassExpression> _supers) {
 		supers = _supers;
 	}
-	
-	public List<OWLClassExpression> get_supers() {
-		return supers;
-	}
-	
-	protected void set_subs(List<OWLClassExpression> _subs) {
+
+	protected void setSubs(List<OWLClassExpression> _subs) {
 		subs = _subs;
 	}
-	
-	public List<OWLClassExpression> get_subs() {
-		return subs;
-	}
-	
-	void set_goodSynset(BabelNetResource.SearchObject _goodSynset) { goodSynset = _goodSynset; }
-	
-	public BabelNetResource.SearchObject get_goodSynset() {
-		return goodSynset;
-	}
-	
-	void set_aliClass(OWLClass _aliclass) {
-		aliClass = _aliclass; 
-	}
-	
-	public OWLClass get_aliClass() {
-		return aliClass;
-	}
-	
-	void set_obj(Object _obj) {
-		obj = _obj; 
-	}
-	
-	public Object get_obj() {
-		return obj;
+
+	void setGoodSynset(BabelNetResource.SearchObject _goodSynset) { goodSynset = _goodSynset; }
+
+	void setAliClass(OWLClass _aliclass) {
+		aliClass = _aliclass;
 	}
 
-//Print the concept information method
-	
-	public void print_info() {
+	void setObject(Object _obj) {
+		obj = _obj;
+	}
+
+
+//Methods
+
+    /**
+    *Prints the concept's information
+    */
+    public void printInfo() {
 		
 		System.out.println("Concept: " + this.className);
 		System.out.println("Description: " + this.desc);
@@ -200,14 +208,13 @@ public class Concept {
 		}
 	}
 
-//Methods
 	
-	/*
+	/**
 	 * This method identify if the concept name is separated by under line, or hyphen, or UpperCase or 
 	 *if the concept name is simple.
 	 * Then separate the concept name, returning the last token or the simple term.
 	 */
-	protected String sp_conceptName() {
+	protected String spConceptName() {
 		String name = null;
 		String cnpName = this.className;
 		if(cnpName.contains("_")) {
@@ -236,8 +243,9 @@ public class Concept {
 		}
 		return name;
 	}	
-	
-	/*
+
+
+	/**
 	 * This methods test if a string has UpperCase in its middle.
 	 */
 	private boolean hasUpperCase(String word) {

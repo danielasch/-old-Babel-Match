@@ -5,7 +5,7 @@ import java.util.*;
 import edu.mit.jwi.item.ISynset;
 import it.uniroma1.lcl.babelnet.BabelSynset;
 
-/*
+/**
  * This class saves the information (about a concept) used to generate the text files.
  */
 public class Utilities {
@@ -36,42 +36,46 @@ public class Utilities {
 		//this.mapPairSim = null;
 	}
 
-//Getters and setters
 
-    //public void set_synsetCntx(HashMap<BabelSynset, List<String>> _synsetCntxt) { this.synsetCntxt = _synsetCntxt; }
+//Getters
 
-    public void set_synsetCntx(List<BabelNetResource.SearchObject> synsetCntxt){ this.synsetCntxt = synsetCntxt; }
+    //public void setSynsetCntx(HashMap<BabelSynset, List<String>> _synsetCntxt) { this.synsetCntxt = _synsetCntxt; }
 
-    public List<BabelNetResource.SearchObject> get_synsetCntx() { return synsetCntxt; }
+    public List<BabelNetResource.SearchObject> getSynsetCntx() { return synsetCntxt; }
 
-	public void set_numSy(int num) {
-		this.numSy = num;
-	}
-
-	public int get_numSy() {
+	public int getNumSy() {
 		return numSy;
 	}
 
-    public void set_hypernyms(String hypernyms) { this.hypernyms = hypernyms; }
-
 	public String getHypernyms(){ return this.hypernyms; }
 
-    public String getSelected_hypernym() { return selected_hypernym; }
-
-    public void setSelected_hypernym(String selected_hypernym) { this.selected_hypernym = selected_hypernym; }
+    public String getSelectedHypernym() { return selected_hypernym; }
 
     public int getLevel() { return level; }
 
+    public List<Double> getSynsetMedia() { return listMedia; }
+
+    public LinkedHashMap<BabelSynset,LinkedHashMap<String,LinkedHashMap<String,Double>>> getPairSim() { return mapPairSim; }
+
+
+//Setters
+
+    public void setSynsetCntx(List<BabelNetResource.SearchObject> synsetCntxt){ this.synsetCntxt = synsetCntxt; }
+
+    public void setNumSy(int num) {
+        this.numSy = num;
+    }
+
+    public void setHypernyms(String hypernyms) { this.hypernyms = hypernyms; }
+
+    public void setSelectedHypernym(String selected_hypernym) { this.selected_hypernym = selected_hypernym; }
+
     public void setLevel(int level) { this.level = level; }
 
-    public void set_synsetMedia(List<Double> _synsetMedia) { this.listMedia = _synsetMedia; }
-	
-	public List<Double> get_synsetMedia() { return listMedia; }
-	
-	public void set_pairSim(LinkedHashMap<BabelSynset, LinkedHashMap<String, LinkedHashMap<String, Double> > > _mapPairSim) {
+    public void setSynsetMedia(List<Double> _synsetMedia) { this.listMedia = _synsetMedia; }
+
+	public void setPairSim(LinkedHashMap<BabelSynset, LinkedHashMap<String, LinkedHashMap<String, Double> > > _mapPairSim) {
 		this.mapPairSim = _mapPairSim;
 	}
-	
-	public LinkedHashMap<BabelSynset, LinkedHashMap<String, LinkedHashMap<String, Double> > > get_pairSim() { return mapPairSim; }
 
 }

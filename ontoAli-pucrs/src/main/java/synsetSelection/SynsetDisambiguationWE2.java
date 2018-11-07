@@ -41,7 +41,7 @@ private BaseResource base;
 		try {
 			init_log();
 			for(Concept concept: listCon) {
-				rc_goodSynset(concept, listUp);
+				rcGoodSynset(concept, listUp);
 			}
 			final_log();
 		} catch(IOException e) {
@@ -50,13 +50,13 @@ private BaseResource base;
 		}
 	}
 	
-	void rc_goodSynset(Concept concept, List<Concept> listUp) throws IOException {		
+	void rcGoodSynset(Concept concept, List<Concept> listUp) throws IOException {
 		IDictionary dict = this.base.get_dictionary();
-		StanfordLemmatizer slem = this.base.get_lemmatizer();
+		StanfordLemmatizer slem = this.base.getLemmatizer();
 		ConceptManager man = new ConceptManager();
 
-		//List<String> context = slem.toList(concept.get_context());
-		String name = man.conceptName_wn(concept);
+		//List<String> context = slem.toList(concept.getContext());
+		String name = man.getConceptNameWn(concept);
 
 		List<String> cnpNameLemma = slem.lemmatize(name);
 		int i = cnpNameLemma.size();
@@ -64,14 +64,14 @@ private BaseResource base;
 
 		//dict.open();
 		//IIndexWord idxWord = dict.getIndexWord(name, POS.NOUN);
-		List<String> lister = (List<String>) this.base.get_word2vec().get_word2Vec().wordsNearest(name, 200);
+		List<String> lister = (List<String>) this.base.getWord2Vec().getword2Vec().wordsNearest(name, 200);
 		//System.out.println("NOME: " + name);
-		//System.out.println("CLASS: " + man.conceptName_wn(concept));
+		//System.out.println("CLASS: " + man.getConceptNameWn(concept));
 		for(String vizinho: lister) {
 			//System.out.println("-- " + vizinho);
 			for(Concept cnp_2: listUp) {
-				if(vizinho.toLowerCase().equals(cnp_2.get_className().toLowerCase())) {
-					//System.out.println(vizinho + "|" + cnp_2.get_className());
+				if(vizinho.toLowerCase().equals(cnp_2.getClassName().toLowerCase())) {
+					//System.out.println(vizinho + "|" + cnp_2.getClassName());
 					dict.open();
 
 					IIndexWord idxWord = dict.getIndexWord(name, POS.NOUN);
@@ -85,7 +85,7 @@ private BaseResource base;
 						    //System.out.println("SY:" + synset);	
 						    List<ISynsetID> hypers = synset.getRelatedSynsets(); 
 						    
-						    IIndexWord idxWord_2 = dict.getIndexWord(cnp_2.get_className().toLowerCase(), POS.NOUN);
+						    IIndexWord idxWord_2 = dict.getIndexWord(cnp_2.getClassName().toLowerCase(), POS.NOUN);
 						    if(idxWord_2 != null) {
 								List<IWordID> wordIds_2 = idxWord_2.getWordIDs();
 								

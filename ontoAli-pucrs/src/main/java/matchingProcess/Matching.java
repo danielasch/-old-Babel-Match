@@ -15,7 +15,7 @@ import resources.BaseResource;
 import resources.Utilities;
 import synsetSelection.SynsetDisambiguation;
 
-/*
+/**
  * This class matches Domain Ont. classes with Top Ont. classes
  */
 public class Matching {
@@ -43,6 +43,7 @@ public class Matching {
 		this.bn = new BabelNetResource();
 	}
 
+
 //Log methods	
 	
 	private void log() {
@@ -50,43 +51,45 @@ public class Matching {
 		System.out.println(sdf.format(Calendar.getInstance().getTime()) + " - [log] - Matcher selected!" );
 	}
 	
-	private void init_log() {
+	private void initLog() {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		System.out.println(sdf.format(Calendar.getInstance().getTime()) + " - [log] - Matching ontologies..." );
 	}
 	
-	private void final_log() {
+	private void finalLog() {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		System.out.println(sdf.format(Calendar.getInstance().getTime()) + " - [log] - Ontologies matched!" );
 	}
 	
-	private void out_log() {
+	private void outLog() {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		System.out.println(sdf.format(Calendar.getInstance().getTime()) + " - [log] - RDF file generated!" );
 	}
 
+
 //Methods
 	
-	/*
+	/**
 	 * Turn the mapping class into a string
 	 * to write the rdf file
 	 */
-	private String toRDF(Mapping m) {
+	private String toRdf(Mapping m) {
 		
 		String out = "\t<map>\n" +
 				"\t\t<Cell>\n" +
-				"\t\t\t<entity1 rdf:resource='"+ m.get_target() +"'/>\n" +
-				"\t\t\t<entity2 rdf:resource='"+ m.get_source() +"'/>\n" +
-				"\t\t\t<relation>" + m.get_relation() + "</relation>\n" +
-				"\t\t\t<measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>"+ m.get_measure() +"</measure>\n" +
+				"\t\t\t<entity1 rdf:resource='"+ m.getTarget() +"'/>\n" +
+				"\t\t\t<entity2 rdf:resource='"+ m.getSource() +"'/>\n" +
+				"\t\t\t<relation>" + m.getRelation() + "</relation>\n" +
+				"\t\t\t<measure rdf:datatype='http://www.w3.org/2001/XMLSchema#float'>"+ m.getMeasure() +"</measure>\n" +
 				"\t\t</Cell>\n" + "\t</map>\n";
 		return out;		
 	}
-	
-	/*
+
+
+	/**
 	 * Writes the rdf file
 	 */
-	public void out_rdf(Ontology onto1, Ontology onto2) {
+	public void outRdf(Ontology onto1, Ontology onto2) {
 		
 		try {
 			FileWriter arq = new FileWriter(localfile);
@@ -103,24 +106,24 @@ public class Matching {
 						"\t<level>0</level>\n" + 
 						"\t<type>11</type>\n");
 		
-			print.print("\t<onto1>\n" + "\t\t<Ontology rdf:about=" + '"' + onto2.get_ontologyID().getOntologyIRI().toString() + '"' + ">\n" + 
-						"\t\t\t<location>file:" + onto2.get_fileName() + "</location>\n" + 
+			print.print("\t<onto1>\n" + "\t\t<Ontology rdf:about=" + '"' + onto2.getOntologyID().getOntologyIRI().toString() + '"' + ">\n" +
+						"\t\t\t<location>file:" + onto2.getFileName() + "</location>\n" +
 							"\t\t</Ontology>\n" + "\t</onto1>\n");
 		
-			print.print("\t<onto2>\n" + "\t\t<Ontology rdf:about=" + '"' + onto1.get_ontologyID().getOntologyIRI().toString() + '"' + ">\n" + 
-				"\t\t\t<location>file:" + onto1.get_fileName() + "</location>\n" + 
+			print.print("\t<onto2>\n" + "\t\t<Ontology rdf:about=" + '"' + onto1.getOntologyID().getOntologyIRI().toString() + '"' + ">\n" +
+				"\t\t\t<location>file:" + onto1.getFileName() + "</location>\n" +
 					"\t\t</Ontology>\n" + "\t</onto2>\n");
 		
 			for(Mapping m: listMap) {
-				if(!m.get_measure().equals("false")) {
-					print.print(toRDF(m));
+				if(!m.getMeasure().equals("false")) {
+					print.print(toRdf(m));
 				}
 			}
 		
 			print.print("</Alignment>\n" + "</rdf:RDF>");
 		
 			arq.close();
-			out_log();
+			outLog();
 		} catch(IOException e) {
 			System.out.println("Operacão I/O interrompida, no arquivo de saída .RDF!");
 	    	System.out.println("erro: " + e);
@@ -128,16 +131,14 @@ public class Matching {
 		}
 	}
 
-	/*
+
+	/**
 	 * Matches a pair of concepts (domain - top) through
 	 * the babelnet's hypernym structure recovered from
 	 * the synset assigned to the domain concept
 	 */
-
-
-
 	public void matchBabel(List<Concept>dom, List<Concept>up){
-		init_log();
+		initLog();
 		List<BabelNetResource.SearchObject> hyp = new LinkedList<>();
 		List<BabelSynset> path = new LinkedList<>();
 		List<Mapping> listM = new ArrayList<>();
@@ -146,20 +147,20 @@ public class Matching {
 		for(Concept d : dom){
 			path.clear();
 			match_context.clear();
-			match_context.addAll(d.get_context());
+			match_context.addAll(d.getContext());
 			int levels = 0;
 			int limit = 10;
 			Boolean matched;
-			if(d.get_goodSynset() != null) {
+			if(d.getGoodSynset() != null) {
                 System.out.println("\n-------------------------------------");
-				System.out.println("Domain concept: " + d.get_className());
-				BabelSynset bs = d.get_goodSynset().getSynset();
+				System.out.println("Domain concept: " + d.getClassName());
+				BabelSynset bs = d.getGoodSynset().getSynset();
                 String hypernym = bn.lemmatizeHypernym(bs.toString());
-                matched = try_match(hypernym,up,d,listM,levels);
+                matched = tryMatch(hypernym,up,d,listM,levels);
                 path.add(bs);
 				while(levels != limit){
                     if(matched) {
-                        d.get_utilities().set_hypernyms(path.toString());
+                        d.getUtilities().setHypernyms(path.toString());
                         break;
                     }
                     System.out.println("Best synset: " + bs + " " + bs.getID() + " " + bs.getMainSense());
@@ -169,7 +170,7 @@ public class Matching {
                     selected = disamb.leskTechnique(hyp,match_context).getSynset();
                     hyp.clear();
                     hypernym = bn.lemmatizeHypernym(selected.toString());
-                    matched = try_match(hypernym,up,d,listM,levels);
+                    matched = tryMatch(hypernym,up,d,listM,levels);
                     levels++;
                     bs = selected;
                     path.add(bs);
@@ -179,25 +180,26 @@ public class Matching {
 			}
 		}
 		this.listMap = listM;
-		final_log();
+		finalLog();
 	}
 
-	public boolean try_match(String hypernym, List<Concept>up, Concept d, List<Mapping> listM, int levels){
+
+	public boolean tryMatch(String hypernym, List<Concept>up, Concept d, List<Mapping> listM, int levels){
 		Boolean matched = false;
 		ConceptManager man = new ConceptManager();
 		for (Concept u : up) {
-			if (u.get_className().toLowerCase().equals(hypernym)) {
+			if (u.getClassName().toLowerCase().equals(hypernym)) {
 				Mapping map = new Mapping();
-				map.set_source(d.get_owlClass().getIRI().toString());
-				man.config_aliClass(d, u.get_owlClass());
-				map.set_target(d.get_aliClass().getIRI().toString());
-				map.set_relation("&lt;");
-				map.set_measure("1.0");
+				map.setSource(d.get_owlClass().getIRI().toString());
+				man.configAliClass(d, u.get_owlClass());
+				map.setTarget(d.getAliClass().getIRI().toString());
+				map.setRelation("&lt;");
+				map.setMeasure("1.0");
 				listM.add(map);
-				Utilities ut = d.get_utilities();
-				ut.setSelected_hypernym(hypernym);
+				Utilities ut = d.getUtilities();
+				ut.setSelectedHypernym(hypernym);
 				ut.setLevel(levels);
-                System.out.println("\nMatched with: " + u.get_className());
+                System.out.println("\nMatched with: " + u.getClassName());
 				matched = true;
 				break;
 			}

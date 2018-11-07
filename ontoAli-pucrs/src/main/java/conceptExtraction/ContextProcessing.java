@@ -13,17 +13,18 @@ import objects.ConceptManager;
 import resources.BaseResource;
 import resources.StanfordLemmatizer;
 
-/*
+/**
  * This class process the context of a concept
  */
 public class ContextProcessing {
 
-	//Attributes
+//Attributes
 
 	//BaseResource contains the necessary resources to execute the context process
 	private BaseResource base;
 
-	//Constructor	
+
+//Constructor
 
 	public ContextProcessing(BaseResource _base) {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -31,7 +32,8 @@ public class ContextProcessing {
 		this.base = _base;
 	}
 
-	//Log methods	
+
+//Log methods
 
 	private void init_log() {
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -42,7 +44,8 @@ public class ContextProcessing {
 		System.out.println(sdf.format(Calendar.getInstance().getTime()) + " - [log] - Context processed!" );
 	}
 
-//Methods - second process
+
+//Methods
 	
 	protected void procWE(List<Concept> listUp) {
 		init_log();
@@ -53,18 +56,20 @@ public class ContextProcessing {
 		
 		final_log();
 	}
-	
+
+
 	private void start(Concept cnp) {
 		ConceptManager cMan = new ConceptManager();
 		List<String> list = null;
 		Set<String> set = null;
-		list = token(cnp.get_context());
+		list = token(cnp.getContext());
 		list = removal(list);
 		list = separate(list);
 		set = lemma(list);
 		set = number(set);
-		cMan.config_context(cnp, set);
+		cMan.configContext(cnp, set);
 	}
+
 	
 	private List<String> token(Set<String> ctx) {
 		List<String> list = new ArrayList<>();
@@ -79,7 +84,8 @@ public class ContextProcessing {
 		aux.clear();
 		return list;
 	}
-	
+
+
 	private void tokenize(String el, String sp, List<String> list) {
 
 		StringTokenizer st = new StringTokenizer(el, sp);
@@ -91,7 +97,8 @@ public class ContextProcessing {
  		   	}
 		}
 	}
-	
+
+
 	private List<String> removal(List<String> aux) {
 		List<String> list = new ArrayList<>();
 		for (String word : aux) {
@@ -102,7 +109,8 @@ public class ContextProcessing {
 		aux.clear();
 		return list;
 	}
-	
+
+
 	private String removeSpecialChar(String word) {
 		char x = '"';
 		String asp = String.valueOf(x);
@@ -113,14 +121,16 @@ public class ContextProcessing {
 		}
 		return word;
 	}
-	
+
+
 	private boolean isSite(String word) {
 		if(word.contains("http:")) {
 			return true;
 		}
 		return false;
 	}
-	
+
+
 	private List<String> separate(List<String> aux) {
 		List<String> list = new ArrayList<>();
 		for (String word : aux) {
@@ -137,7 +147,8 @@ public class ContextProcessing {
 		aux.clear();
 		return list;
 	}
-	
+
+
 	private String putCharSeq(String word) {
 		String str = "";
 		int sIndex = 0;
@@ -161,7 +172,8 @@ public class ContextProcessing {
 		str = str + word.substring(sIndex);
 		return str;
 	}
-	
+
+
 	private Set<String> lemma(List<String> aux) {
 		List<String> list = null;
 		Set<String> set = null;
@@ -170,9 +182,10 @@ public class ContextProcessing {
 		aux.clear();
 		return set;
 	}
-	
+
+
 	private List<String> stopWords(List<String> aux) {
-		List<String> stpWords = this.base.get_StpWords();
+		List<String> stpWords = this.base.getStpWords();
 		List<String> list = new ArrayList<>();
 		for(String word: aux) {            
 			String wordLow = word.toLowerCase();
@@ -182,16 +195,18 @@ public class ContextProcessing {
 		}
 		return list;
 	}
-	
+
+
 	private Set<String> lemmatize(List<String> aux) {
 		List<String> lemma = new ArrayList<String>();
-		StanfordLemmatizer slem = this.base.get_lemmatizer();
+		StanfordLemmatizer slem = this.base.getLemmatizer();
 		String toLemma = slem.toLemmatize(aux);
 		lemma = slem.lemmatize(toLemma);
 		aux.clear();
 		return slem.toSet(lemma);
 	}
-	
+
+
 	private Set<String> number(Set<String> aux) {
 		Set<String> set = new HashSet<>();
 		for(String word: aux) {
@@ -203,15 +218,15 @@ public class ContextProcessing {
 		aux.clear();
 		return set;
 	}
-	
+
+
 	private String removeNumbers(String word) {
 		word = word.replaceAll("[*0-9]", "");
 		return word;
 	}
-	
-	//Methods
 
-	/*
+
+	/**
 	 * This method process the context 
 	 */
 	protected void process(List<Concept> listCon) {
@@ -219,23 +234,24 @@ public class ContextProcessing {
 		init_log();
 
 		for(Concept concept: listCon) {
-			//System.out.println("@@" + concept.get_className());
-			//System.out.println("@@" + concept.get_context());
+			//System.out.println("@@" + concept.getClassName());
+			//System.out.println("@@" + concept.getContext());
 			//context will receive the processed context of a concept
-			Set<String> context = init(concept.get_context());
+			Set<String> context = init(concept.getContext());
 			//sets the context of a concept
-			man.config_context(concept, context);
+			man.configContext(concept, context);
 		}
 		final_log();
 	}
 
-	/*
+
+	/**
 	 * Split process
 	 */
 	private Set<String> init(Set<String> context) {
 		//Split strings, turning all elements of the context
 		//into tokens
-		Set<String> aux = sp_string(context);
+		Set<String> aux = spString(context);
 		Set<String> temp = new HashSet<String>();
 		//Split strings with upperCase.
 		//This second split, avoid tokens separated by upperCase
@@ -243,40 +259,42 @@ public class ContextProcessing {
 		for(String word: aux) {
 			if(word.length() != 0) {	
 				if(hasUpperCase(word)) {
-					String tempStr = rm_specialChar(word);
-					temp.addAll(sp_upperCase(tempStr));
+					String tempStr = rmSpecialChar(word);
+					temp.addAll(spUpperCase(tempStr));
 				} else {
-					String tempStr = rm_specialChar(word);
+					String tempStr = rmSpecialChar(word);
 					temp.add(tempStr.toLowerCase());
 				}
 			}
 		}
 		//Remove the stop words
 		//System.out.println("$$" + temp);
-		temp = rm_stopWords(temp);
+		temp = rmStopWords(temp);
 		//Lemmatize the context
 		temp = lemmatizer(temp);
 		//System.out.println("--" + temp);
-		temp = rm_stopWords(temp);
+		temp = rmStopWords(temp);
 		//System.out.println("---" + temp);
 		return temp;
 	}
 
-	/*
+
+	/**
 	 * Lemmatizes all elements of a set
 	 */
 	private Set<String> lemmatizer(Set<String> context) {
 		List<String> lemma = new ArrayList<String>();
-		StanfordLemmatizer slem = this.base.get_lemmatizer();
+		StanfordLemmatizer slem = this.base.getLemmatizer();
 		String toLemma = slem.toLemmatize(slem.toList(context));
 		lemma = slem.lemmatize(toLemma);
 		return slem.toSet(lemma);
 	}
 
-	/*
+
+	/**
 	 * Split strings separated with "_", " ", "�" and upperCase
 	 */
-	private Set<String> sp_string(Set<String> context) {
+	private Set<String> spString(Set<String> context) {
 		Set<String> temp= new HashSet<String>();
 
 		for(String str: context) {
@@ -292,7 +310,7 @@ public class ContextProcessing {
 					temp.add(strSplit);
 				}
 			} else if(hasUpperCase(str)) {
-				temp.addAll(sp_upperCase(str));
+				temp.addAll(spUpperCase(str));
 			} else {
 				temp.add(str);
 			}	
@@ -302,10 +320,11 @@ public class ContextProcessing {
 		return context;
 	}
 
-	/*
+
+	/**
 	 * Splits strings separated by upperCase
 	 */
-	private Set<String> sp_upperCase(String wordComp) {
+	private Set<String> spUpperCase(String wordComp) {
 		Set<String> sep = new HashSet<String>();
 		int x = wordComp.length();
 		int up, aux = 0;
@@ -321,14 +340,14 @@ public class ContextProcessing {
 		return sep;
 	}
 
-	//Auxiliary methods
+//Auxiliary methods
 
-	/*
+	/**
 	 * Removes the stopwords of a set
 	 */
-	public Set<String> rm_stopWords(Set<String> set) {
+	public Set<String> rmStopWords(Set<String> set) {
 		Set<String> wordSet = new HashSet<String>();
-		List<String> stpWords = this.base.get_StpWords();
+		List<String> stpWords = this.base.getStpWords();
 		for(String word: set) {            
 			String wordLow = word.toLowerCase();
 			if(!(stpWords.contains(wordLow))) {  
@@ -340,10 +359,11 @@ public class ContextProcessing {
 		return wordSet;
 	}
 
-	/*
+
+	/**
 	 * Removes some chars of a string
 	 */
-	private String rm_specialChar(String word) {
+	private String rmSpecialChar(String word) {
 		if(word.endsWith("-")) {
 			word = word.replace("-", "");
 		}
@@ -391,7 +411,8 @@ public class ContextProcessing {
 		return word;	
 	}
 
-	/*
+
+	/**
 	 * Verifies if a string is separated by space
 	 */
 	private boolean hasWhiteSpace(String str) {
@@ -405,7 +426,8 @@ public class ContextProcessing {
 		return false;	
 	}
 
-	/*
+
+	/**
 	 * Verifies if a string is separated by UpperCase
 	 */
 	private boolean hasUpperCase(String word) {
@@ -419,6 +441,7 @@ public class ContextProcessing {
 		}
 		return false;	
 	}
+
 
 	private boolean hasConsecutiveUpperCase(String word) {
 		int cont = 0;
